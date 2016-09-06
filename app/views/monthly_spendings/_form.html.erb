@@ -1,0 +1,24 @@
+<%= form_for @monthly_spending do |f| %>
+	<div>
+		<div><%= f.label "Rent" %></div>
+		<%= f.text_field :rent %>
+	</div>
+		<div>
+			<div><%= f.label "Food" %></div>
+		<%= f.text_field :food %>
+	</div>
+		<div>
+			<div><%= f.label "Phone Bill" %></div>
+		<%= f.text_field :phone %>
+	</div>
+		<div>
+			<div><%= f.label "Utilities" %></div>
+		<%= f.text_field :utilities %>
+	</div>
+		<div>
+			<div><%= f.label "Everything Else" %></div>
+		<%= f.text_field :everything_else %>
+	</div>
+
+	<%= f.submit "SUBMIT" %>
+<% end %>

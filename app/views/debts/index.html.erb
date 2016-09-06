@@ -1,0 +1,17 @@
+<h1>Debt</h1>
+
+<% if @user.debts.any? %>
+	<% @user.debts.each do |debt| %>
+		<h3>Name: <%= debt.name %> || Amount <%= debt.amount %> || Interest Rate: <%= debt.interest_rate %> || Minimum Monthly Payment <%= debt.minimum_monthly_payment %></h3>
+	<% end %>
+<% else %>
+	<h2 class="no_debt">No DEBT currently</h2>
+<% end %>
+<div class='render_create_here'></div>
+
+<%= link_to 'Add Debt', new_debt_path(), id:'new_debt_path', remote:true  %>
+<div id="undo-new-debt">UNDO</div>
+<div class='render_here'></div>
+
+
+<h2><%= link_to "ur Investments ->", investments_path %></h2>

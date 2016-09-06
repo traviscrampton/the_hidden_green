@@ -1,0 +1,13 @@
+<%= form_for @user do |f| %>
+	<%= f.fields_for :accounts do |p| %>
+	<div>
+		<h2><%= which_type(p.index) %></h2>
+		<%= p.hidden_field :a_type, value:which_type(p.index) %>
+		<%= p.label "Amount" %>
+		<%= p.text_field :amount %>
+		<%= p.label "Interest Rate" %>
+		<%= p.text_field :interest_rate %>
+	</div>
+	<% end %>
+	<%= f.submit "SUBMIT!" %>
+<% end %>

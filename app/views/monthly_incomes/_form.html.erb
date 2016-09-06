@@ -1,0 +1,13 @@
+<%= form_for @monthly_income do |f| %>
+<div>
+	<div>
+		<%= f.label "Income Source" %>
+		<%= f.text_field :source_name %>
+	</div>
+	<div>
+		<%= f.label "Income Amount" %>
+		<%= f.text_field :source_amount %>
+	</div>
+</div>
+<%= f.submit %>
+<% end %>

@@ -1,0 +1,10 @@
+$('.render_here').replaceWith('<%= j render("form") %>')
+$('#new_debt_path').hide();
+$('#undo-new-debt').show();
+
+
+$(document).on("click", "#undo-new-debt", function(e){
+  $('form').remove();
+	$('#new_debt_path').show();
+	$('#undo-new-debt').hide();
+});

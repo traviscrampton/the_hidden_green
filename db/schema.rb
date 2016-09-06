@@ -13,32 +13,47 @@
 
 ActiveRecord::Schema.define(version: 20160905164100) do
 
+  create_table "accounts", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "a_type"
+    t.float   "amount"
+    t.float   "interest_rate"
+  end
+
   create_table "assets", force: :cascade do |t|
     t.integer "user_id"
     t.string  "name"
-    t.integer "amount"
+    t.float   "amount"
+  end
+
+  create_table "debts", force: :cascade do |t|
+    t.string  "name"
+    t.integer "user_id"
+    t.float   "amount"
+    t.float   "interest_rate"
+    t.float   "minimum_monthly_payment"
+  end
+
+  create_table "investments", force: :cascade do |t|
+    t.string  "name"
+    t.integer "user_id"
+    t.float   "amount"
+    t.float   "interest_rate"
   end
 
   create_table "monthly_incomes", force: :cascade do |t|
     t.integer "user_id"
     t.string  "source_name"
-    t.integer "source_amount"
+    t.float   "source_amount"
   end
 
   create_table "monthly_spendings", force: :cascade do |t|
-    t.integer "portfolio_id"
-    t.integer "rent"
-    t.integer "food"
-    t.integer "phone"
-    t.integer "utilities"
-    t.integer "everything_else"
-  end
-
-  create_table "portfolios", force: :cascade do |t|
     t.integer "user_id"
-    t.string  "type"
-    t.integer "amount"
-    t.float   "interest_rate"
+    t.float   "rent"
+    t.float   "food"
+    t.float   "phone"
+    t.float   "utilities"
+    t.float   "everything_else"
   end
 
   create_table "users", force: :cascade do |t|

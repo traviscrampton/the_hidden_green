@@ -1,0 +1,18 @@
+<%= form_for @investment, remote:true do |f| %>
+	<div>
+		<div><%= f.label "Investment Account Name:" %></div>
+		<%= f.text_field :name %>
+	</div>
+	<div>
+		<div><%= f.label "Amount" %></div>
+		<%= f.text_field :amount %>
+	</div>
+	<div>
+		<div><%= f.label "Interest Rate" %></div>
+		<%= f.text_field :interest_rate %>
+	</div>
+	<div>
+		<%= f.submit %>
+	</div>
+<% end %>
+<div class="render_here"></div>

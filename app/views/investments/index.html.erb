@@ -1,0 +1,16 @@
+<h1>Investment</h1>
+
+<% if @user.investments.any? %>
+	<% @user.investments.each do |investment| %>
+		<h3>Name: <%= investment.name %> || Amount <%= investment.amount %> || Interest Rate: <%= investment.interest_rate %> </h3>
+	<% end %>
+<% else %>
+	<h2 class="no_investment">No Investments Currently</h2>
+<% end %>
+<div class='render_create_here'></div>
+<%= link_to 'Add An Investment', new_investment_path(), id:'new_investment_path', remote:true  %>
+<div id="undo-new-investment">UNDO</div>
+<div class='render_here'></div>
+
+
+<h2> <%= link_to '<- ur Debts', debts_path %> | <%= link_to "Dashboard ->", user_path(current_user) %></h2>

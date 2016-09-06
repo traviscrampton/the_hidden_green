@@ -1,0 +1,10 @@
+$('.render_here').replaceWith('<%= j render("form") %>')
+$('#new_investment_path').hide();
+$('#undo-new-investment').show();
+
+
+$(document).on("click", "#undo-new-investment", function(e){
+  $('form').remove();
+	$('#new_investment_path').show();
+	$('#undo-new-investment').hide();
+});

@@ -8,3 +8,21 @@
 		 color: #33D032;
 	 }
  }
+
+ #undo-new-debt, #undo-new-investment{
+   display:none;
+   &:hover{
+     cursor:pointer;
+   }
+ }
+
+ .portfolio_data{
+   width: 60%;
+   float:left;
+   display: inline-block;
+ }
+
+ .monthly_numbers{
+   display: inline-block;
+   width: 39%;
+ }

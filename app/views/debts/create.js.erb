@@ -1,0 +1,5 @@
+$('.no_debt').fadeOut();
+$('form').hide();
+$('#new_debt_path').show();
+$('#undo-new-debt').hide();
+$('.render_create_here').append('<%= j render (@debt) %><div class="render_create_here"></div>')
