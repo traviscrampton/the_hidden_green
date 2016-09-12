@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
           advice.push("Put #{goal} in your savings and then put #{to_even} towards your debt")
         end
       else
-        advice.push("You have atleast three months savings ready to go, transfer #{debt - three_months_spending}0 towards paying off your debt.")
+        advice.push("You have atleast three months savings ready to go, transfer #{savings - three_months_spending}0 towards paying off your debt.")
         advice.push("Your first months cash flow of #{cash_flow} should go towards crushing debt.")
       end
     else
