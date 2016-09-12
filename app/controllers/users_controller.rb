@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 	before_action :set_user
 
 	def show
+		@advice = @user.has_debt
 	end
 
 	def update

@@ -39,10 +39,10 @@
 </div>
 
 <div>
-	<h1>WHAT THE FUCK SHOULD I DO?!</h1>
+	<h1>WTF DO I DO (Initially)?!</h1>
 	<ul>
-	<% @user.initial_calculation_shuffle.each do |advice| %>
-		<li><%= advice %></li>
-	<% end %>
+		<% @advice.each do |ad| %>
+		<li><%= ad %></li>
+		<% end %>
 	</ul>
 </div>
