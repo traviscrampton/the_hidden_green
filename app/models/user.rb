@@ -62,42 +62,121 @@ class User < ActiveRecord::Base
     total_monthly_spending * 6
   end
 
-  def has_debt
-    advice = []
-    debt = total_debt
-    three_months = three_months_spending
-    six_months = six_months_spending
-    savings = accounts.find_by(a_type:'Savings').amount
-    investment = total_investment
-    if total_debt > 0
-      if savings < three_months
-        goal = three_months - savings
-        advice.push("Your savings account needs to be atleast up to three months of spending for you that would be #{goal}")
-        if goal > cash_flow
-          advice.push("Your first months cash flow of $#{cash_flow}0 should go towards your three month cushion")
-        else
-          to_even = cash_flow - goal
-          advice.push("Put #{goal} in your savings and then put #{to_even} towards your debt")
-        end
-      else
-        advice.push("You have atleast three months savings ready to go, transfer #{savings - three_months_spending}0 towards paying off your debt.")
-        advice.push("Your first months cash flow of #{cash_flow} should go towards crushing debt.")
-      end
+  def savings
+    accounts.find_by(a_type:'Savings').amount
+  end
+
+
+
+  #### CALCULATION MATRIX ####
+
+  def financial_shuffle(debt, savings, investment_hash, advice_array)
+    binding.pry
+    if debt > 0
+      look_at_debt(debt, savings, investment_hash, advice_array)
     else
-      if savings < six_months
-        goal = six_months - savings
-        advice.push("Before you start investing you'll need to get #{goal} in your savings account for a 6 month cushion")
-        if goal > cash_flow
-          advice.push("Your first months cash flow of $#{cash_flow}0 should go towards your six month cushion")
-        else
-          to_even = cash_flow - goal
-          advice.push("Put #{goal} in your savings and then put #{to_even} towards your debt")
-        end
-      else
-        advice.push("You are debt free and have saved up enough money to party. Lets start investing your cash flow of #{cash_flow}")
+      return 'yall is doing good! '
+    end
+  end
+
+  def look_at_debt(debt, save, investment_hash, advice_array)
+    if save < three_months_spending
+      less_savings_look_at_investment(save, debt, investment_hash, advice_array)
+    else
+      debt_and_savings_scramble(debt, save, investment_hash, advice_array)
+    end
+  end
+
+  def less_savings_look_at_investment(save, debt, investment_hash, advice_array)
+    new_hash = {}
+    save = save
+    goal = three_months_spending - save
+    investment_hash.each do |name, amount|
+      next if save >= three_months_spending
+      if amount[0] >= goal
+        new_hash[name] = [goal, "TO SAVINGS"]
+        amount[0] -= goal
+        save += goal
+      elsif amount[0] < goal
+        new_hash[name] = [amount[0], "TO SAVINGS"]
+        goal -= amount[0]
+        save += amount[0]
+        amount[0] = 0
       end
     end
-    return advice
+    new_hash.each do |key, score|
+      advice_array.push("Move #{score[0]} from the #{key} account #{score[1]}")
+    end
+
+    if save < three_months_spending
+      first_months_spending_towards_savings(save, advice_array)
+    else
+      financial_shuffle(debt, save, investment_hash, advice_array)
+    end
+  end
+
+  def first_months_spending_towards_savings(save, advice_array)
+    goal = three_months_spending - save
+    if goal > cash_flow
+      advice_array.push("Your first months cashflow of #{cash_flow} should go towards your savings")
+    else
+      advice_array.push("#{cash_flow - goal} of your first months cashflow should go towards your savings")
+    end
+    return advice_array
+  end
+
+  def debt_and_savings_scramble(debt, save, investment_hash, advice_array)
+    immediate_transfer = save - three_months_spending
+    if debt >= immediate_transfer
+      debt -= immediate_transfer
+      advice_array.push("transfer #{immediate_transfer} from your savings towards your debt") unless immediate_transfer == 0
+      more_savings_look_at_investment(debt, investment_hash, advice_array)
+    else
+      advice_array.push("transfer #{debt} from your savings account to pay off all your debt")
+      return advice_array
+    end
+  end
+
+
+  def more_savings_look_at_investment(debt, investment_hash, advice_array)
+    sort_hash = {}
+    debt
+    investment_hash.each do |name, amount|
+      next if debt == 0
+      if amount[0] > debt
+        sort_hash[name] = [debt, "TO DEBT"]
+        debt = 0
+      else
+        debt -= amount[0]
+        sort_hash[name] = [amount[0], "TO DEBT"]
+      end
+    end
+    sort_hash.each do |key, score|
+      advice_array.push("Move #{score[0]} from the #{key} account #{score[1]}")
+    end
+
+    if debt != 0
+      first_months_spending_towards_debt(debt, advice_array)
+    end
+
+    return advice_array
+  end
+
+  def first_months_spending_towards_debt(debt, advice_array)
+    if debt > cash_flow
+      advice_array.push("Your first months cashflow of #{cash_flow} should go towards your debt")
+    else
+      advice_array.push("#{cash_flow - debt} of your first months cashflow should go towards your savings")
+    end
+    return advice_array
+  end
+
+  def investment_hashitize(investments)
+    investment_hash = {}
+    investments.each do |invest|
+      investment_hash[invest.name] = [invest.amount, ""]
+    end
+    return investment_hash
   end
 
 end

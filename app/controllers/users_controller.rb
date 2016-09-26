@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 	before_action :set_user
 
 	def show
-		@advice = @user.has_debt
+		@finance = @user.financial_shuffle(@user.total_debt, @user.savings, @user.investment_hashitize(@user.investments), [])
 	end
 
 	def update
