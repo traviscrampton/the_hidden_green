@@ -71,11 +71,10 @@ class User < ActiveRecord::Base
   #### CALCULATION MATRIX ####
 
   def financial_shuffle(debt, savings, investment_hash, advice_array)
-    binding.pry
     if debt > 0
       look_at_debt(debt, savings, investment_hash, advice_array)
     else
-      return 'yall is doing good! '
+      check_savings(savings, investment_hash, advice_array)
     end
   end
 
@@ -104,19 +103,57 @@ class User < ActiveRecord::Base
         amount[0] = 0
       end
     end
+
     new_hash.each do |key, score|
       advice_array.push("Move #{score[0]} from the #{key} account #{score[1]}")
     end
 
     if save < three_months_spending
-      first_months_spending_towards_savings(save, advice_array)
+      first_months_spending_towards_savings(save, advice_array, three_months_spending)
     else
       financial_shuffle(debt, save, investment_hash, advice_array)
     end
   end
 
-  def first_months_spending_towards_savings(save, advice_array)
-    goal = three_months_spending - save
+  def check_savings(savings, investment_hash, advice_array)
+    if savings < six_months_spending
+      six_months_spending_check_investments(savings, investment_hash, advice_array)
+    else
+      advice_array.push("Your first months cash flow of #{cash_flow} should go towards some type of investment")
+      return advice_array
+    end
+  end
+
+  def six_months_spending_check_investments(savings, investment_hash, advice_array)
+    new_hash = {}
+    goal = six_months_spending - savings
+    investment_hash.each do |name, amount|
+      next if savings >= six_months_spending
+      if amount[0] >= goal
+        new_hash[name] = [goal, "TO SAVINGS"]
+        amount[0] -= goal
+        savings += goal
+      elsif amount[0] < goal
+        new_hash[name] = [amount[0], "TO SAVINGS"]
+        goal -= amount[0]
+        savings += amount[0]
+        amount[0] = 0
+      end
+    end
+
+    new_hash.each do |key, score|
+      advice_array.push("Move #{score[0]} from the #{key} account #{score[1]}")
+    end
+
+    if savings < six_months_spending
+      first_months_spending_towards_savings(savings, advice_array, six_months_spending)
+    else
+      return advice_array
+    end
+  end
+
+  def first_months_spending_towards_savings(save, advice_array, x_months_spending)
+    goal = x_months_spending - save
     if goal > cash_flow
       advice_array.push("Your first months cashflow of #{cash_flow} should go towards your savings")
     else
@@ -133,9 +170,11 @@ class User < ActiveRecord::Base
       more_savings_look_at_investment(debt, investment_hash, advice_array)
     else
       advice_array.push("transfer #{debt} from your savings account to pay off all your debt")
-      return advice_array
+      check_savings(save - debt, investment_hash, advice_array)
+
     end
   end
+
 
 
   def more_savings_look_at_investment(debt, investment_hash, advice_array)

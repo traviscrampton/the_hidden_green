@@ -8,6 +8,7 @@
 
 	<h2><u><%= link_to "Total Debt", debts_path %>:</u></h2>
 	$ <%= @user.total_debt %>
+	<% binding.pry %>
 
 	<ul>
 		<% @user.debts.each do |debt| %>
