@@ -3,7 +3,12 @@ class UsersController < ApplicationController
 	before_action :set_user
 
 	def show
-		@finance = @user.financial_shuffle(@user.total_debt, @user.savings, @user.investment_hashitize(@user.investments), [])
+		@vifance = @user.financial_shuffle(@user.total_debt, @user.savings, @user.investment_hashitize(@user.investments), [])
+		@finance = @vifance['advice_array']
+		@new_debt = @vifance['debt']
+		@new_savings = @vifance['savings']
+		@investments = @vifance['investment_hash']
+		@months_from_now = Calendar.new(user: @user).re_order_year
 	end
 
 	def update
