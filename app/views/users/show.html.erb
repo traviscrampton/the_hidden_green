@@ -1,4 +1,4 @@
-<!-- <div>
+<div>
 <h1><%= @user.email %>'s Financial Docket</h1>
 <div class="portfolio_data">
 	<h2><u>Savings Account:</u></h2>
@@ -43,21 +43,20 @@
 <div>
 	<h1>WTF DO I DO (Initially)?!</h1>
 	<ul>
-		<% @finance.each do |ad| %>
+		<% @advice.each do |ad| %>
 		<li><%= ad %></li>
 		<% end %>
 	</ul>
 	<div>
 		<h2>If you follow this advice your finances would be updated accordingly</h2>
 		<ul>
-			<li>Debt: <%= @new_debt %></li>
-			<li>Savings: <%= @new_savings %></li>
+			<li>Debt: <%= @debt %></li>
+			<li>Savings: <%= @savings %></li>
 			<li>
 				Investments:
 					<ul>
-						<% @investments.each do |name, value| %>
-							<li> <%= name %>: <%= value[0] %></li>
-						<% end %>
+						<%=  @total_investment_amount %>
+
 					</ul>
 			</li>
 		</ul>
@@ -65,30 +64,5 @@
 
 </div>
 </div>
-<div style="width: 30%; display: inline-block;">
-	<% @months_from_now.each do |month| %>
-		<% finance = @user.financial_shuffle(@vifance['debt'], @vifance['savings'], @vifance['investment_hash'], []) %>
-		<div><h1><%= month %></h1></div>
-		<div><strong>Savings</strong>: <%= @vifance['savings'] %></div>
-		<div>
-			<strong>Investments:</strong>
-			 <% @vifance['investment_hash'].each do |name, value| %>
-				 <li> <%= name %>: <%= value[0] %></li>
-			 <% end %>
-		</div>
-		<div>
-			<u><strong>Advice</strong></u>
-			<ul>
-				<% @vifance['advice_array'].each do |advice| %>
-					<li><%= advice %></li>
-				<% end %>
-		</ul>
-		</div>
-		<div>
-			<strong>Debt:</strong> <%= @vifance['debt'] %>
-		</div>
 
-			<% @vifance = finance  %>
-	<% end %>
-</div>
-<h1><%= link_to 'Sign Out YO!', destroy_user_session_path(current_user), method: :delete %></h1> -->
+<h1><%= link_to 'Sign Out YO!', destroy_user_session_path(current_user), method: :delete %></h1>

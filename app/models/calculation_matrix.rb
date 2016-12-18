@@ -8,95 +8,130 @@ class CalculationMatrix
 		self.user = user
 	end
 
-	def financial_shuffle(debt, savings, total_investment, advice)
+	def financial_shuffle(debt, savings, total_investment, cash_flow, advice)
 		if debt > 0
-			has_debt_check_savings(debt, savings, total_investment, advice)
+			has_debt_check_savings(debt, savings, total_investment, cash_flow, advice)
 		else
-			no_debt_check_savings(debt, savings, total_investment, advice)
+			no_debt_check_savings(debt, savings, total_investment, cash_flow, advice)
 		end
 	end
 
-	def has_debt_check_savings(debt, savings, total_investment, advice)
+	def has_debt_check_savings(debt, savings, total_investment, cash_flow, advice)
 		if savings < user.three_months_spending
 			goal = user.three_months_spending - savings
-			savings_less_than_3_months_check_investments(debt, savings, total_investment, advice, goal)
+			savings_less_than_3_months_check_investments(debt, savings, total_investment, cash_flow, advice, goal)
 		else
-			transfer_savings_to_debt(debt, savings, total_investment, advice)
+			transfer_savings_to_debt(debt, savings, total_investment, cash_flow, advice)
 		end
 	end
 
-	def savings_less_than_3_months_check_investments(debt, savings, total_investment, advice, goal)
+	def savings_less_than_3_months_check_investments(debt, savings, total_investment, cash_flow, advice, goal)
 		if total_investment[:amount] > 0
-			investments_to_savings(debt, savings, total_investment, advice, goal)
+			investments_to_savings(debt, savings, total_investment, cash_flow, advice, goal)
 		else
-			cash_flow_to_savings(debt, savings, total_investment, advice, goal)
+			cash_flow_to_savings(debt, savings, total_investment, cash_flow, advice, goal)
 		end
 	end
 
-	def transfer_savings_to_debt(debt, savings, total_investment, advice)
+	def transfer_savings_to_debt(debt, savings, total_investment, cash_flow, advice)
 		immediate_transfer = savings - user.three_months_spending
 		if debt >= immediate_transfer
-			pay_off_portion_of_debt_savings(debt, savings, total_investment, advice, immediate_transfer)
+			pay_off_portion_of_debt_savings(debt, savings, total_investment, cash_flow, advice, immediate_transfer)
 		else
-			pay_off_all_debt_from_savings(debt, savings, total_investment, advice, immediate_transfer)
+			pay_off_all_debt_from_savings(debt, savings, total_investment, cash_flow, advice, immediate_transfer)
 		end
 	end
 
-	def pay_off_portion_of_debt_savings(debt, savings, total_investment, advice, immediate_transfer)
+	def pay_off_portion_of_debt_savings(debt, savings, total_investment, cash_flow, advice, immediate_transfer)
+		savings -= immediate_transfer
 		debt -= immediate_transfer
 		advice.push("transfer #{immediate_transfer} from your savings towards your debt") unless immediate_transfer == 0
-		more_savings_look_at_investment(debt, savings, total_investment, advice)
+		three_months_spending_has_debt_look_at_investment(debt, savings, total_investment, cash_flow, advice)
 	end
 
-	def pay_off_all_debt_from_savings(debt, savings, total_investment, advice, immediate_transfer)
+	def three_months_spending_has_debt_look_at_investment(debt, savings, total_investment, cash_flow, advice)
+		if total_investment[:amount] > 0
+			investment_to_pay_debt(debt, savings, total_investment, cash_flow, advice)
+		else
+			cash_flow_to_debt(debt, savings, total_investment, cash_flow, advice)
+		end
+	end
+
+	def pay_off_all_debt_from_savings(debt, savings, total_investment, cash_flow, advice, immediate_transfer)
 	  advice.push("transfer #{debt} from your savings account to pay off all your debt")
 	  savings -= debt
 	  debt = 0
-	  financial_shuffle(debt, savings, total_investment, advice)
+	  financial_shuffle(debt, savings, total_investment, cash_flow, advice)
 	end
 
-	def no_debt_check_savings(debt, savings, total_investment, advice)
+	def no_debt_check_savings(debt, savings, total_investment, cash_flow, advice)
 	  if savings < user.six_months_spending
-	    savings_less_than_6_months_check_investments(debt, savings, total_investment, advice)
+	    savings_less_than_6_months_check_investments(debt, savings, total_investment, cash_flow, advice)
 	  else
-			cash_flow_to_investment(debt, savings, total_investment, advice)
+			cash_flow_to_investment(debt, savings, total_investment, cash_flow, advice)
 	  end
 	end
 
-	def savings_less_than_6_months_check_investments(debt, savings, total_investment, advice)
+	def savings_less_than_6_months_check_investments(debt, savings, total_investment, cash_flow, advice)
 		goal = user.six_months_spending - savings
 		 if total_investment[:amount] > 0
-			 investments_to_savings(debt, savings, total_investment, advice, goal)
+			 investments_to_savings(debt, savings, total_investment, cash_flow, advice, goal)
 		 else
-			 binding.pry
+			 cash_flow_to_savings(debt, savings, total_investment, cash_flow, advice, goal)
 		 end
 	end
 
-	def investments_to_savings(debt, savings, total_investment, advice, goal)
+	def investments_to_savings(debt, savings, total_investment, cash_flow, advice, goal)
 		if total_investment[:amount] >= goal
 			total_investment[:amount] -= goal
+			savings += goal
 			advice.push("Transfer #{goal} from your investments and put it towards your savings")
-
-			# investment_to_pay_debt(debt, savings, total_investment, advice)
 		else
-			goal -= total_investment[:amount]
+			savings += total_investment[:amount]
+			advice.push("Transfer #{total_investment[:amount]} from your investment to your savings")
 			total_investment[:amount] = 0
+		end
+		financial_shuffle(debt, savings, total_investment, cash_flow, advice)
+	end
+
+	def investment_to_pay_debt(debt, savings, total_investment, cash_flow, advice)
+		if debt >= total_investment[:amount]
+			advice.push("Transfer #{total_investment[:amount]} from your investments towards your debt")
+			debt -= total_investment[:amount]
+			total_investment[:amount] = 0
+		else
+			advice.push("Transfer #{debt} from your investments to pay off all your debt!")
+			total_investment[:amount] -= debt
+			debt = 0
+		end
+		financial_shuffle(debt, savings, total_investment, cash_flow, advice)
+	end
+
+	def cash_flow_to_savings(debt, savings, total_investment, cash_flow, advice, goal)
+		if goal >= cash_flow
+			savings += cash_flow
+			advice.push("This months cash flow of #{cash_flow} should go towards your savings")
+			cash_flow = 0
+			final_function(debt, savings, total_investment, cash_flow, advice)
+		else
+			savings += goal
+			cash_flow -= goal
+			advice.push("This months cash flow of #{goal} should go towards savings")
+			financial_shuffle(debt, savings, total_investment, cash_flow, advice)
 		end
 	end
 
-	def investment_to_pay_debt(debt, savings, total_investment, advice)
-
-	end
-
-	def cash_flow_to_savings(debt, savings, total_investment, advice, goal)
-		if goal >= user.cash_flow
-			savings += user.cash_flow
-			advice.push("This months cash flow of #{user.cash_flow} should go towards your savings")
-			final_function(debt, savings, total_investment, advice)
+	def cash_flow_to_debt(debt, savings, total_investment, cash_flow, advice)
+		if debt >= cash_flow
+			debt -= cash_flow
+			advice.push("$#{cash_flow} should go towards paying off your debt ")
+			cash_flow = 0
+			final_function(debt, savings, total_investment, cash_flow, advice)
 		else
-			savings += (user.cash_flow - goal)
-			advice.push("This months cash flow of #{user.cash_flow - goal} should go towards savings")
-			financial_shuffle(debt, savings, total_investment, advice)
+			cash_flow -= debt
+			advice.push("your cash flow of #{debt} should go to pay off your debt")
+			debt = 0
+			financial_shuffle(debt, savings, total_investment, cash_flow, advice)
 		end
 	end
 
@@ -104,15 +139,16 @@ class CalculationMatrix
 	## cash_flow_to_investment really just means that you've lined up your ducks and are taking care of business.
 
 
-	def cash_flow_to_investment(debt, savings, total_investment, advice)
+	def cash_flow_to_investment(debt, savings, total_investment, cash_flow, advice)
+		binding.pry
 		advice.push("This months cash flow of #{user.cash_flow} should go towards your investments")
 		total_investment[:amount] += user.cash_flow
 
-		final_function(debt, savings, total_investment, advice)
+		final_function(debt, savings, total_investment, cash_flow, advice)
 	end
 
-	def final_function(debt, savings, total_investment, advice)
-		{debt: debt, savings: savings, total_investment: total_investment, advice: advice}
+	def final_function(debt, savings, total_investment, cash_flow, advice)
+		{debt: debt, savings: savings, total_investment: total_investment, cash_flow: cash_flow, advice: advice}
 	end
 
 

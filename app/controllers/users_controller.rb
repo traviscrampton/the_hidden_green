@@ -3,12 +3,12 @@ class UsersController < ApplicationController
 	before_action :set_user
 
 	def show
-		@matrix = CalculationMatrix.new(@user).financial_shuffle(@user.total_debt, @user.savings, @user.total_investment, [])
-		# @vifance = @user.financial_shuffle(@user.total_debt, @user.savings, @user.investments, [])
-		# @finance = @vifance['advice_array']
-		# @new_debt = @vifance['debt']
-		# @new_savings = @vifance['savings']
-		# @investments = @vifance['investment_hash']
+		matrix_results = CalculationMatrix.new(@user).financial_shuffle(@user.total_debt, @user.savings, @user.total_investment, @user.cash_flow, [])
+
+		@debt = matrix_results[:debt]
+		@savings = matrix_results[:savings]
+		@total_investment_amount = matrix_results[:total_investment][:amount]
+		@advice = matrix_results[:advice]
 		@months_from_now = Calendar.new(user: @user).re_order_year
 	end
 
