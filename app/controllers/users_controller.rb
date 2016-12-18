@@ -3,7 +3,8 @@ class UsersController < ApplicationController
 	before_action :set_user
 
 	def show
-		@vifance = @user.financial_shuffle(@user.total_debt, @user.savings, @user.investments, [])
+		@matrix = CalculationMatrix.new(@user).financial_shuffle(@user.total_debt, @user.savings, @user.total_investment, [])
+		# @vifance = @user.financial_shuffle(@user.total_debt, @user.savings, @user.investments, [])
 		# @finance = @vifance['advice_array']
 		# @new_debt = @vifance['debt']
 		# @new_savings = @vifance['savings']
