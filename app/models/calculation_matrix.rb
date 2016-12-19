@@ -144,8 +144,8 @@ class CalculationMatrix
 	end
 
 	def cash_flow_to_investment(debt, savings, total_investment, cash_flow, advice)
-		advice.push("This months cash flow of #{user.cash_flow} should go towards your investments")
-		total_investment[:amount] += user.cash_flow
+		advice.push("This months cash flow of #{cash_flow} should go towards your investments")
+		total_investment[:amount] += cash_flow
 
 		final_function(debt, savings, total_investment, cash_flow, advice)
 	end

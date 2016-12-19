@@ -15,10 +15,37 @@
      cursor:pointer;
    }
  }
+.portfolio_data, .monthly_numbers{
+	width: 40%;
+	display:inline-block;
+	overflow: hidden;
+}
+.generalUserStats{
 
- .portfolio_data{
- }
+}
 
  .monthly_numbers{
-
+	 vertical-align:123px;
+ }
+ .fullCalendar{
+	 text-align: center;
+	 .individual_month{
+		 text-align: left;
+		 min-height: 300px;
+		 display: inline-block;
+		 overflow: hidden;
+		 width: 25%;
+		 border: 1px solid darkred;
+		 .calendarMonth{
+			 background: darkred;
+			 color: white;
+			 font-size: 30px;
+			 font-weight: 600;
+			 padding: 10px 0px 10px 20px;
+		 }
+		 .calendarInformation{
+			 padding: 10px;
+			 font-size: 17px;
+		 }
+	 }
  }

@@ -1,67 +1,73 @@
-<div>
-<h1><%= @user.email %>'s Financial Docket</h1>
-<div class="portfolio_data">
-	<h2><u>Savings Account:</u></h2>
-	$<%= @user.accounts.find_by(a_type:'Savings').amount %>
+<center>
+	<h1><%= @user.email %>'s Financial Docket</h1>
+	<div class="portfolio_data">
+		<div class="generalUserStats">
+			<h2><u>Savings Account:</u></h2>
+			$<%= @user.accounts.find_by(a_type:'Savings').amount %>
 
-	<h2><u>Checking Account:</u></h2>
-	$<%= @user.accounts.find_by(a_type:'Checkings').amount %>
+			<h2><u>Checking Account:</u></h2>
+			$<%= @user.accounts.find_by(a_type:'Checkings').amount %>
 
-	<h2><u><%= link_to "Total Debt", debts_path %>:</u></h2>
-	$ <%= @user.total_debt %>
+			<h2><u><%= link_to "Total Debt", debts_path %>:</u></h2>
+			$ <%= @user.total_debt %>
+		</div>
 
-	<ul>
-		<% @user.debts.each do |debt| %>
-			<li>Name: <%= debt.name %> || Amount: <%= debt.amount %> || Interest Rate: <%= debt.interest_rate %> || Minimum Monthly Payment: <%= debt.minimum_monthly_payment %> </li>
-		<% end %>
-	</ul>
-
-	<h2><u><%= link_to "Total Investments", investments_path %>:</u></h2>
-	$<%= @user.total_investment %>
-	<ul>
-		<% @user.investments.each do |investment| %>
-			<li>Name: <%= investment.name %> || Amount: <%= investment.amount %> || Interest Rate: <%= investment.interest_rate %> </li>
-		<% end %>
-	</ul>
-</div>
-
-
-<div class="monthly_numbers">
-	<h3>Total Monthly Spending: </h3>
-	<%= @user.total_monthly_spending %>
-
-	<h3>Monthly Income:</h3>
-	<%= @user.total_monthly_income %>
-	<% @user.monthly_incomes.each do |income| %>
-		<li>Name: <%= income.source_name %> || Amount <%= income.source_amount %></li>
-	<% end %>
-
-	<h3>Monthly CashFlow</h3>
-	<%= @user.cash_flow %>
-</div>
-
-<div>
-	<h1>WTF DO I DO (Initially)?!</h1>
-	<ul>
-		<% @advice.each do |ad| %>
-		<li><%= ad %></li>
-		<% end %>
-	</ul>
-	<div>
-		<h2>If you follow this advice your finances would be updated accordingly</h2>
 		<ul>
-			<li>Debt: <%= @debt %></li>
-			<li>Savings: <%= @savings %></li>
-			<li>
-				Investments:
-					<ul>
-						<%=  @total_investment_amount %>
-					</ul>
-			</li>
+			<% @user.debts.each do |debt| %>
+				<li>Name: <%= debt.name %> || Amount: <%= debt.amount %> || Interest Rate: <%= debt.interest_rate %> || Minimum Monthly Payment: <%= debt.minimum_monthly_payment %> </li>
+			<% end %>
+		</ul>
+
+		<h2><u><%= link_to "Total Investments", investments_path %>:</u></h2>
+		$<%= @total_investment_amount %>
+		<ul>
+			<% @user.investments.each do |investment| %>
+				<li>Name: <%= investment.name %> || Amount: <%= investment.amount %> || Interest Rate: <%= investment.interest_rate %> </li>
+			<% end %>
 		</ul>
 	</div>
+	<div class="monthly_numbers">
+		<h2>Total Monthly Spending: </h2>
+		<%= @user.total_monthly_spending %>
 
-</div>
+		<h2>Monthly Income:</h2>
+		<%= @user.total_monthly_income %>
+		<% @user.monthly_incomes.each do |income| %>
+		<li>Name: <%= income.source_name %> || Amount <%= income.source_amount %></li>
+		<% end %>
+
+		<h2>Monthly CashFlow</h2>
+		<%= @user.cash_flow %>
+	</div>
+</center>
+
+<div class="fullCalendar">
+	<% @months_from_now.each do |month| %>
+		<% finance = CalculationMatrix.new(@user).financial_shuffle(@matrix_results[:debt], @matrix_results[:savings], @matrix_results[:total_investment], @user.cash_flow, []) %>
+		<div class="individual_month">
+			<div class="calendarMonth"><%= month %></div>
+			<div class="calendarInformation">
+				<div><strong>Savings</strong>: <%= @matrix_results[:savings] %></div>
+				<div>
+					<strong>Investments:</strong>
+					 <%= @matrix_results[:total_investment][:amount] %>
+				</div>
+				<div>
+					<u><strong>Advice</strong></u>
+					<ul>
+						<% @matrix_results[:advice].each do |advice| %>
+							<li><%= advice %></li>
+						<% end %>
+					</ul>
+				</div>
+				<div>
+					<strong>Debt:</strong> <%= @matrix_results[:debt] > 0 ? @matrix_results[:debt] : "NO MORE DEBT!"  %>
+				</div>
+			</div>
+		</div>
+			<% @matrix_results = finance %>
+
+	<% end %>
 </div>
 
 <h1><%= link_to 'Sign Out YO!', destroy_user_session_path(current_user), method: :delete %></h1>
