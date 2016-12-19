@@ -1,5 +1,5 @@
-<center id="dashboard">
-	<div>
-		<h1>Hello Dashboard</h1>
-	</div>
-</center>
+<script>
+	var current_user = <%= raw json_escape(current_user.to_json) %>
+</script>
+
+<div id="dashboard"></div>
