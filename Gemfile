@@ -13,6 +13,7 @@ gem "backbone-on-rails"
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem "awesome_print", require: "ap"
+gem 'responders'
 
 group :development do
   gem 'pry'
