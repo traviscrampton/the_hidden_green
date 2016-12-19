@@ -68,8 +68,16 @@ class CalculationMatrix
 	  if savings < user.six_months_spending
 	    savings_less_than_6_months_check_investments(debt, savings, total_investment, cash_flow, advice)
 	  else
-			cash_flow_to_investment(debt, savings, total_investment, cash_flow, advice)
+			savings_more_than_6_months_check_investments(debt, savings, total_investment, cash_flow, advice)
 	  end
+	end
+
+	def savings_more_than_6_months_check_investments(debt, savings, total_investment, cash_flow, advice)
+		transfer = savings - user.six_months_spending
+		total_investment[:amount] += transfer
+		savings = user.six_months_spending
+		advice.push("Move #{transfer} from your savings into your investments") unless transfer == 0
+		cash_flow_to_investment(debt, savings, total_investment, cash_flow, advice)
 	end
 
 	def savings_less_than_6_months_check_investments(debt, savings, total_investment, cash_flow, advice)
@@ -135,12 +143,7 @@ class CalculationMatrix
 		end
 	end
 
-
-	## cash_flow_to_investment really just means that you've lined up your ducks and are taking care of business.
-
-
 	def cash_flow_to_investment(debt, savings, total_investment, cash_flow, advice)
-		binding.pry
 		advice.push("This months cash flow of #{user.cash_flow} should go towards your investments")
 		total_investment[:amount] += user.cash_flow
 

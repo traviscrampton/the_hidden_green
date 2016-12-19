@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
 	end
 
 	def create_psuedo_investment
-		investment_hash = {amount: 0, interest_rate: 0 }
+		investment_hash = {amount: 0, interest_rate: 0.07 }
 	end
 
   def total_monthly_income
