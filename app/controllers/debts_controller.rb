@@ -1,9 +1,11 @@
 class DebtsController < ApplicationController
 
-	before_action :set_user
+	respond_to :json, only: [:index]
 
 	def index
-		@debts = @user.debts
+		user = User.find(params[:user_id])
+		respond_with(user.debts.to_json)
+
 	end
 
 	def new
@@ -27,8 +29,8 @@ class DebtsController < ApplicationController
 		params.require(:debt).permit(:name, :amount, :interest_rate, :minimum_monthly_payment)
 	end
 
-	def set_user
-		@user = current_user
-	end
+	# def set_user
+	# 	@user = current_user
+	# end
 
 end

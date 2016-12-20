@@ -25,7 +25,7 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 	},
 
 	selectFinancial: function(data){
-		this.currentWindow.remove();
+		this.removeCurrentWindow();
 		var viewHash = {
 			'debts': this.getDebts,
 			'savings': this.getSavings,
@@ -36,8 +36,18 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		viewHash[data].call();
 	},
 
+	removeCurrentWindow(){
+		this.currentWindow.undelegateEvents();
+    this.currentWindow.$el.removeData().unbind().empty();
+	},
+
 	getDebts: function(){
-		alert('You Hit Debts')
+		this.debtsCollection = new TheHiddenGreen.Collections.Debts();
+		this.currentWindow = new TheHiddenGreen.Views.DebtList({
+			el: '#contentView',
+			collection: this.debtsCollection,
+		});
+		this.debtsCollection.fetch({data: { user_id: current_user.id} });
 	},
 
 	getSavings: function(){
