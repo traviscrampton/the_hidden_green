@@ -7,7 +7,7 @@ TheHiddenGreen.Views.DashboardLayout = Backbone.View.extend({
 	},
 
 	setupEvents: function(){
-		this.listenTo(TheHiddenGreen.Views.CommandCenter.prototype, 'selectFinancial', this.selectFinancial);
+		// this.listenTo(TheHiddenGreen.Views.CommandCenter.prototype, 'selectFinancial', this.selectFinancial);
 	},
 
 	render: function(){
@@ -25,6 +25,7 @@ TheHiddenGreen.Views.DashboardLayout = Backbone.View.extend({
 	},
 
 	selectFinancial: function(data){
-		
+		debugger;
 	}
+
 })

@@ -19,12 +19,40 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 			el: '#navigationButtons'
 		});
 
-		this.contentWindow = new TheHiddenGreen.Views.ContentView({
+		this.currentWindow = new TheHiddenGreen.Views.ContentView({
 			el: '#contentView'
 		})
 	},
 
 	selectFinancial: function(data){
-		this.trigger('selectFinancial', data)
+		this.currentWindow.remove();
+		var viewHash = {
+			'debts': this.getDebts,
+			'savings': this.getSavings,
+			'investments': this.getInvestments,
+			'income': this.getIncome,
+			'spending': this.getSpending
+		}
+		viewHash[data].call();
+	},
+
+	getDebts: function(){
+		alert('You Hit Debts')
+	},
+
+	getSavings: function(){
+		alert('you hit savings')
+	},
+
+	getInvestments: function(){
+		alert('you hit investments')
+	},
+
+	getIncome: function(){
+		alert('you hit income')
+	},
+
+	getSpending: function(){
+		alert('you hit spending')
 	}
 })
