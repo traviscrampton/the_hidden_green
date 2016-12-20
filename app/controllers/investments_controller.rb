@@ -1,9 +1,10 @@
 class InvestmentsController < ApplicationController
 
-	before_action :set_user
+	respond_to :json, only: [:index]
 
 	def index
-		@investments = @user.investments
+		user = User.find(params[:user_id])
+		respond_with(user.investments.to_json)
 	end
 
 	def new

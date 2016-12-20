@@ -4,7 +4,6 @@ TheHiddenGreen.Views.Debt = Backbone.View.extend({
   },
 
   render: function(){
-		debugger;
     this.$el.html(JST['debts/debt']({debt: this.model}));
   }
 
