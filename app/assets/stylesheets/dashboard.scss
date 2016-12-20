@@ -11,7 +11,6 @@
 	    margin-left: 17px;
 	    width: 66%;
 			border-radius: 4px;
-			box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.14);
 			.hidden__home{
 				img{
 					width: 200px;
@@ -27,6 +26,7 @@
 
 		#navigationButtons{
 			width: 30%;
+			padding:10px;
 			.navigation__button{
 				border-radius: 4px;
 				padding: 20px 5px;
@@ -43,7 +43,10 @@
 			}
 			.selected__navigation__button{
 				background: white;
-				box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.14);
+				box-shadow:0px 1px 0px 2px #82CA9C;		
+				&:hover{
+					background: white;
+				}
 			}
 		}
 	}

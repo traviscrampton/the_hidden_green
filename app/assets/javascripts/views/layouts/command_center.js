@@ -1,8 +1,13 @@
 TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 
 	initialize: function(){
+		this.setupEvents();
 		this.render();
 		this.renderSubViews();
+	},
+
+	setupEvents: function(){
+		this.listenTo(TheHiddenGreen.Views.NavigationButtons.prototype, 'selectFinancial', this.selectFinancial);
 	},
 
 	render: function(){
@@ -17,5 +22,9 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		this.contentWindow = new TheHiddenGreen.Views.ContentView({
 			el: '#contentView'
 		})
+	},
+
+	selectFinancial: function(data){
+		this.trigger('selectFinancial', data)
 	}
 })
