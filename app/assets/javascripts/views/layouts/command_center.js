@@ -64,7 +64,12 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 	},
 
 	getIncome: function(){
-		alert('you hit income')
+		this.incomeCollection = new TheHiddenGreen.Collections.Incomes();
+		this.currentWindow = new TheHiddenGreen.Views.IncomeList({
+			el: '#contentView',
+			collection: this.incomeCollection,
+		});
+		this.incomeCollection.fetch({data: { user_id: current_user.id} });
 	},
 
 	getSpending: function(){
