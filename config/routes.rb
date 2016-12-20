@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :debts
   resources :investments
   resources :users
-  resources :monthly_incomes
+  resources :incomes
   resources :monthly_spendings
 
   # Example of regular route:

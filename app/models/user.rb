@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   has_one :monthly_spending
   has_many :accounts
-  has_many :monthly_incomes
+  has_many :incomes
   has_many :assets
   has_many :debts
   has_many :investments
@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
 	end
 
   def total_monthly_income
-    monthly_incomes.pluck(:source_amount).reduce(:+)
+    incomes.pluck(:source_amount).reduce(:+)
   end
 
   def cash_flow

@@ -32,7 +32,7 @@
 
 		<h2>Monthly Income:</h2>
 		<%= @user.total_monthly_income %>
-		<% @user.monthly_incomes.each do |income| %>
+		<% @user.incomes.each do |income| %>
 		<li>Name: <%= income.source_name %> || Amount <%= income.source_amount %></li>
 		<% end %>
 
