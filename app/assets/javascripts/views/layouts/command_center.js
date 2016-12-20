@@ -12,6 +12,10 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 	renderSubViews: function(){
 		this.navigationButtons = new TheHiddenGreen.Views.NavigationButtons({
 			el: '#navigationButtons'
+		});
+
+		this.contentWindow = new TheHiddenGreen.Views.ContentView({
+			el: '#contentView'
 		})
 	}
 })
