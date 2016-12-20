@@ -1,11 +1,11 @@
 class AccountsController < ApplicationController
-	before_action :set_user
-	before_action :next_pls, only: [:new]
 
-	def new
-		2.times {@user.accounts.new()}
-	end
+		respond_to :json, only: [:index]
 
+		def index
+			user = User.find(params[:user_id])
+			respond_with(user.accounts.sort_by{|a| a.a_type }.reverse)
+		end
 
 private
 	def set_user

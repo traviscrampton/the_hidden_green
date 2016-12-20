@@ -51,7 +51,12 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 	},
 
 	getSavings: function(){
-		alert('you hit savings')
+		this.accountsCollection = new TheHiddenGreen.Collections.Accounts();
+		this.currentWindow = new TheHiddenGreen.Views.AccountList({
+			el: '#contentView',
+			collection: this.accountsCollection,
+		});
+		this.accountsCollection.fetch({data: { user_id: current_user.id} });
 	},
 
 	getInvestments: function(){
