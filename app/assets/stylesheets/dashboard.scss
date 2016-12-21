@@ -29,6 +29,16 @@
 				padding: 10px 20px;
 				height: 200px;
 				margin-bottom: 10px;
+				position: relative;
+				svg{
+					position: absolute;
+			    top: 50%;
+			    left: 50%;
+			    -webkit-transform: translate(-50%,-50%);
+			    -ms-transform: translate(-50%,-50%);
+			    transform: translate(-50%,-50%);
+			    overflow: hidden;
+				}
 				.account__name__type{
 					border-left: 3px solid #505050;
 					padding-left: 10px;

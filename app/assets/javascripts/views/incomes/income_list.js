@@ -5,13 +5,14 @@ TheHiddenGreen.Views.IncomeList = Backbone.View.extend({
 	},
 
 	render: function(){
-		this.$el.html('');
+		this.$el.html(JST['incomes/income_list']);
 		this.collection.each(this.renderIncome, this);
 	},
 
 	renderIncome: function(income){
-		 this.$el.append(new TheHiddenGreen.Views.Income({
-			 model: income
+		 this.$el.prepend(new TheHiddenGreen.Views.Income({
+			 model: income,
+			 className:'itemContainer'
 		 }).el);
 	 },
 })

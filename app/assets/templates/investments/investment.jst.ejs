@@ -1,1 +1,14 @@
-<%= investment.get('name') %>
+<div class="account__name__type">
+	<div class="account__name">
+		<%= investment.get('name') %>
+	</div>
+	<div class="account__type">
+		
+	</div>
+	<div class="account__type">
+		Interest Rate: <%= investment.get('interest_rate') %>
+	</div>
+</div>
+<div class="account__amount">
+	<%= investment.get('amount') %>
+</div>

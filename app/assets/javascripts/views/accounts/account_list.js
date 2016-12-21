@@ -5,12 +5,12 @@ TheHiddenGreen.Views.AccountList = Backbone.View.extend({
 	},
 
 	render: function(){
-		this.$el.html('');
+		this.$el.html(JST['accounts/account_list']);
 		this.collection.each(this.renderAccount, this);
 	},
 
 	renderAccount: function(account){
-		 this.$el.append(new TheHiddenGreen.Views.Account({
+		 this.$el.prepend(new TheHiddenGreen.Views.Account({
 			 model: account,
 			 className:'itemContainer'
 		 }).el);

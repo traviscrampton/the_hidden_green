@@ -1,1 +1,14 @@
-<%= debt.get('name') %>
+<div class="account__name__type">
+	<div class="account__name">
+		<%= debt.get('name') %>
+	</div>
+	<div class="account__type">
+		Minimum Monthly Payment: <%= debt.get('minimum_payment') %>
+	</div>
+	<div class="account__type">
+		Interest Rate: <%= debt.get('interest_rate') %>
+	</div>
+</div>
+<div class="account__amount">
+	<%= debt.get('amount') %>
+</div>
