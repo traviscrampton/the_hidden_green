@@ -1,7 +1,7 @@
 TheHiddenGreen.Views.DebtList = Backbone.View.extend({
 
 	events:{
-		'click .triggerDebtForm' : 'triggerDebtForm'
+		'click .triggerForm' : 'triggerDebtForm'
 	},
 
 	initialize: function(){
@@ -14,7 +14,7 @@ TheHiddenGreen.Views.DebtList = Backbone.View.extend({
 	},
 
 	renderDebt: function(debt){
-		 this.$el.prepend(new TheHiddenGreen.Views.Debt({
+		 this.$el.append(new TheHiddenGreen.Views.Debt({
 			 model: debt,
 			 className:'itemContainer'
 		 }).el);

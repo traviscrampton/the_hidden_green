@@ -1,21 +1,16 @@
 class DebtsController < ApplicationController
 
-	respond_to :json, only: [:index]
+	respond_to :json, only: [:index, :create]
 
 	def index
-		user = User.find(params[:user_id])
-		respond_with(user.debts.to_json)
-	end
-
-	def new
-		@debt = @user.debts.new()
-		respond_to do |format|
-			format.js
-		end
+		debts = current_user.debts.sort_by{|d| d.created_at }.reverse
+		respond_with debts
 	end
 
 	def create
-		binding.pry
+		@debt = current_user.debts.new(debt_params)
+		@debt.save!
+		respond_with(@debt)
 	end
 
 	private

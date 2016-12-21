@@ -1,17 +1,19 @@
-<form class="" action="/debts" method="post" id='debt_form'>
+<form class="" id='debt_form'>
 	<input name="utf8" type="hidden" value="✓">
-	<input type="hidden" name="authenticity_token" value="<%= csrf_token %>">
+	 <input type="hidden" name="authenticity_token" value="<%= csrf_token %>">
 	<div>
-		<input type="text" name="debt[name]" placeholder="Debt Name" value="">
+		<input type="text" name="debt[name]" placeholder="Debt Name" value="" id="name">
 	</div>
 	<div>
-		<input type="text" name="debt[amount]" placeholder="Debt Amount" value="">
+		<input type="text" name="debt[amount]" placeholder="Debt Amount" value="" id="amount">
 	</div>
 	<div>
-		<input type="text" name="debt[interest_rate]" placeholder="Interest Rate" value="">
+		<input type="text" name="debt[interest_rate]" placeholder="Interest Rate" value="" id="interest_rate">
 	</div>
 	<div>
-		<input type="text" name="debt[minimum_monthly_payment]" placeholder='minimum monthly spending' value="">
+		<input type="text" name="debt[minimum_monthly_payment]" placeholder='minimum monthly spending' value="" id='minimum_monthly_payment'>
 	</div>
-	<input type="submit" name="commit" value="SUBMIT">
+	<div class="submission">
+		<button type="button" name="button" class="submit">SUBMIT</button>
+	</div>
 </form>

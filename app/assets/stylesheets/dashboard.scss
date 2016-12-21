@@ -1,12 +1,13 @@
 #dashboard{
 
 	#commandCenter{
-		padding: 100px;
+		    padding: 100px 100px 0px;
 		#contentView, #navigationButtons{
 			display:inline-block;
 			overflow: hidden;
 		}
 		#contentView{
+			overflow: auto;
 			height: 461.5px;
 	    margin-left: 17px;
 	    width: 66%;
@@ -20,6 +21,41 @@
 					font-size: 30px;
 				}
 			}
+			form{
+				text-align: left;
+				margin-left: 40px;
+				input{
+					text-align: left;
+					font-size: 20px;
+			    width: 70%;
+			    height: 38px;
+			    border: none;
+			    border-bottom: 1px solid #000000;
+					margin-bottom: 20px;
+			    padding: 0;
+				}
+				.submission{
+					width: 70%;
+					text-align: right;
+					.submit{
+						border: 1px solid #82CA9C;
+						background: #82CA9C;
+						border-radius: 3px;
+						font-size: 22px;
+						color: #FFFFFF;
+						letter-spacing: 3.51px;
+						&:hover{
+							color: #82CA9C;
+							background: white;
+							cursor:pointer;
+						}
+					}
+				}
+			}
+			.triggerForm:hover{
+				cursor: pointer;
+				border:1px solid #82CA9C;
+			}
 			.itemContainer{
 				background: #f8f8f8;
 				display: inline-block;
@@ -28,6 +64,8 @@
 				margin-right: 15px;
 				padding: 10px 20px;
 				height: 200px;
+				border: 1px solid #f8f8f8;
+				border-radius: 4px;
 				margin-bottom: 10px;
 				position: relative;
 				svg{

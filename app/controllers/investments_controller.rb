@@ -1,10 +1,10 @@
 class InvestmentsController < ApplicationController
 
-	respond_to :json, only: [:index]
+	respond_to :json, only: [:index, :create]
 
 	def index
-		user = User.find(params[:user_id])
-		respond_with(user.investments.to_json)
+		investments = current_user.investments.sort_by{|i| i.created_at }.reverse
+		respond_with investments
 	end
 
 	def new
@@ -15,12 +15,11 @@ class InvestmentsController < ApplicationController
 	end
 
 	def create
-		@investment = @user.investments.new(investment_params)
-		@investment.save
-		respond_to do |format|
-			format.js
-		end
+		investment = current_user.investments.new(investment_params)
+		investment.save!
+		respond_with(investment)
 	end
+
 
 	private
 

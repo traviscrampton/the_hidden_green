@@ -1,7 +1,7 @@
 TheHiddenGreen.Views.DebtForm = Backbone.View.extend({
 
 	events:{
-		'submit form#debt_form' : 'submitDebtForm'
+		'click .submit' : 'submitDebtForm'
 	},
 
 	initialize: function(){
@@ -15,6 +15,20 @@ TheHiddenGreen.Views.DebtForm = Backbone.View.extend({
 	},
 
 	submitDebtForm: function(){
-		debugger;
+		var self = this;
+		var newModel = new TheHiddenGreen.Models.Debt({
+			name: $('#name').val(),
+			amount: $('#amount').val(),
+			interest_rate: $('#interest_rate').val(),
+			minimum_monthly_payment: $('#minimum_monthly_payment').val()
+		});
+		newModel.save({}, {
+		    success: function (model, response) {
+		      self.trigger('submitDebtForm', "debts")
+		    },
+		    error: function (model, response) {
+		        console.log("error");
+		    }
+		});
 	}
 })

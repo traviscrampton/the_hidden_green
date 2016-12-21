@@ -11,14 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161220232212) do
+ActiveRecord::Schema.define(version: 20161221215706) do
 
   create_table "accounts", force: :cascade do |t|
-    t.integer "user_id"
-    t.string  "a_type"
-    t.float   "amount"
-    t.float   "interest_rate"
-    t.string  "name"
+    t.integer  "user_id"
+    t.string   "a_type"
+    t.float    "amount"
+    t.float    "interest_rate"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "assets", force: :cascade do |t|
@@ -28,33 +30,41 @@ ActiveRecord::Schema.define(version: 20161220232212) do
   end
 
   create_table "debts", force: :cascade do |t|
-    t.string  "name"
-    t.integer "user_id"
-    t.float   "amount"
-    t.float   "interest_rate"
-    t.float   "minimum_monthly_payment"
+    t.string   "name"
+    t.integer  "user_id"
+    t.float    "amount"
+    t.float    "interest_rate"
+    t.float    "minimum_monthly_payment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "incomes", force: :cascade do |t|
-    t.integer "user_id"
-    t.string  "source_name"
-    t.float   "source_amount"
+    t.integer  "user_id"
+    t.string   "source_name"
+    t.float    "source_amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "investments", force: :cascade do |t|
-    t.string  "name"
-    t.integer "user_id"
-    t.float   "amount"
-    t.float   "interest_rate"
+    t.string   "name"
+    t.integer  "user_id"
+    t.float    "amount"
+    t.float    "interest_rate"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "monthly_spendings", force: :cascade do |t|
-    t.integer "user_id"
-    t.float   "rent"
-    t.float   "food"
-    t.float   "phone"
-    t.float   "utilities"
-    t.float   "everything_else"
+    t.integer  "user_id"
+    t.float    "rent"
+    t.float    "food"
+    t.float    "phone"
+    t.float    "utilities"
+    t.float    "everything_else"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|

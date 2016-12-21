@@ -1,5 +1,9 @@
 TheHiddenGreen.Views.InvestmentList = Backbone.View.extend({
 
+	events:{
+		'click .triggerForm' : 'triggerInvestmentForm'
+	},
+
 	initialize: function(){
 		this.listenTo(this.collection, 'sync', this.render);
 	},
@@ -10,9 +14,12 @@ TheHiddenGreen.Views.InvestmentList = Backbone.View.extend({
 	},
 
 	renderInvestment: function(investment){
-		 this.$el.prepend(new TheHiddenGreen.Views.Investment({
+		 this.$el.append(new TheHiddenGreen.Views.Investment({
 			 model: investment,
 			 className: 'itemContainer'
 		 }).el);
 	 },
+	 triggerInvestmentForm: function(){
+		 this.trigger('triggerInvestmentForm')
+	 }
 })
