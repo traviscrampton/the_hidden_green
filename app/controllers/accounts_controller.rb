@@ -7,6 +7,10 @@ class AccountsController < ApplicationController
 			respond_with(user.accounts.sort_by{|a| a.a_type }.reverse)
 		end
 
+		def new
+			@user = User.find(1)
+		end
+
 private
 	def set_user
 		@user = current_user

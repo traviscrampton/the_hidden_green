@@ -15,11 +15,7 @@ class DebtsController < ApplicationController
 	end
 
 	def create
-		@debt = @user.debts.new(debt_params)
-		@debt.save
-		respond_to do |format|
-			format.js
-		end
+		binding.pry
 	end
 
 	private
