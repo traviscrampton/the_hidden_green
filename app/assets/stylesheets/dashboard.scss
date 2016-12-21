@@ -7,7 +7,7 @@
 			overflow: hidden;
 		}
 		#contentView{
-			height: 450px;
+			height: 461.5px;
 	    margin-left: 17px;
 	    width: 66%;
 			border-radius: 4px;
@@ -18,6 +18,33 @@
 				}
 				.hidden__get_started{
 					font-size: 30px;
+				}
+			}
+			.itemContainer{
+				background: #f8f8f8;
+				display: inline-block;
+				width: 40%;
+				overflow: hidden;
+				margin-right: 15px;
+				padding: 10px 20px;
+				height: 200px;
+				margin-bottom: 10px;
+				.account__name__type{
+					border-left: 3px solid #505050;
+					padding-left: 10px;
+					margin-bottom:50px;
+					.account__name{
+						font-size: 25px;
+						color: #505050;
+					}
+					.account__type{
+
+					}
+				}
+				.account__amount{
+					font-size: 45px;
+					text-align: center;
+					color: #505050;
 				}
 			}
 		}
@@ -43,7 +70,7 @@
 			}
 			.selected__navigation__button{
 				background: white;
-				box-shadow:0px 1px 0px 2px #82CA9C;		
+				box-shadow:0px 1px 0px 2px #82CA9C;
 				&:hover{
 					background: white;
 				}
