@@ -1,6 +1,6 @@
 class DebtsController < ApplicationController
 
-	respond_to :json, only: [:index, :create]
+	respond_to :json, only:[:index, :create, :destroy]
 
 	def index
 		debts = current_user.debts.sort_by{|d| d.created_at }.reverse
@@ -8,9 +8,15 @@ class DebtsController < ApplicationController
 	end
 
 	def create
-		@debt = current_user.debts.new(debt_params)
-		@debt.save!
-		respond_with(@debt)
+		debt = current_user.debts.new(debt_params)
+		debt.save!
+		respond_with(debt)
+	end
+
+	def destroy
+		debt = Debt.find(params[:id])
+		debt.destroy
+		respond_with(debt)
 	end
 
 	private

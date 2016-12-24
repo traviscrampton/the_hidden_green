@@ -16,6 +16,7 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		this.listenTo(TheHiddenGreen.Views.IncomeForm.prototype, 'submitIncomeForm', this.selectFinancial)
 		this.listenTo(TheHiddenGreen.Views.AccountList.prototype, 'triggerAccountForm', this.renderAccountForm)
 		this.listenTo(TheHiddenGreen.Views.AccountForm.prototype, 'submitAccountForm', this.selectFinancial)
+		this.listenTo(TheHiddenGreen.Views.DebtList.prototype, 'deleteItem', this.deleteItem)
 	},
 
 	render: function(){
@@ -29,6 +30,12 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 
 		this.currentWindow = new TheHiddenGreen.Views.ContentView({
 			el: '#contentView'
+		})
+	},
+
+	deleteItem: function(debtItem){
+		debtItem.model.destroy({
+			wait: true
 		})
 	},
 
