@@ -7,13 +7,6 @@ class InvestmentsController < ApplicationController
 		respond_with investments
 	end
 
-	def new
-		@investment = @user.investments.new()
-		respond_to do |format|
-			format.js
-		end
-	end
-
 	def create
 		investment = current_user.investments.new(investment_params)
 		investment.save!

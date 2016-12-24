@@ -1,6 +1,6 @@
 class IncomesController < ApplicationController
 
-	respond_to :json, only: [:index]
+	respond_to :json, only: [:index, :create]
 
 	def index
 		user = User.find(params[:user_id])
@@ -13,9 +13,9 @@ class IncomesController < ApplicationController
 	end
 
 	def create
-		@income = @user.incomes.new(income_params)
-		@income.save!
-		redirect_to new_monthly_spending_path
+		income = current_user.incomes.new(income_params)
+		income.save!
+		respond_with(income)
 	end
 
 	private
@@ -26,6 +26,6 @@ class IncomesController < ApplicationController
 
 
 	def income_params
-		params.require(:monthly_income).permit(:source_name, :source_amount)
+		params.require(:income).permit(:source_name, :source_amount)
 	end
 end

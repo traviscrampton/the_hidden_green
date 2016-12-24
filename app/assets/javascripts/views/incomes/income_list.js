@@ -1,5 +1,9 @@
 TheHiddenGreen.Views.IncomeList = Backbone.View.extend({
 
+	events:{
+		'click .triggerForm' : 'triggerIncomeForm'
+	},
+
 	initialize: function(){
 		this.listenTo(this.collection, 'sync', this.render);
 	},
@@ -15,4 +19,8 @@ TheHiddenGreen.Views.IncomeList = Backbone.View.extend({
 			 className:'itemContainer'
 		 }).el);
 	 },
+
+	 triggerIncomeForm: function(){
+		 this.trigger('triggerIncomeForm')
+	 }
 })
