@@ -14,6 +14,8 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		this.listenTo(TheHiddenGreen.Views.InvestmentForm.prototype, 'submitInvestmentForm', this.selectFinancial)
 		this.listenTo(TheHiddenGreen.Views.IncomeList.prototype, 'triggerIncomeForm', this.renderIncomeForm)
 		this.listenTo(TheHiddenGreen.Views.IncomeForm.prototype, 'submitIncomeForm', this.selectFinancial)
+		this.listenTo(TheHiddenGreen.Views.AccountList.prototype, 'triggerAccountForm', this.renderAccountForm)
+		this.listenTo(TheHiddenGreen.Views.AccountForm.prototype, 'submitAccountForm', this.selectFinancial)
 	},
 
 	render: function(){
@@ -47,6 +49,13 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 	renderIncomeForm: function(){
 		this.removeCurrentWindow();
 		this.currentWindow = new TheHiddenGreen.Views.IncomeForm({
+			el: '#contentView'
+		});
+	},
+
+	renderAccountForm: function(){
+		this.removeCurrentWindow();
+		this.currentWindow = new TheHiddenGreen.Views.AccountForm({
 			el: '#contentView'
 		});
 	},

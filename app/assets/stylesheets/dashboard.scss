@@ -24,7 +24,7 @@
 			form{
 				text-align: left;
 				margin-left: 40px;
-				input{
+				input, select{
 					text-align: left;
 					font-size: 20px;
 			    width: 70%;
@@ -33,6 +33,10 @@
 			    border-bottom: 1px solid #000000;
 					margin-bottom: 20px;
 			    padding: 0;
+				}
+				select{
+					background: white;
+					border-bottom: 1px solid black;
 				}
 				.submission{
 					width: 70%;

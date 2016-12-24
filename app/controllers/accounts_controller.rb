@@ -1,22 +1,27 @@
 class AccountsController < ApplicationController
 
-		respond_to :json, only: [:index]
+	respond_to :json, only: [:index, :create]
 
-		def index
-			user = User.find(params[:user_id])
-			respond_with(user.accounts.sort_by{|a| a.a_type }.reverse)
-		end
+	def index
+		user = User.find(params[:user_id])
+		respond_with(user.accounts.sort_by{|a| a.a_type }.reverse)
+	end
 
-		def new
-			@user = User.find(1)
-		end
+	def create
+		account = current_user.accounts.new(account_params)
+		account.save!
+		respond_with account
+	end
 
-private
+
+	private
+
 	def set_user
 		@user = current_user
 	end
 
-	def next_pls
-		redirect_to new_monthly_income_path() if @user.accounts.length == 2
+	def account_params
+		params.require(:account).permit(:name, :amount, :a_type, :interest_rate)
 	end
+
 end
