@@ -33,10 +33,9 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		})
 	},
 
+	// this is firing off twice
 	deleteItem: function(debtItem){
-		debtItem.model.destroy({
-			wait: true
-		})
+		debtItem.model.destroy({})
 	},
 
 	renderDebtForm: function(){

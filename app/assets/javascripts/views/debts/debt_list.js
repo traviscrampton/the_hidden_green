@@ -6,7 +6,6 @@ TheHiddenGreen.Views.DebtList = Backbone.View.extend({
 
 	initialize: function(){
 		this.listenTo(this.collection, 'sync', this.render);
-		this.listenTo(this.model, 'destroy', this.removeDebtItem);
 		this.listenTo(TheHiddenGreen.Views.Debt.prototype, 'deleteItem', this.clickedTrashCan)
 	},
 
@@ -28,9 +27,7 @@ TheHiddenGreen.Views.DebtList = Backbone.View.extend({
 
 	clickedTrashCan: function(debtItem){
 		this.trigger('deleteItem', debtItem)
-	},
-
-	removeDebtItem: function(model){
-		this.$el.fadeOut('fast');
 	}
+
+
 })

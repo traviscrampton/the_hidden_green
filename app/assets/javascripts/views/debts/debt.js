@@ -5,6 +5,7 @@ TheHiddenGreen.Views.Debt = Backbone.View.extend({
 
   initialize: function(){
     this.render();
+		this.listenToOnce(this.model, 'destroy', this.removeDebtItem);
   },
 
   render: function(){
@@ -13,6 +14,10 @@ TheHiddenGreen.Views.Debt = Backbone.View.extend({
 
 	clickedTrashCan: function(){
 		this.trigger('deleteItem', this)
+	},
+
+	removeDebtItem: function(model){
+		this.$el.fadeOut('fast');
 	}
 
 });
