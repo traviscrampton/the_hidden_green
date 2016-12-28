@@ -1,15 +1,22 @@
 class AccountsController < ApplicationController
 
-	respond_to :json, only: [:index, :create]
+	respond_to :json, only: [:index, :create, :destroy]
 
 	def index
 		user = User.find(params[:user_id])
-		respond_with(user.accounts.sort_by{|a| a.a_type }.reverse)
+		accounts = user.accounts.order('created_at ASC')
+		respond_with accounts
 	end
 
 	def create
 		account = current_user.accounts.new(account_params)
 		account.save!
+		respond_with account
+	end
+
+	def destroy
+		account = Account.find(params[:id])
+		account.destroy
 		respond_with account
 	end
 

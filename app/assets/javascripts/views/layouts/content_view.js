@@ -5,6 +5,6 @@ TheHiddenGreen.Views.ContentView = Backbone.View.extend({
 	},
 
 	render: function(){
-		this.$el.html(JST['layouts/content_view']);
+		$('#contentView').html(JST['layouts/content_view']);
 	}
 })

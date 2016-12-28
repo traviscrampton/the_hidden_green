@@ -6,6 +6,7 @@ TheHiddenGreen.Views.InvestmentList = Backbone.View.extend({
 
 	initialize: function(){
 		this.listenTo(this.collection, 'sync', this.render);
+		this.listenTo(TheHiddenGreen.Views.Investment.prototype, 'deleteItem', this.clickedTrashCan)
 	},
 
 	render: function(){
@@ -14,12 +15,19 @@ TheHiddenGreen.Views.InvestmentList = Backbone.View.extend({
 	},
 
 	renderInvestment: function(investment){
-		 this.$el.append(new TheHiddenGreen.Views.Investment({
-			 model: investment,
-			 className: 'itemContainer'
-		 }).el);
-	 },
-	 triggerInvestmentForm: function(){
-		 this.trigger('triggerInvestmentForm')
-	 }
+		this.$el.append(new TheHiddenGreen.Views.Investment({
+			model: investment,
+			className:'itemContainer'
+	}).el);
+	},
+
+	triggerInvestmentForm: function(){
+		this.trigger('triggerInvestmentForm')
+	},
+
+	clickedTrashCan: function(investmentItem){
+		this.trigger('deleteItem', investmentItem)
+	}
+
+
 })

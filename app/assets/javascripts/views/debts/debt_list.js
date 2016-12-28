@@ -10,15 +10,20 @@ TheHiddenGreen.Views.DebtList = Backbone.View.extend({
 	},
 
 	render: function(){
-		this.$el.html(JST['debts/debt_list']);
-		this.collection.each(this.renderDebt, this);
+		this.$el.append(JST['debts/debt_list']);
+		this.debts = this.collection.each(this.renderDebt, this);
 	},
 
 	renderDebt: function(debt){
 		this.$el.append(new TheHiddenGreen.Views.Debt({
 			model: debt,
 			className:'itemContainer'
-	}).el);
+		}).el);
+	},
+
+	removeSubViews: function(){
+		debugger;
+		// _.each(this.debts, function(d){d.remove()})
 	},
 
 	triggerDebtForm: function(){

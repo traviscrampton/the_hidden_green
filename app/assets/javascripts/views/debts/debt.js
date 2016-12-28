@@ -5,11 +5,11 @@ TheHiddenGreen.Views.Debt = Backbone.View.extend({
 
   initialize: function(){
     this.render();
-		this.listenToOnce(this.model, 'destroy', this.removeDebtItem);
+		this.listenTo(this.model, 'destroy', this.removeDebtItem);
   },
 
   render: function(){
-    this.$el.html(JST['debts/debt']({debt: this.model}));
+    this.$el.append(JST['debts/debt']({debt: this.model}));
   },
 
 	clickedTrashCan: function(){

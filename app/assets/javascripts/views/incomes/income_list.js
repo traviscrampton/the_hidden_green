@@ -6,6 +6,7 @@ TheHiddenGreen.Views.IncomeList = Backbone.View.extend({
 
 	initialize: function(){
 		this.listenTo(this.collection, 'sync', this.render);
+		this.listenTo(TheHiddenGreen.Views.Income.prototype, 'deleteItem', this.clickedTrashCan)
 	},
 
 	render: function(){
@@ -14,13 +15,19 @@ TheHiddenGreen.Views.IncomeList = Backbone.View.extend({
 	},
 
 	renderIncome: function(income){
-		 this.$el.append(new TheHiddenGreen.Views.Income({
-			 model: income,
-			 className:'itemContainer'
-		 }).el);
-	 },
+		this.$el.append(new TheHiddenGreen.Views.Income({
+			model: income,
+			className:'itemContainer'
+	}).el);
+	},
 
-	 triggerIncomeForm: function(){
-		 this.trigger('triggerIncomeForm')
-	 }
+	triggerIncomeForm: function(){
+		this.trigger('triggerIncomeForm')
+	},
+
+	clickedTrashCan: function(incomeItem){
+		this.trigger('deleteItem', incomeItem)
+	}
+
+
 })

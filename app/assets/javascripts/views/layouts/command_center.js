@@ -17,6 +17,8 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		this.listenTo(TheHiddenGreen.Views.AccountList.prototype, 'triggerAccountForm', this.renderAccountForm)
 		this.listenTo(TheHiddenGreen.Views.AccountForm.prototype, 'submitAccountForm', this.selectFinancial)
 		this.listenTo(TheHiddenGreen.Views.DebtList.prototype, 'deleteItem', this.deleteItem)
+		this.listenTo(TheHiddenGreen.Views.AccountList.prototype, 'deleteItem', this.deleteItem)
+		this.listenTo(TheHiddenGreen.Views.IncomeList.prototype, 'deleteItem', this.deleteItem)
 	},
 
 	render: function(){
@@ -33,7 +35,6 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		})
 	},
 
-	// this is firing off twice
 	deleteItem: function(debtItem){
 		debtItem.model.destroy({})
 	},

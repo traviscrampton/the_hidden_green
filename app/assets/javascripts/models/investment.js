@@ -1,5 +1,5 @@
 TheHiddenGreen.Models.Investment = Backbone.Model.extend({
-	url:'/investments'
+	urlRoot:'/investments'
 });
 
 TheHiddenGreen.Collections.Investments = Backbone.Collection.extend({
