@@ -30,7 +30,7 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 			el: '#navigationButtons'
 		});
 
-		this.currentWindow = new TheHiddenGreen.Views.ContentView({
+		activeView = new TheHiddenGreen.Views.ContentView({
 			el: '#contentView'
 		})
 	},
@@ -41,28 +41,28 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 
 	renderDebtForm: function(){
 		this.removeCurrentWindow();
-		this.currentWindow = new TheHiddenGreen.Views.DebtForm({
+		activeView = new TheHiddenGreen.Views.DebtForm({
 			el: '#contentView'
 		});
 	},
 
 	renderInvestmentForm: function(){
 		this.removeCurrentWindow();
-		this.currentWindow = new TheHiddenGreen.Views.InvestmentForm({
+		activeView = new TheHiddenGreen.Views.InvestmentForm({
 			el: '#contentView'
 		});
 	},
 
 	renderIncomeForm: function(){
 		this.removeCurrentWindow();
-		this.currentWindow = new TheHiddenGreen.Views.IncomeForm({
+		activeView = new TheHiddenGreen.Views.IncomeForm({
 			el: '#contentView'
 		});
 	},
 
 	renderAccountForm: function(){
 		this.removeCurrentWindow();
-		this.currentWindow = new TheHiddenGreen.Views.AccountForm({
+		activeView = new TheHiddenGreen.Views.AccountForm({
 			el: '#contentView'
 		});
 	},
@@ -80,13 +80,13 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 	},
 
 	removeCurrentWindow(){
-		this.currentWindow.undelegateEvents();
-    this.currentWindow.$el.removeData().unbind().empty();
+		activeView.unbind();
+		activeView.$el.empty();
 	},
 
 	getDebts: function(){
 		this.debtsCollection = new TheHiddenGreen.Collections.Debts();
-		this.currentWindow = new TheHiddenGreen.Views.DebtList({
+		activeView = new TheHiddenGreen.Views.DebtList({
 			el: '#contentView',
 			collection: this.debtsCollection,
 		});
@@ -95,7 +95,7 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 
 	getSavings: function(){
 		this.accountsCollection = new TheHiddenGreen.Collections.Accounts();
-		this.currentWindow = new TheHiddenGreen.Views.AccountList({
+		activeView = new TheHiddenGreen.Views.AccountList({
 			el: '#contentView',
 			collection: this.accountsCollection,
 		});
@@ -104,7 +104,7 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 
 	getInvestments: function(){
 		this.investmentCollection = new TheHiddenGreen.Collections.Investments();
-		this.currentWindow = new TheHiddenGreen.Views.InvestmentList({
+		activeView = new TheHiddenGreen.Views.InvestmentList({
 			el: '#contentView',
 			collection: this.investmentCollection,
 		});
@@ -113,7 +113,7 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 
 	getIncome: function(){
 		this.incomeCollection = new TheHiddenGreen.Collections.Incomes();
-		this.currentWindow = new TheHiddenGreen.Views.IncomeList({
+		activeView = new TheHiddenGreen.Views.IncomeList({
 			el: '#contentView',
 			collection: this.incomeCollection,
 		});
