@@ -1,6 +1,7 @@
 TheHiddenGreen.Views.Debt = Backbone.View.extend({
 	events:{
-		'click .deleteItem': 'clickedTrashCan'
+		'click .deleteItem': 'clickedTrashCan',
+		'click .editItem': 'clickedPencil'
 	},
 
   initialize: function(){
@@ -14,6 +15,10 @@ TheHiddenGreen.Views.Debt = Backbone.View.extend({
 
 	clickedTrashCan: function(){
 		this.trigger('deleteItem', this)
+	},
+
+	clickedPencil: function(){
+		this.trigger('editItem', this.model)
 	},
 
 	removeDebtItem: function(model){

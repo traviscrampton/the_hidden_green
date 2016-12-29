@@ -7,11 +7,12 @@ TheHiddenGreen.Views.DebtList = Backbone.View.extend({
 	initialize: function(){
 		this.listenTo(this.collection, 'sync', this.render);
 		this.listenTo(TheHiddenGreen.Views.Debt.prototype, 'deleteItem', this.clickedTrashCan)
+		this.listenTo(TheHiddenGreen.Views.Debt.prototype, 'editItem', this.clickedPencil)
 	},
 
 	render: function(){
 		this.$el.append(JST['debts/debt_list']);
-		this.debts = this.collection.each(this.renderDebt, this);
+		this.collection.each(this.renderDebt, this);
 	},
 
 	renderDebt: function(debt){
@@ -21,17 +22,16 @@ TheHiddenGreen.Views.DebtList = Backbone.View.extend({
 		}).el);
 	},
 
-	removeSubViews: function(){
-		debugger;
-		// _.each(this.debts, function(d){d.remove()})
-	},
-
 	triggerDebtForm: function(){
 		this.trigger('triggerDebtForm')
 	},
 
-	clickedTrashCan: function(debtItem){
-		this.trigger('deleteItem', debtItem)
+	clickedTrashCan: function(model){
+		this.trigger('deleteItem', model)
+	},
+
+	clickedPencil: function(model){
+		this.trigger('editItem', model)
 	}
 
 

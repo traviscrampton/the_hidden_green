@@ -4,14 +4,19 @@ TheHiddenGreen.Views.DebtForm = Backbone.View.extend({
 		'click .submit' : 'submitDebtForm'
 	},
 
-	initialize: function(){
+	initialize: function(options){
 		this.render();
+		if(options.model){
+			this.populateUpdateForm(options.model)
+		}
 	},
 
 	render: function(){
-		this.$el.html(JST['debts/debt_form']({
-			csrf_token: $("meta[name=csrf-token]")[0].content
-		}));
+		this.$el.html(JST['debts/debt_form']);
+	},
+
+	populateUpdateForm: function(model){
+		debugger;
 	},
 
 	submitDebtForm: function(){
@@ -27,7 +32,7 @@ TheHiddenGreen.Views.DebtForm = Backbone.View.extend({
 		      self.trigger('submitDebtForm', "debts")
 		    },
 		    error: function (model, response) {
-		        console.log("error");
+		        console.log(response);
 		    }
 		});
 	}

@@ -17,6 +17,7 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		this.listenTo(TheHiddenGreen.Views.AccountList.prototype, 'triggerAccountForm', this.renderAccountForm)
 		this.listenTo(TheHiddenGreen.Views.AccountForm.prototype, 'submitAccountForm', this.selectFinancial)
 		this.listenTo(TheHiddenGreen.Views.DebtList.prototype, 'deleteItem', this.deleteItem)
+		this.listenTo(TheHiddenGreen.Views.DebtList.prototype, 'editItem', this.renderDebtForm)
 		this.listenTo(TheHiddenGreen.Views.AccountList.prototype, 'deleteItem', this.deleteItem)
 		this.listenTo(TheHiddenGreen.Views.IncomeList.prototype, 'deleteItem', this.deleteItem)
 	},
@@ -39,10 +40,11 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		debtItem.model.destroy({})
 	},
 
-	renderDebtForm: function(){
+	renderDebtForm: function(model){
 		this.removeCurrentWindow();
 		activeView = new TheHiddenGreen.Views.DebtForm({
-			el: '#contentView'
+			el: '#contentView',
+			model: model
 		});
 	},
 
