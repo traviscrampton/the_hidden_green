@@ -1,7 +1,7 @@
 TheHiddenGreen.Views.Account = Backbone.View.extend({
-
 	events:{
-		'click .deleteItem': 'clickedTrashCan'
+		'click .deleteItem': 'clickedTrashCan',
+		'click .editItem': 'clickedPencil'
 	},
 
   initialize: function(){
@@ -10,11 +10,15 @@ TheHiddenGreen.Views.Account = Backbone.View.extend({
   },
 
   render: function(){
-    this.$el.html(JST['accounts/account']({account: this.model}));
+    this.$el.append(JST['accounts/account']({account: this.model}));
   },
 
 	clickedTrashCan: function(){
 		this.trigger('deleteItem', this)
+	},
+
+	clickedPencil: function(){
+		this.trigger('editItem', this.model)
 	},
 
 	removeAccountItem: function(model){

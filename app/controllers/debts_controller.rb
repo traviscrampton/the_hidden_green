@@ -1,8 +1,8 @@
 class DebtsController < ApplicationController
 
-	respond_to :json, only:[:index, :create, :destroy]
+	respond_to :json, only:[:index, :create, :update, :destroy]
 
-	def index	
+	def index
 		debts = current_user.debts.order('created_at ASC')
 		respond_with debts
 	end
@@ -13,20 +13,24 @@ class DebtsController < ApplicationController
 		respond_with debt
 	end
 
+	def update
+		debt = Debt.find params[:id]
+		debt.update!(debt_params)
+		respond_with debt
+
+	end
+
 	def destroy
 		debt = Debt.find(params[:id])
 		debt.destroy
 		respond_with debt
 	end
 
+
 	private
 
 	def debt_params
 		params.require(:debt).permit(:name, :amount, :interest_rate, :minimum_monthly_payment)
 	end
-
-	# def set_user
-	# 	@user = current_user
-	# end
 
 end

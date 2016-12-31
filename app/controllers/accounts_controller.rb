@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
 
-	respond_to :json, only: [:index, :create, :destroy]
+	respond_to :json, only: [:index, :create, :update, :destroy]
 
 	def index
 		user = User.find(params[:user_id])
@@ -11,6 +11,12 @@ class AccountsController < ApplicationController
 	def create
 		account = current_user.accounts.new(account_params)
 		account.save!
+		respond_with account
+	end
+
+	def update
+		account = Account.find params[:id]
+		account.update(account_params)
 		respond_with account
 	end
 

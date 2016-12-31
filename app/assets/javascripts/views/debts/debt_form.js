@@ -1,13 +1,15 @@
 TheHiddenGreen.Views.DebtForm = Backbone.View.extend({
 
 	events:{
-		'click .submit' : 'submitDebtForm'
+		'click .submit' : 'submitDebtForm',
+		'click .submit_update': 'updateDebtForm'
 	},
 
 	initialize: function(options){
 		this.render();
 		if(options.model){
 			this.populateUpdateForm(options.model)
+			this.changeUpdateButton();
 		}
 	},
 
@@ -22,13 +24,17 @@ TheHiddenGreen.Views.DebtForm = Backbone.View.extend({
 		this.$el.find('input#minimum_monthly_payment')[0].defaultValue = model.attributes.minimum_monthly_payment
 	},
 
+	changeUpdateButton(){
+		this.$el.find('.submit').removeClass('submit').addClass('submit_update')
+	},
+
 	submitDebtForm: function(){
 		var self = this;
 		var newModel = new TheHiddenGreen.Models.Debt({
-			name: $('#name').val(),
-			amount: $('#amount').val(),
-			interest_rate: $('#interest_rate').val(),
-			minimum_monthly_payment: $('#minimum_monthly_payment').val()
+			name: $('input#name').val(),
+			amount: $('input#amount').val(),
+			interest_rate: $('input#interest_rate').val(),
+			minimum_monthly_payment: $('input#minimum_monthly_payment').val()
 		});
 		newModel.save({}, {
 		    success: function (model, response) {
@@ -38,5 +44,16 @@ TheHiddenGreen.Views.DebtForm = Backbone.View.extend({
 		        console.log(response);
 		    }
 		});
+	},
+
+	updateDebtForm: function(){
+		var attributes = {
+			name: $('#name').val(),
+			amount: $('#amount').val(),
+			interest_rate: $('#interest_rate').val(),
+			minimum_monthly_payment: $('#minimum_monthly_payment').val()
+		}
+		this.model.save(attributes, {patch: true})
+		this.trigger('submitDebtForm', "debts")
 	}
 })

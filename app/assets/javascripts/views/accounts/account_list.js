@@ -5,12 +5,13 @@ TheHiddenGreen.Views.AccountList = Backbone.View.extend({
 	},
 
 	initialize: function(){
-		this.listenTo(this.collection, 'sync', this.render);
+		this.listenToOnce(this.collection, 'sync', this.render);
 		this.listenTo(TheHiddenGreen.Views.Account.prototype, 'deleteItem', this.clickedTrashCan)
+		this.listenTo(TheHiddenGreen.Views.Account.prototype, 'editItem', this.clickedPencil)
 	},
 
 	render: function(){
-		this.$el.html(JST['accounts/account_list']);
+		this.$el.append(JST['accounts/account_list']);
 		this.collection.each(this.renderAccount, this);
 	},
 
@@ -18,15 +19,19 @@ TheHiddenGreen.Views.AccountList = Backbone.View.extend({
 		this.$el.append(new TheHiddenGreen.Views.Account({
 			model: account,
 			className:'itemContainer'
-	}).el);
+		}).el);
 	},
 
 	triggerAccountForm: function(){
 		this.trigger('triggerAccountForm')
 	},
 
-	clickedTrashCan: function(accountItem){
-		this.trigger('deleteItem', accountItem)
+	clickedTrashCan: function(model){
+		this.trigger('deleteItem', model)
+	},
+
+	clickedPencil: function(model){
+		this.trigger('editItem', model)
 	}
 
 

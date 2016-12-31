@@ -5,7 +5,7 @@ TheHiddenGreen.Views.DebtList = Backbone.View.extend({
 	},
 
 	initialize: function(){
-		this.listenTo(this.collection, 'sync', this.render);
+		this.listenToOnce(this.collection, 'sync', this.render);
 		this.listenTo(TheHiddenGreen.Views.Debt.prototype, 'deleteItem', this.clickedTrashCan)
 		this.listenTo(TheHiddenGreen.Views.Debt.prototype, 'editItem', this.clickedPencil)
 	},

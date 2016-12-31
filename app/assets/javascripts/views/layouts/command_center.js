@@ -18,6 +18,7 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		this.listenTo(TheHiddenGreen.Views.AccountForm.prototype, 'submitAccountForm', this.selectFinancial)
 		this.listenTo(TheHiddenGreen.Views.DebtList.prototype, 'deleteItem', this.deleteItem)
 		this.listenTo(TheHiddenGreen.Views.DebtList.prototype, 'editItem', this.renderDebtForm)
+		this.listenTo(TheHiddenGreen.Views.AccountList.prototype, 'editItem', this.renderAccountForm)
 		this.listenTo(TheHiddenGreen.Views.AccountList.prototype, 'deleteItem', this.deleteItem)
 		this.listenTo(TheHiddenGreen.Views.IncomeList.prototype, 'deleteItem', this.deleteItem)
 	},
@@ -62,10 +63,11 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		});
 	},
 
-	renderAccountForm: function(){
+	renderAccountForm: function(model){
 		this.removeCurrentWindow();
 		activeView = new TheHiddenGreen.Views.AccountForm({
-			el: '#contentView'
+			el: '#contentView',
+			model: model
 		});
 	},
 
@@ -81,9 +83,9 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		viewHash[data].call();
 	},
 
-	removeCurrentWindow(){
+	removeCurrentWindow: function(){
 		activeView.unbind();
-		activeView.$el.empty();
+		activeView.$el.empty().off();
 	},
 
 	getDebts: function(){
