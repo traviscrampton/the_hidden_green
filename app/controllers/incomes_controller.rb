@@ -8,11 +8,6 @@ class IncomesController < ApplicationController
 		respond_with incomes
 	end
 
-
-	def new
-		@income = @user.incomes.new()
-	end
-
 	def create
 		income = current_user.incomes.new(income_params)
 		income.save!

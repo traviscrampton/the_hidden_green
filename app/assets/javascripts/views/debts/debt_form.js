@@ -18,10 +18,10 @@ TheHiddenGreen.Views.DebtForm = Backbone.View.extend({
 	},
 
 	populateUpdateForm: function(model){
-		this.$el.find('input#name')[0].defaultValue = model.attributes.name
-		this.$el.find('input#amount')[0].defaultValue = model.attributes.amount
-		this.$el.find('input#interest_rate')[0].defaultValue = model.attributes.interest_rate
-		this.$el.find('input#minimum_monthly_payment')[0].defaultValue = model.attributes.minimum_monthly_payment
+		this.$el.find('input#name').val(model.attributes.name)
+		this.$el.find('input#amount').val(model.attributes.amount)
+		this.$el.find('input#interest_rate').val(model.attributes.interest_rate)
+		this.$el.find('input#minimum_monthly_payment').val(model.attributes.minimum_monthly_payment) 
 	},
 
 	changeUpdateButton(){
