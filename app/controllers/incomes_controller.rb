@@ -1,6 +1,6 @@
 class IncomesController < ApplicationController
 
-	respond_to :json, only: [:index, :create, :destroy]
+	respond_to :json, only: [:index, :create, :update, :destroy]
 
 	def index
 		user = User.find(params[:user_id])
@@ -16,6 +16,12 @@ class IncomesController < ApplicationController
 	def create
 		income = current_user.incomes.new(income_params)
 		income.save!
+		respond_with income
+	end
+
+	def update
+		income = Income.find params[:id]
+		income.update(income_params)
 		respond_with income
 	end
 

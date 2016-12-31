@@ -1,6 +1,6 @@
 class InvestmentsController < ApplicationController
 
-	respond_to :json, only: [:index, :create, :destroy]
+	respond_to :json, only: [:index, :create, :update, :destroy]
 
 	def index
 		investments = current_user.investments.order('created_at ASC')
@@ -11,6 +11,12 @@ class InvestmentsController < ApplicationController
 		investment = current_user.investments.new(investment_params)
 		investment.save!
 		respond_with(investment)
+	end
+
+	def update
+		investment = Investment.find params[:id]
+		investment.update(investment_params)
+		respond_with investment
 	end
 
 	def destroy

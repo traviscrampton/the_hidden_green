@@ -19,6 +19,8 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		this.listenTo(TheHiddenGreen.Views.DebtList.prototype, 'deleteItem', this.deleteItem)
 		this.listenTo(TheHiddenGreen.Views.DebtList.prototype, 'editItem', this.renderDebtForm)
 		this.listenTo(TheHiddenGreen.Views.AccountList.prototype, 'editItem', this.renderAccountForm)
+		this.listenTo(TheHiddenGreen.Views.IncomeList.prototype, 'editItem', this.renderIncomeForm)
+		this.listenTo(TheHiddenGreen.Views.InvestmentList.prototype, 'editItem', this.renderInvestmentForm)
 		this.listenTo(TheHiddenGreen.Views.AccountList.prototype, 'deleteItem', this.deleteItem)
 		this.listenTo(TheHiddenGreen.Views.IncomeList.prototype, 'deleteItem', this.deleteItem)
 	},
@@ -49,17 +51,19 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		});
 	},
 
-	renderInvestmentForm: function(){
+	renderInvestmentForm: function(model){
 		this.removeCurrentWindow();
 		activeView = new TheHiddenGreen.Views.InvestmentForm({
-			el: '#contentView'
+			el: '#contentView',
+			model: model
 		});
 	},
 
-	renderIncomeForm: function(){
+	renderIncomeForm: function(model){
 		this.removeCurrentWindow();
 		activeView = new TheHiddenGreen.Views.IncomeForm({
-			el: '#contentView'
+			el: '#contentView',
+			model: model
 		});
 	},
 
