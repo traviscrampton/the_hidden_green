@@ -1,4 +1,4 @@
-class NextTwelveMonthScope
+class InitialSetup::NextTwelveMonthScope
 
 
 	def initialize

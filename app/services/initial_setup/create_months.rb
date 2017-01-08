@@ -1,9 +1,9 @@
-class CreateMonths
+class InitialSetup::CreateMonths
 	attr_accessor :user
 
 	def initialize(user)
 		@user = user
-		@twelve_month_scope = NextTwelveMonthScope.new().call
+		@twelve_month_scope = InitialSetup::NextTwelveMonthScope.new().call
 	end
 
 	def call

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 	has_many :months
-  has_one :monthly_spending
+  has_one :monthly_spending, as: :monthly_spendable
   has_many :accounts, as: :accountable
   has_many :incomes, as: :incomeable
   # has_many :assets, as: :assetable

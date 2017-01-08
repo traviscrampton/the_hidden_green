@@ -1,4 +1,4 @@
-class CreateIndividualMonthFinancials
+class InitialSetup::CreateIndividualMonthFinancials
 
 	attr_accessor :user
 
@@ -22,9 +22,20 @@ class CreateIndividualMonthFinancials
 
 		first_month_investments = user.investments.map { |i| first_month.investments.new(name: i.name, amount: i.amount, interest_rate: i.interest_rate)}
 
-		first_month_debts.each(&:save)
-		first_month_accounts.each(&:save)
-		first_month_incomes.each(&:save)
-		first_month_investments.each(&:save)
+		first_month_monthly_spending = first_month.build_monthly_spending(rent: user.monthly_spending.rent, food: user.monthly_spending.food, phone: user.monthly_spending.phone, utilities: user.monthly_spending.utilities, everything_else: user.monthly_spending.everything_else)
+
+		ActiveRecord::Base.transaction do
+			begin
+				first_month_debts.each(&:save!)
+				first_month_accounts.each(&:save!)
+				first_month_incomes.each(&:save!)
+				first_month_investments.each(&:save!)
+				first_month_monthly_spending.save!
+			rescue ActiveRecord::RecordInvalid => e
+				binding.pry
+			end
+		end
+
+
 	end
 end
