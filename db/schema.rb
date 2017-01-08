@@ -11,16 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161221215706) do
+ActiveRecord::Schema.define(version: 20170108011814) do
 
   create_table "accounts", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "accountable_id"
     t.string   "a_type"
     t.float    "amount"
     t.float    "interest_rate"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "accountable_type"
+  end
+
+  create_table "advices", force: :cascade do |t|
+    t.integer "adviceable_id"
+    t.integer "adviceable_type"
+    t.text    "description"
   end
 
   create_table "assets", force: :cascade do |t|
@@ -31,33 +38,36 @@ ActiveRecord::Schema.define(version: 20161221215706) do
 
   create_table "debts", force: :cascade do |t|
     t.string   "name"
-    t.integer  "user_id"
+    t.integer  "debtable_id"
     t.float    "amount"
     t.float    "interest_rate"
     t.float    "minimum_monthly_payment"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "debtable_type"
   end
 
   create_table "incomes", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "incomeable_id"
     t.string   "source_name"
     t.float    "source_amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "incomeable_type"
   end
 
   create_table "investments", force: :cascade do |t|
     t.string   "name"
-    t.integer  "user_id"
+    t.integer  "investmentable_id"
     t.float    "amount"
     t.float    "interest_rate"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "investmentable_type"
   end
 
   create_table "monthly_spendings", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "monthly_spendable_id"
     t.float    "rent"
     t.float    "food"
     t.float    "phone"
@@ -65,6 +75,14 @@ ActiveRecord::Schema.define(version: 20161221215706) do
     t.float    "everything_else"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "monthly_spendable_type"
+  end
+
+  create_table "months", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "name"
+    t.integer "sequence_num"
+    t.integer "year"
   end
 
   create_table "users", force: :cascade do |t|

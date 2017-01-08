@@ -4,12 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+	has_many :months
   has_one :monthly_spending
-  has_many :accounts
-  has_many :incomes
-  has_many :assets
-  has_many :debts
-  has_many :investments
+  has_many :accounts, as: :accountable
+  has_many :incomes, as: :incomeable
+  # has_many :assets, as: :assetable
+  has_many :debts, as: :debtable
+  has_many :investments, as: :investmentable
 
   accepts_nested_attributes_for :accounts
 
