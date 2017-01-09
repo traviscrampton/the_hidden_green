@@ -3,15 +3,16 @@ class FinancialForcast::CalculationMatrix
 
 	## this month needs to have ability to be any month, and when it's selected that all the months after are affected by this change.
 
-	def initialize(user)
-		@user = user
-		@remaining_months = GetRemainingMonths.new(user.months.first).call
-		@current_financial = GetCurrentMonthFinancial.new(user.months.first).call
-		binding.pry
+	def initialize(month)
+		@month = month
+		@user = month.user
+		@remaining_months = GetRemainingMonths.new(@month).call
+		@current_financial = GetCurrentMonthFinancial.new(@month).call
 	end
 
 	def call
-
+		binding.pry
+		Debts::ExamineDebt.new(@month).call
 	end
 
 

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 	before_action :set_user
 
 	def show
-		sure = FinancialForcast::CalculationMatrix.new(current_user).call
+		FinancialForcast::CalculationMatrix.new(current_user.months.first).call
 		# @matrix_results = CalculationMatrix.new(@user).financial_shuffle(@user.total_debt, @user.savings, @user.total_investment, @user.cash_flow, [])
 		# @debt = @matrix_results[:debt]
 		# @savings = @matrix_results[:savings]

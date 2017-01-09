@@ -58,10 +58,10 @@ class CalculationMatrix
 	end
 
 	def pay_off_all_debt_from_savings(debt, savings, total_investment, cash_flow, advice, immediate_transfer)
-	  advice.push("transfer #{debt} from your savings account to pay off all your debt")
-	  savings -= debt
-	  debt = 0
-	  financial_shuffle(debt, savings, total_investment, cash_flow, advice)
+	advice.push("transfer #{debt} from your savings account to pay off all your debt")
+	savings -= debt
+	debt = 0
+	financial_shuffle(debt, savings, total_investment, cash_flow, advice)
 	end
 
 	def no_debt_check_savings(debt, savings, total_investment, cash_flow, advice)
