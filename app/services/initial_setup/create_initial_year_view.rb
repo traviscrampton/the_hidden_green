@@ -7,6 +7,7 @@ class InitialSetup::CreateInitialYearView
 	end
 
 	def call
+		cash_flow = CreateInitialCashFlow.new(user).call
 		created_months = InitialSetup::CreateMonths.new(user).call
 		created_financials = InitialSetup::CreateIndividualMonthFinancials.new(user).call
 	end

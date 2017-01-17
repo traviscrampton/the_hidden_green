@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
 	has_many :months
   has_one :monthly_spending, as: :monthly_spendable
+	has_one :cash_flow, as: :cash_flowable
   has_many :accounts, as: :accountable
   has_many :incomes, as: :incomeable
   # has_many :assets, as: :assetable
@@ -16,7 +17,7 @@ class User < ActiveRecord::Base
 
 
   def total_monthly_spending
-		values = monthly_spending.attributes.except("id", "user_id").values
+		values = monthly_spending.slice("rent", "food", "phone", "utilities", "everything_else").values
 		values.reduce(:+)
   end
 
@@ -47,7 +48,7 @@ class User < ActiveRecord::Base
     incomes.pluck(:source_amount).reduce(:+)
   end
 
-  def cash_flow
+  def user_cash_flow
     (total_monthly_income - total_monthly_spending) - total_min_monthly_payments
   end
 

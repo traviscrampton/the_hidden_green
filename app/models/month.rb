@@ -2,6 +2,7 @@ class Month < ActiveRecord::Base
 
 	belongs_to :user
 	has_one :monthly_spending, as: :monthly_spendable
+	has_one :cash_flow, as: :cash_flowable, dependent: :destroy
 	has_many :advices, as: :adviceable, dependent: :destroy
 	has_many :debts, as: :debtable, dependent: :destroy
 	has_many :accounts, as: :accountable, dependent: :destroy
@@ -50,7 +51,7 @@ class Month < ActiveRecord::Base
     incomes.pluck(:source_amount).reduce(:+)
   end
 
-  def cash_flow
+  def monthly_cash_flow
 
      amount = (total_monthly_income - total_monthly_spending) - total_min_monthly_payments
 		 binding.pry
