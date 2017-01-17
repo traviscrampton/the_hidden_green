@@ -11,7 +11,6 @@ class Debts::ExamineDebt
 		if month.total_debt > 0
 			Accounts::HasDebtCheckSavings.new(month).call
 		else
-			binding.pry
 			Accounts::NoDebtCheckSavings.new(month).call
 		end
 	end

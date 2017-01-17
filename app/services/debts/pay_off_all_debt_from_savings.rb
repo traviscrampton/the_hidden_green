@@ -21,7 +21,6 @@ class Debts::PayOffAllDebtFromSavings
 				end
 			end
 		end
-		
 		FinancialForcast::CalculationMatrix.new(month).call
 	end
 

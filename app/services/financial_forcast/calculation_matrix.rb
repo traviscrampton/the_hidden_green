@@ -11,7 +11,6 @@ class FinancialForcast::CalculationMatrix
 	end
 
 	def call
-		binding.pry
 		Debts::ExamineDebt.new(@month).call
 	end
 
