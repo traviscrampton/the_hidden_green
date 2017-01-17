@@ -9,6 +9,7 @@ class Month < ActiveRecord::Base
 	has_many :debts, as: :debtable, dependent: :destroy
 	has_many :investments, as: :investmentable, dependent: :destroy
 
+
 	def total_monthly_spending
 		values = monthly_spending.attributes.except("id", "monthly_spendable_id", "monthly_spendable_type", "created_at", "updated_at").values
 		values.reduce(:+)
@@ -50,7 +51,9 @@ class Month < ActiveRecord::Base
   end
 
   def cash_flow
-    (total_monthly_income - total_monthly_spending) - total_min_monthly_payments
+
+     amount = (total_monthly_income - total_monthly_spending) - total_min_monthly_payments
+		 binding.pry
   end
 
   def three_months_spending
