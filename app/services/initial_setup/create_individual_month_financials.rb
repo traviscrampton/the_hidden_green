@@ -23,7 +23,6 @@ class InitialSetup::CreateIndividualMonthFinancials
 		first_month_investments = user.investments.map { |i| first_month.investments.new(name: i.name, amount: i.amount, interest_rate: i.interest_rate)}
 
 		first_month_monthly_spending = first_month.build_monthly_spending(rent: user.monthly_spending.rent, food: user.monthly_spending.food, phone: user.monthly_spending.phone, utilities: user.monthly_spending.utilities, everything_else: user.monthly_spending.everything_else)
-		binding.pry
 		first_month_cash_flow = first_month.build_cash_flow(amount: user.cash_flow.amount)
 
 		ActiveRecord::Base.transaction do
@@ -35,7 +34,7 @@ class InitialSetup::CreateIndividualMonthFinancials
 				first_month_monthly_spending.save!
 				first_month_cash_flow.save!
 			rescue ActiveRecord::RecordInvalid => e
-				binding.pry
+
 			end
 		end
 

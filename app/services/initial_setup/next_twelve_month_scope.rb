@@ -1,9 +1,6 @@
 class InitialSetup::NextTwelveMonthScope
 
 
-	def initialize
-	end
-
 	def call
 		month_array = [Time.now]
 		twelve_months =
