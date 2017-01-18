@@ -1,3 +1,3 @@
 class Debt < ActiveRecord::Base
-	belongs_to :user
+	belongs_to :debtable, polymorphic: true
 end
