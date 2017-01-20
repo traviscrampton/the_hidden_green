@@ -1,5 +1,13 @@
 class Debts::PayOffSomeDebtFromSavings
 
+	####
+	# This might turn into just transfering objects over to be thrown into the other function
+	####
+	####
+
+
+
+
 	attr_accessor :month
 
 	def initialize(month)
