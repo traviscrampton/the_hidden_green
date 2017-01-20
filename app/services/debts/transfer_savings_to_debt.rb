@@ -1,6 +1,6 @@
 class Debts::TransferSavingsToDebt
 
-	attr_accessor :month
+	attr_reader :month
 
 	def initialize(month)
 		@month = month
@@ -8,10 +8,10 @@ class Debts::TransferSavingsToDebt
 	end
 
 	def call
-		if month.total_debt >= @immediate_transfer
+		if month.total_debt >= immediate_transfer
 			binding.pry
 		else
-			Debts::PayOffAllDebtFromSavings.new(@month).call
+			Debts::PayOffAllDebtFromSavings.new(month).call
 		end
 	end
 
