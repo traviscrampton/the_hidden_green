@@ -15,7 +15,7 @@ class Investments::SavingsLessThreeMonthsCheckInvestments
 				month.advices.new(description:"Transfer #{goal} from your #{investment.name} investment to your #{savings_account.name} account").save!
 				savings_account.update!(amount: savings_account.amount + goal)
 				investment.update!(amount: investment.amount - goal)
-				goal == 0
+				goal = 0
 			else
 				month.advices.new(description:"Transfer #{investment.amount} from your #{investment.name} investment to your #{savings_account.name} account").save!
 				savings_account.update!(amount: savings_account.amount + investment.amount)
