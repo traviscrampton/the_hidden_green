@@ -23,7 +23,7 @@ class Debts::PayOffSomeDebtFromSavings
 					month.advices.new(description: "Transfer #{spend.transfer} from your #{spend.name} account to your #{debt.name} debt").save!
 					spend.transfer = 0
 				else
-					month.advices.new(description: "Transfer #{debt.amount} from your #{spend.name} account to your #{debt.name} debt")
+					month.advices.new(description: "Transfer #{debt.amount} from your #{spend.name} account to your #{debt.name} debt").save!
 					spend.transfer -= debt.amount
 					debt.update!(amount: 0)
 				end
