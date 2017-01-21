@@ -21,5 +21,4 @@ class GetSavingsObjects
 			account
 		end
 	end
-
 end
