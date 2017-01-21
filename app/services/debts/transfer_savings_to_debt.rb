@@ -9,7 +9,7 @@ class Debts::TransferSavingsToDebt
 
 	def call
 		if month.total_debt >= immediate_transfer
-			binding.pry
+			Debts::PayOffSomeDebtFromSavings.new(month).call
 		else
 			Debts::PayOffAllDebtFromSavings.new(month).call
 		end
