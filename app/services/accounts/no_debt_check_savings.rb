@@ -7,7 +7,6 @@ class Accounts::NoDebtCheckSavings
 	end
 
 	def call
-		binding.pry
 		if month.savings < month.six_months_spending
 			binding.pry
 		else
