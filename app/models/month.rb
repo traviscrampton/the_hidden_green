@@ -28,6 +28,10 @@ class Month < ActiveRecord::Base
 		accounts.where(a_type:'savings').order('interest_rate ASC')
 	end
 
+	def order_investment_by_lowest_rate
+		investments.order('interest_rate ASC')
+	end
+
   def total_min_monthly_payments
 		debts.any? ? debts.pluck(:minimum_monthly_payment).reduce(:+) : 0
   end

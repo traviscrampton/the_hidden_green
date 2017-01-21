@@ -7,9 +7,9 @@ class Accounts::HasDebtCheckSavings
 	end
 
 
-	def call	
+	def call
 		if month.savings < month.three_months_spending
-			binding.pry
+			Investments::SavingsLessThreeMonthsCheckInvestments.new(month).call
 		else
 			Debts::TransferSavingsToDebt.new(month).call
 		end
