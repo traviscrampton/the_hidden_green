@@ -8,7 +8,7 @@ class Accounts::NoDebtCheckSavings
 
 	def call
 		if month.savings < month.six_months_spending
-			binding.pry
+			CashFlows::TowardsSixMonthsSpending.new(month).call 
 		else
 			Investments::SavingsMoreThanSixMonthsCheckInvestment.new(month).call
 		end
