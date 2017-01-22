@@ -14,14 +14,13 @@ RSpec.describe InitialSetup::CreateInitialCashFlow do
 			monthly_spending
 			debt
 			income
+			cash_flow = service.call
 		end
 		it 'saves a cashflow entry for a user' do
-			cash_flow = service.call
 			expect(user.cash_flow).to be_persisted
 		end
 		it 'calculates the correct cash flow figure' do
-			service.call
-			expect(user.cash_flow.amount).to eq(1930.0)
+			expect(user.cash_flow.amount).to eq 1930.0 
 		end
 	end
 end

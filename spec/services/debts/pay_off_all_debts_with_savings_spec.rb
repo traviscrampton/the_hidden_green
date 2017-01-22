@@ -11,22 +11,21 @@ RSpec.describe Debts::PayOffAllDebtFromSavings do
 		before(:each) do
 			debt
 			savings
+			service.call
+			debt.reload
+			savings.reload
 		end
 
 		it "pays off all debt and makes debt amount equal to zero" do
-			service.call
-			debt.reload
 			expect(debt.amount).to eq 0
 		end
 		it "subtracts the correct amount from the account" do
-			service.call
-			savings.reload
 			expect(savings.amount).to eq 27000
 		end
 
 		it "adds the proper advice for this context" do
-			service.call
-			expect(month.advices.first.description).to eq("Transfer 8000.0 from your Bank Of America account to your Student Loan debt")
+			descriptions = month.advices.pluck(:description)
+			expect(descriptions).to include("Transfer 8000.0 from your Bank Of America account to your Student Loan debt")
 		end
 	end
 
@@ -39,24 +38,22 @@ RSpec.describe Debts::PayOffAllDebtFromSavings do
 			debt_1
 			debt_2
 			savings
-		end
-
-		it "Pays off both debts to zero" do
 			service.call
 			debt_1.reload
 			debt_2.reload
+			savings.reload
+		end
+
+		it "Pays off both debts to zero" do
 			expect(debt_1.amount).to eq 0
 			expect(debt_2.amount).to eq 0
 		end
 
 		it "Subtracts the proper amount from savings" do
-			service.call
-			savings.reload
 			expect(savings.amount).to eq 29716
 		end
 
 		it "adds the proper advice for the context" do
-			service.call
 			descriptions = month.advices.pluck(:description)
 			expect(descriptions).to include "Transfer 4255.0 from your Bank Of America account to your Student Loan debt"
 			expect(descriptions).to include "Transfer 1029.0 from your Bank Of America account to your Credit Card debt"
@@ -72,28 +69,25 @@ RSpec.describe Debts::PayOffAllDebtFromSavings do
 			savings_1
 			savings_2
 			debt
+			service.call
+			savings_1.reload
+			savings_2.reload
+			debt.reload
 		end
 
 		it "pays off debt completely" do
-			service.call
-			debt.reload
 			expect(debt.amount).to eq 0
 		end
 
 		it "takes away the whole amount from the first savings" do
-			service.call
-			savings_2.reload
 			expect(savings_2.amount).to eq 0
 		end
 
 		it "takes away the remainder from the second account" do
-			service.call
-			savings_1.reload
 			expect(savings_1.amount).to eq 32000
 		end
 
 		it "adds the proper advice given the context" do
-			service.call
 			descriptions = month.advices.pluck(:description)
 			expect(descriptions).to include "Transfer 5000.0 from your Grandmas Fund towards your Student Loan debt"
 			expect(descriptions).to include "Transfer 3000.0 from your Bank Of America account to your Student Loan debt"
@@ -111,11 +105,14 @@ RSpec.describe Debts::PayOffAllDebtFromSavings do
 			savings_2
 			debt_1
 			debt_2
+			service.call
+			savings_1.reload
+			savings_2.reload
+			debt_1.reload
+			debt_2.reload
 		end
 
 		it "sets the first debt amount equal to zero" do
-			service.call
-			debt_1.reload
 			expect(debt_1.amount).to eq 0
 		end
 
@@ -126,21 +123,16 @@ RSpec.describe Debts::PayOffAllDebtFromSavings do
 		end
 
 		it "subtracts the proper amount from the first savings" do
-			service.call
-			savings_1.reload
 			expect(savings_1.amount).to eq 0
 		end
 
 		it "subtracts the proper amount from the other savings account" do
-			service.call
-			savings_2.reload
 			expect(savings_2.amount).to eq 30971.0
 
 		end
 
 		it "creates the proper advices based on the context" do
-			service.call
-			descriptions = month.advices.pluck(:description)	
+			descriptions = month.advices.pluck(:description)
 			expect(descriptions).to include "Transfer 1029.0 from your Grandmas Fund account to your Credit Card debt"
 			expect(descriptions).to include "Transfer 3971.0 from your Grandmas Fund towards your Student Loan debt"
 			expect(descriptions).to include "Transfer 4029.0 from your Bank Of America account to your Student Loan debt"

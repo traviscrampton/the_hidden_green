@@ -4,12 +4,16 @@ RSpec.describe InitialSetup::CreateMonths do
 	context "no months are created runs service to create months" do
 		let(:user) { create(:user) }
 		let(:service) { InitialSetup::CreateMonths.new(user) }
-		it "creates an array of 13 months" do
+
+		before(:each) do
 			service.call
+		end
+
+		it "creates an array of 13 months" do
 			expect(user.months.length).to eq 13
 		end
+
 		it "creates months up to the the current month a year from now" do
-			service.call
 			expect(user.months.last.year).to eq((Time.now + 1.year).strftime('%Y').to_i)
 			expect(user.months.last.name).to eq((Time.now + 1.year).strftime('%B'))
 		end
@@ -22,7 +26,6 @@ RSpec.describe InitialSetup::CreateMonths do
 		it "doesn't create any extra months" do
 			service.call
 			service.call
-
 			expect(user.months.length).to eq(13)
 		end
 

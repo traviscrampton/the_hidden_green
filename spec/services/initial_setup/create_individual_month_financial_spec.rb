@@ -19,16 +19,15 @@ RSpec.describe InitialSetup::CreateIndividualMonthFinancials do
 			cash_flow
 			investment
 			months
+			service.call
 		end
 
 		it "replicates a users income into a first month" do
-			service.call
 			expect(user.months.first.incomes.first.source_amount).to eq(income.source_amount)
 			expect(user.months.first.incomes.first.source_name).to eq(income.source_name)
 		end
 
 		it "replicates a users monthly_spending into a first month" do
-			service.call
 			expect(user.months.first.monthly_spending.rent).to eq(monthly_spending.rent)
 			expect(user.months.first.monthly_spending.food).to eq(monthly_spending.food)
 			expect(user.months.first.monthly_spending.phone).to eq(monthly_spending.phone)
@@ -37,7 +36,6 @@ RSpec.describe InitialSetup::CreateIndividualMonthFinancials do
 		end
 
 		it "replicates a users debt into a first month" do
-			service.call
 			expect(user.months.first.debts.first.amount).to eq(debt.amount)
 			expect(user.months.first.debts.first.name).to eq(debt.name)
 			expect(user.months.first.debts.first.interest_rate).to eq(debt.interest_rate)
@@ -45,14 +43,12 @@ RSpec.describe InitialSetup::CreateIndividualMonthFinancials do
 		end
 
 		it "replicates a users investment into a first month" do
-			service.call
 			expect(user.months.first.investments.first.amount).to eq(investment.amount)
 			expect(user.months.first.investments.first.name).to eq(investment.name)
 			expect(user.months.first.investments.first.interest_rate).to eq(investment.interest_rate)
 		end
 
 		it "replicates a users cash_flow into a first month" do
-			service.call
 			expect(user.months.first.cash_flow.amount).to eq(cash_flow.amount)
 		end
 
