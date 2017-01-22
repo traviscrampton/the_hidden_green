@@ -9,7 +9,7 @@ RSpec.describe Investments::SavingsMoreThanSixMonthsCheckInvestment do
 
 	context "one savings account" do
 		let(:savings) { create(:account, a_type:'savings', amount:15000, interest_rate:0.08, name:'Bank Of America', accountable_id: month.id, accountable_type:month.class)}
-		let(:investment) { create(:investment, name:'S&B 500', amount: 1250, interest_rate: 0.07)}
+		let(:investment) { create(:investment, name:'S&B 500', amount: 1250, interest_rate: 0.07, investmentable_id: month.id, investmentable_type:month.class )}
 
 		before(:each) do
 			monthly_spending
@@ -32,5 +32,13 @@ RSpec.describe Investments::SavingsMoreThanSixMonthsCheckInvestment do
 			expect(month.advices.length).to eq 1
 		end
 
+		it "has the correct advices associated"  do
+			descriptions = month.advices.pluck(:description)
+			expect(descriptions).to include("Tranfer 3600.0 from your Bank Of America account to your S&B 500")
+		end
 	end
+
+	
+
+
 end
