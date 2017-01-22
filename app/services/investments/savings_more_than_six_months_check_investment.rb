@@ -13,7 +13,7 @@ class Investments::SavingsMoreThanSixMonthsCheckInvestment
 		top_investment = if month.investments.any?
 			month.investments.order("interest_rate DESC").first
 		else
-			month.investments.new(name:'S&P', interest_rate: 0.07, amount:0.0).save!
+			month.investments.create(name:'S&P', interest_rate: 0.07, amount:0.0)
 		end
 		month.advices.new(description:"Transfer #{transfer} from your #{month.accounts.find_by(a_type:'savings').name} account into your #{top_investment.name } investment")
 
