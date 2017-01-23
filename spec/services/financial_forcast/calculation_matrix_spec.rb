@@ -135,7 +135,4 @@ RSpec.describe FinancialForcast::CalculationMatrix do
 			expect(month.advices.length).to eq 3
 		end
 	end
-
-
-
 end
