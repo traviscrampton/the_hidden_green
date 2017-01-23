@@ -9,13 +9,10 @@ class Debts::ExamineDebt
 
 	def call
 		if month.has_debt?
-			if month.total_savings < month.three_months_spending
+			Routing::SavingsWithDebt.new(month).call
+		else
 
-		# if month.total_debt > 0
-		# 	Accounts::HasDebtCheckSavings.new(month).call
-		# else
-		# 	return
-		# end
+		end
 	end
 
 end

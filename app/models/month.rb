@@ -28,9 +28,22 @@ class Month < ActiveRecord::Base
 		investments.any? ? investments.pluck(:amount).reduce(:+) : 0
 	end
 
+	def has_investment?
+		total_investment > 0
+	end
+
 	def total_savings
 		accounts.where(a_type: "savings").pluck(:amount).reduce(:+)
 	end
+
+	def has_cash_flow?
+		cash_flow.amount > 0
+	end
+
+	def less_than_three_months
+		month.total_savings < month.three_months_spending
+	end
+
 
 
 
