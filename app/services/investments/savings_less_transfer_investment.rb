@@ -28,10 +28,10 @@ class Investments::SavingsLessTransferInvestment
 	private
 
 	def three_months(month)
-		month.three_months_spending - month.savings
+		month.three_months_spending - month.total_savings
 	end
 
 	def six_months(month)
-		month.six_months_spending - month.savings
+		month.six_months_spending - month.total_savings
 	end
 end

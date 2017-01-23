@@ -21,7 +21,7 @@ RSpec.describe Investments::SavingsMoreThanSixMonthsCheckInvestment do
 		end
 
 		it "sets savings to equal six months spending" do
-			expect(month.savings).to eq month.six_months_spending
+			expect(month.total_savings).to eq month.six_months_spending
 		end
 
 		it "transfers the amount over to the investments" do
@@ -55,7 +55,7 @@ RSpec.describe Investments::SavingsMoreThanSixMonthsCheckInvestment do
 		end
 
 		it "sets savings to equal six months spending" do
-			expect(month.savings).to eq month.six_months_spending
+			expect(month.total_savings).to eq month.six_months_spending
 		end
 
 		it "transfers the amount over to the investments" do

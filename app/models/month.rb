@@ -24,6 +24,16 @@ class Month < ActiveRecord::Base
 		total_debt > 0
 	end
 
+	def total_investment
+		investments.any? ? investments.pluck(:amount).reduce(:+) : 0
+	end
+
+	def total_savings
+		accounts.where(a_type: "savings").pluck(:amount).reduce(:+)
+	end
+
+
+
 	def order_debt_by_highest_interest_rate
 		debts.order('interest_rate DESC')
 	end
@@ -40,9 +50,7 @@ class Month < ActiveRecord::Base
 		debts.any? ? debts.pluck(:minimum_monthly_payment).reduce(:+) : 0
   end
 
-  def total_investment
-		investments.any? ? investments.pluck(:amount).reduce(:+) : 0
-  end
+
 
   def total_monthly_income
     incomes.pluck(:source_amount).reduce(:+)
@@ -60,8 +68,6 @@ class Month < ActiveRecord::Base
     total_monthly_spending * 6
   end
 
-  def savings
-		accounts.where(a_type: "savings").pluck(:amount).reduce(:+)
-  end
+
 
 end

@@ -7,8 +7,8 @@ class Accounts::NoDebtCheckSavings
 	end
 
 	def call
-		if month.savings < month.six_months_spending
-			CashFlows::TowardsSixMonthsSpending.new(month).call 
+		if month.total_savings < month.six_months_spending
+			CashFlows::TowardsSixMonthsSpending.new(month).call
 		else
 			Investments::SavingsMoreThanSixMonthsCheckInvestment.new(month).call
 		end

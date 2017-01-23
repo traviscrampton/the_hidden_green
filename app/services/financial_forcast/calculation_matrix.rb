@@ -11,7 +11,6 @@ class FinancialForcast::CalculationMatrix
 
 	def call
 		Debts::ExamineDebt.new(month).call
-		
 	end
 
 end

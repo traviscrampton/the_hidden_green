@@ -24,10 +24,10 @@ class CashFlows::TowardsSavings
 	private
 
 	def six_month(month)
-		month.six_months_spending - month.savings
+		month.six_months_spending - month.total_savings
 	end
 
 	def three_month(month)
-		month.three_months_spending - month.savings
+		month.three_months_spending - month.total_savings
 	end
 end

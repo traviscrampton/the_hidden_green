@@ -6,7 +6,7 @@ class GetSavingsObjects
 	end
 
 	def call
-		spendable_amount = month.savings - month.three_months_spending
+		spendable_amount = month.total_savings - month.three_months_spending
 		month.order_savings_by_lowest_interest_rate.map do |saving|
 			next if spendable_amount == 0
 			if saving.amount <= spendable_amount

@@ -8,7 +8,7 @@ class Investments::SavingsMoreThanSixMonthsCheckInvestment
 
 	def call
 		investment = month.order_investment_by_lowest_rate.last
-		difference = month.savings - month.six_months_spending
+		difference = month.total_savings - month.six_months_spending
 
 		month.order_savings_by_lowest_interest_rate.each do |savings|
 			next if reason_to_skip(difference, savings)

@@ -4,7 +4,7 @@ class Debts::TransferSavingsToDebt
 
 	def initialize(month)
 		@month = month
-		@immediate_transfer = month.savings - month.three_months_spending
+		@immediate_transfer = month.total_savings - month.three_months_spending
 	end
 
 	def call

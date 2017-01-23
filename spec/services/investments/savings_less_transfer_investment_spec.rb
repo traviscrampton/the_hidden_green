@@ -86,7 +86,7 @@ RSpec.describe Investments::SavingsLessTransferInvestment do
 			service.call
 			savings.reload
 			savings_2.reload
-			expect(month.savings).to eq month.three_months_spending
+			expect(month.total_savings).to eq month.three_months_spending
 		end
 
 		it "adds money to the savings with the higher interest rate" do
