@@ -1,9 +1,10 @@
 require "rails_helper"
 
-RSpec.describe Investments::SavingsLessThreeMonthsCheckInvestments do
+RSpec.describe Investments::SavingsLessTransferInvestment do
 	let(:month) { create(:month) }
-	let(:service) { Investments::SavingsLessThreeMonthsCheckInvestments.new(month) }
+	let(:service) { Investments::SavingsLessTransferInvestment.new(month) }
 	let(:monthly_spending) { create(:monthly_spending, monthly_spendable_id: month.id, monthly_spendable_type:month.class, food: 100, phone: 100, rent: 800, utilities: 50, everything_else: 850)}
+	let(:debt) { create(:debt, debtable_id: month.id, debtable_type:month.class, name:'Student Loan', amount: 1, interest_rate:0.09)}
 
 
 	context "enough investment to get a users savings to three_months_spending" do
@@ -11,6 +12,7 @@ RSpec.describe Investments::SavingsLessThreeMonthsCheckInvestments do
 		let(:investment) { create(:investment, name:'Big Time Stocks', amount: 10000, interest_rate:0.09, investmentable_id: month.id, investmentable_type: month.class)}
 
 		before(:each) do
+			debt
 			monthly_spending
 			savings
 			investment
@@ -68,6 +70,7 @@ RSpec.describe Investments::SavingsLessThreeMonthsCheckInvestments do
 
 		before(:each) do
 			monthly_spending
+			debt
 			savings
 			savings_2
 			investment

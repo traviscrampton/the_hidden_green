@@ -9,7 +9,7 @@ class Accounts::HasDebtCheckSavings
 
 	def call
 		if month.savings < month.three_months_spending
-			Investments::SavingsLessThreeMonthsCheckInvestments.new(month).call
+			Investments::SavingsLessThreeMonthsCheckInvestments.new(month).call if month.total_investment > 0
 		else
 			Debts::TransferSavingsToDebt.new(month).call
 		end

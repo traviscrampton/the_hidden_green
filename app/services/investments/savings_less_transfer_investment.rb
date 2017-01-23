@@ -1,4 +1,4 @@
-class Investments::SavingsLessThreeMonthsCheckInvestments
+class Investments::SavingsLessTransferInvestment
 
 	attr_accessor :month
 
@@ -7,7 +7,7 @@ class Investments::SavingsLessThreeMonthsCheckInvestments
 	end
 
 	def call
-		goal = month.three_months_spending - month.savings
+		goal = month.has_debt? ? three_months(month) : six_months(month)
 		savings_account = month.order_savings_by_lowest_interest_rate.last
 		month.order_investment_by_lowest_rate.each do |investment|
 			next if goal == 0
@@ -23,5 +23,15 @@ class Investments::SavingsLessThreeMonthsCheckInvestments
 				investment.update!(amount: 0)
 			end
 		end
+	end
+
+	private
+
+	def three_months(month)
+		month.three_months_spending - month.savings
+	end
+
+	def six_months(month)
+		month.six_months_spending - month.savings
 	end
 end

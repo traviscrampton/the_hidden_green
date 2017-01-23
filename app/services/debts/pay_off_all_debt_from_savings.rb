@@ -21,8 +21,5 @@ class Debts::PayOffAllDebtFromSavings
 				end
 			end
 		end
-		# FinancialForcast::CalculationMatrix.new(month).call
-		# Will need to figure out the best way to make this recursive
 	end
-
 end

@@ -20,6 +20,10 @@ class Month < ActiveRecord::Base
 		debts.any? ? debts.pluck(:amount).reduce(:+) : 0
   end
 
+	def has_debt?
+		total_debt > 0
+	end
+
 	def order_debt_by_highest_interest_rate
 		debts.order('interest_rate DESC')
 	end
@@ -37,19 +41,8 @@ class Month < ActiveRecord::Base
   end
 
   def total_investment
-		investments.any? ? add_and_average_investments : create_psuedo_investment
+		investments.any? ? investments.pluck(:amount).reduce(:+) : 0
   end
-
-	def add_and_average_investments
-		total_amount = investments.pluck(:amount).reduce(:+)
-		average_interest_rate = investments.pluck(:interest_rate).reduce(:+)/investments.length
-
-		investment_hash = {amount: total_amount, interest_rate: average_interest_rate}
-	end
-
-	def create_psuedo_investment
-		investment_hash = {amount: 0, interest_rate: 0.07 }
-	end
 
   def total_monthly_income
     incomes.pluck(:source_amount).reduce(:+)

@@ -1,6 +1,6 @@
 class Debts::TransferSavingsToDebt
 
-	attr_reader :month
+	attr_reader :month, :immediate_transfer
 
 	def initialize(month)
 		@month = month
