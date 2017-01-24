@@ -44,6 +44,10 @@ class Month < ActiveRecord::Base
 		month.total_savings < month.three_months_spending
 	end
 
+	def which_spending
+		total_debt > 0 ? month.three_months_spending : month.six_months_spending
+	end
+
 
 
 

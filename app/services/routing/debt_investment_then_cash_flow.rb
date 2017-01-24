@@ -1,4 +1,4 @@
-class Routing::InvestmentThenCashFlow
+class Routing::DebtInvestmentThenCashFlow
 
 	attr_accessor :month
 

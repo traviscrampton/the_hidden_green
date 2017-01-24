@@ -8,9 +8,10 @@ class Routing::SavingsWithDebt
 
 	def call
 		if month.total_savings <= month.three_months_spending
-			Routing::InvestmentThenCashFlow.new(month).call
+			Routing::DebtInvestmentThenCashFlow.new(month).call
 		else
 			Debts::TransferSavingsToDebt.new(month).call
+			Debts::ExamineDebt.new(month).call
 		end
 	end
 

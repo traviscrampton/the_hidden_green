@@ -11,7 +11,7 @@ class Debts::ExamineDebt
 		if month.has_debt?
 			Routing::SavingsWithDebt.new(month).call
 		else
-
+			Routing::SavingsNoDebt.new(month).call
 		end
 	end
 
