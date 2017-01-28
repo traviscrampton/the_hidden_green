@@ -5,8 +5,6 @@ class FinancialForcast::CalculationMatrix
 
 	def initialize(month)
 		@month = month
-		# @remaining_months = GetRemainingMonths.new(@month).call
-		# @current_financial = GetCurrentMonthFinancial.new(@month).call
 	end
 
 	def call
