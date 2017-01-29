@@ -38,6 +38,6 @@ class InitialSetup::CreateIndividualMonthFinancials
 			end
 		end
 
-
+		return first_month
 	end
 end
