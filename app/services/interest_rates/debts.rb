@@ -17,7 +17,7 @@ class InterestRates::Debts
 
 	private
 
-	# is reasonable creditcard debt actually nailin pailin?
+	# should there be a boolean on whether or not 
 
 	def compounding_interest_rate(debt)
 		percentage = (debt.interest_rate/12)

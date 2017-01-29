@@ -7,7 +7,6 @@ class Month < ActiveRecord::Base
 	has_many :debts, as: :debtable, dependent: :destroy
 	has_many :accounts, as: :accountable, dependent: :destroy
 	has_many :incomes, as: :incomeable, dependent: :destroy
-	has_many :debts, as: :debtable, dependent: :destroy
 	has_many :investments, as: :investmentable, dependent: :destroy
 
 
@@ -66,8 +65,6 @@ class Month < ActiveRecord::Base
   def total_min_monthly_payments
 		debts.any? ? debts.pluck(:minimum_monthly_payment).reduce(:+) : 0
   end
-
-
 
   def total_monthly_income
     incomes.pluck(:source_amount).reduce(:+)

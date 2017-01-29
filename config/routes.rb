@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :incomes
   resources :monthly_spendings
 
+	resources :calendars, only:[:index]
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
