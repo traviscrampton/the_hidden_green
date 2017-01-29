@@ -1,1 +1,23 @@
-<% debugger %>
+<div class="month">
+	<div class="month__date">
+		<span class="month__date--month"><%= calendar.get('month').name %></span>
+		<span class="month__date--year"><%= calendar.get('month').year %></span>
+	</div>
+	<div class="month__stats">
+		<div class="month__stats--debts">
+			<div class="title">Debts</div>
+			<ul class="debt_list">
+			</ul>
+		</div>
+		<div class="month__stats--savings">
+			<div class="title">Savings</div>
+			<ul class="saving_list">
+			</ul>
+		</div>
+		<div class="month__stats--investments">
+			<div class="title">Investments</div>
+			<ul class="investment_list">
+			</ul>
+		</div>
+	</div>
+</div>

@@ -5,7 +5,7 @@ $(function() {
     });
   } else if($('#calendars').length) {
 		return new TheHiddenGreen.Views.Calendar({
-			el:'#calendar'
+			el:'#calendars'
 		})
 	}
 });

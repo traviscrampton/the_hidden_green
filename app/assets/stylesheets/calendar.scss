@@ -1,0 +1,29 @@
+
+#calendars{
+	padding: 50px;
+	text-align: center;
+	.month{
+		width: 30%;
+		margin: 10px;
+		border-radius: 2px;
+		display: inline-block;
+		overflow: hidden;
+		float: left;
+		border: 1px solid darkgray;
+		height: 300px;
+		.month__stats{
+			padding: 10px;
+			text-align: left;
+			.title{
+				text-decoration: underline;
+			}
+		}
+	}
+
+
+
+
+
+
+
+}
