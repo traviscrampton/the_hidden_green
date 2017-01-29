@@ -81,4 +81,16 @@ class Month < ActiveRecord::Base
   def six_months_spending
     total_monthly_spending * 6
   end
+
+	def attrs
+		options = {}
+		options['debts'] = debts
+		options['accounts'] = accounts
+		options['incomes'] = incomes
+ 		options['monthly_spending'] = monthly_spending
+		options['investments'] = investments
+		options['cash_flow'] = cash_flow
+		options['advices'] = advices
+		return options
+	end
 end

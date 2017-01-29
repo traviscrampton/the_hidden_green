@@ -1,4 +1,4 @@
-class Calendar
+class DeprecatedCalendar
 	require 'date'
   extend Forwardable
 

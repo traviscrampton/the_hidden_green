@@ -3,13 +3,13 @@ class Calendar
 	attr_accessor :user, :months
 
 	def initialize(user)
-		@user = user
-		@months = user.months.map { |m| IndividualMonth.new(m).call }
+		self.months = options(user)
 	end
 
-	def call
-		self.months = months
-	end
+	private
 
+	def options(user)
+		user.hashitize_months
+	end
 
 end

@@ -64,4 +64,12 @@ class User < ActiveRecord::Base
 		accounts.where(a_type: "Savings").pluck(:amount).reduce(:+)
   end
 
+	def hashitize_months
+		options = {};
+		months.each do |month|
+			options[month] = month.attrs
+		end
+		return options
+	end
+
  end
