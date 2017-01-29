@@ -16,7 +16,6 @@ class Routing::NoDebtInvestmentThenCashFlow
 			CashFlows::TowardsSavings.new(month).call
 			Routing::SavingsNoDebt.new(month).call if month.cash_flow.amount > 0
 		end
-
 	end
 
 end

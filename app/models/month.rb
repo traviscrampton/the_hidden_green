@@ -74,7 +74,7 @@ class Month < ActiveRecord::Base
   end
 
   def monthly_cash_flow
-     amount = (total_monthly_income - total_monthly_spending) - total_min_monthly_payments
+     total_monthly_income - total_monthly_spending
   end
 
   def three_months_spending
@@ -84,7 +84,4 @@ class Month < ActiveRecord::Base
   def six_months_spending
     total_monthly_spending * 6
   end
-
-
-
 end

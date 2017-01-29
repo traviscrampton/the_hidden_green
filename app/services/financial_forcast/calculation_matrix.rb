@@ -8,7 +8,9 @@ class FinancialForcast::CalculationMatrix
 	end
 
 	def call
+		Debts::PayMinimumPayment.new(month).call
 		Debts::ExamineDebt.new(month).call
+		InterestRates::Debts.new(month).call
 	end
 
 end

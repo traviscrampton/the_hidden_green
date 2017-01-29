@@ -28,7 +28,7 @@ class Calendar
 
 
 		# months_in_year.each_with_index do |mon, index|
-		# 	binding.pry
+
 		# end
 
 	end

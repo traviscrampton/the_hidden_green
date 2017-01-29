@@ -72,7 +72,7 @@ RSpec.describe FinancialForcast::CalculationMatrix do
 		end
 
 		it "pays off debt with current months cash flow" do
-			expect(debt.amount).to eq 6700.0
+			expect(debt.amount).to eq 6722.33
 		end
 
 		it "transfers everything from investment" do
@@ -116,7 +116,7 @@ RSpec.describe FinancialForcast::CalculationMatrix do
 		end
 
 		it "pays off debt with current months cash flow" do
-			expect(debt.amount).to eq 3700.0
+			expect(debt.amount).to eq 3712.33
 		end
 
 		it "transfers everything from investment" do
@@ -327,7 +327,7 @@ RSpec.describe FinancialForcast::CalculationMatrix do
 		end
 
 		it "takes a little chunk of of debt" do
-			expect(debt.amount).to eq 36900.0
+			expect(debt.amount).to eq 37023.0
 		end
 
 		it "sets savings to three months spending" do
