@@ -66,10 +66,10 @@ class User < ActiveRecord::Base
 
 	def hashitize_months
 		options = {};
-		months.each do |month|
-			options[month] = month.attrs
+		monthz = months.map do |month|
+			 MonthObj.new(month.attrs)
 		end
-		return options
+		return monthz
 	end
 
  end

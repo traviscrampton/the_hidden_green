@@ -1,8 +1,9 @@
-class Calendar::Month
+class MonthObj
 
-	attr_accessor :month, :debts, :accounts, :investments, :cash_flows, :monthly_spending, :incomes, :advices
+	attr_accessor :month, :debts, :accounts, :investments, :cash_flow, :monthly_spending, :incomes, :advices
 
 	def initialize(options)
+		self.month = options['month']
 		self.debts = options['debts']
 		self.accounts = options['accounts']
 		self.investments = options['investments']

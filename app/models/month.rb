@@ -84,6 +84,7 @@ class Month < ActiveRecord::Base
 
 	def attrs
 		options = {}
+		options['month'] = self
 		options['debts'] = debts
 		options['accounts'] = accounts
 		options['incomes'] = incomes

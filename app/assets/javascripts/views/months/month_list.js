@@ -5,7 +5,13 @@ TheHiddenGreen.Views.MonthList = Backbone.View.extend({
 	},
 
 	render: function(){
-		debugger;
+		this.collection.each(this.renderMonth, this)
+	},
+
+	renderMonth: function(month){
+		this.$el.append(new TheHiddenGreen.Views.Month({
+			model: month
+		}).el)
 	}
 
 
