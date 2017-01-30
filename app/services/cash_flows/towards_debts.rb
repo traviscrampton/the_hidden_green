@@ -11,11 +11,11 @@ class CashFlows::TowardsDebts
 			next if reasons_to_skip(month.cash_flow.amount, debt)
 			if debt.amount <= month.cash_flow.amount
 				month.advices.create(description:"Cash flow of #{debt.amount} should go towards #{debt.name} debt")
-				month.cash_flow.update!(amount:month.cash_flow.amount - debt.amount)
+				month.cash_flow.update!(amount:(month.cash_flow.amount - debt.amount).round(2))
 				debt.update!(amount: 0)
 			else
 				month.advices.create(description: "Cash flow of #{month.cash_flow.amount} should go towards #{debt.name} debt")
-				debt.update!(amount: debt.amount - month.cash_flow.amount )
+				debt.update!(amount:(debt.amount - month.cash_flow.amount).round(2) )
 				month.cash_flow.update!(amount:0 )
 			end
 		end

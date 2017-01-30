@@ -11,7 +11,7 @@ class Debts::PayOffSomeDebtFromSavings
 		month.order_debt_by_highest_interest_rate.each do |debt|
 			savings_objects.each do |spend|
 				if spend.transfer <= debt.amount
-					debt.update!(amount: debt.amount - spend.transfer)
+					debt.update!(amount: (debt.amount - spend.transfer).round(2))
 					month.advices.create(description: "Transfer #{spend.transfer} from your #{spend.name} account to your #{debt.name} debt")
 					spend.transfer = 0
 				else

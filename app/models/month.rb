@@ -1,7 +1,7 @@
 class Month < ActiveRecord::Base
 
 	belongs_to :user
-	has_one :monthly_spending, as: :monthly_spendable
+	has_one :monthly_spending, as: :monthly_spendable, dependent: :destroy
 	has_one :cash_flow, as: :cash_flowable, dependent: :destroy
 	has_many :advices, as: :adviceable, dependent: :destroy
 	has_many :debts, as: :debtable, dependent: :destroy

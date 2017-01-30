@@ -11,12 +11,12 @@ class Debts::PayOffAllDebtFromSavings
 			month.order_savings_by_lowest_interest_rate.each do |saving|
 				next if debt.amount == 0 || saving.amount == 0
 				if debt.amount <= saving.amount
-					saving.update(amount: saving.amount - debt.amount)
+					saving.update(amount: (saving.amount - debt.amount).round(2))
 					month.advices.create(description: "Transfer #{debt.amount} from your #{saving.name} account to your #{debt.name} debt")
 					debt.update!(amount: 0)
 				else
 					month.advices.create(description:"Transfer #{saving.amount} from your #{saving.name} towards your #{debt.name} debt")
-					debt.update(amount: debt.amount - saving.amount )
+					debt.update(amount: (debt.amount - saving.amount).round(2) )
 					saving.update!(amount: 0)
 				end
 			end

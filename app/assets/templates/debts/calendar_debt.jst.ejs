@@ -1,1 +1,1 @@
-<li><%= debt.get('name') %>: <%= debt.get('amount') %></li>
+<li><%= debt.get('name') %>: <%= debt.get('amount') != 0 ? debt.get('amount') : 'PAID'  %></li>
