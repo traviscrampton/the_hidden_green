@@ -18,7 +18,7 @@ class Investments::SavingsMoreThanSixMonthsCheckInvestment
 				investment.update!(amount: investment.amount + difference)
 				difference = 0
 			else
-				month.advice.create(description: "Tranfer #{savings.amount} from your #{savings.name} account to your #{investment.name}")
+				month.advices.create(description: "Tranfer #{savings.amount} from your #{savings.name} account to your #{investment.name}")
 				difference -= savings.amount
 				investment.update!(amount: investment.amount + savings.amount)
 				savings.update!(amount: 0)

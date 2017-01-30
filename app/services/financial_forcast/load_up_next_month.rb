@@ -36,11 +36,8 @@ class FinancialForcast::LoadUpNextMonth
 				next_month_monthly_spending.save!
 				next_month_cash_flow.save!
 			rescue ActiveRecord::RecordInvalid => e
-				binding.pry
 			end
 		end
-
-
 	end
 
 
