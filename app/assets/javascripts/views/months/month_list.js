@@ -1,7 +1,12 @@
 TheHiddenGreen.Views.MonthList = Backbone.View.extend({
 
 	initialize: function(){
-		this.render()
+		this.setupEvents();
+		this.render();
+	},
+
+	setupEvents: function(){
+		this.listenTo(TheHiddenGreen.Views.Month.prototype, 'clickedMonth', this.sendToCalendar)
 	},
 
 	render: function(){
@@ -12,6 +17,10 @@ TheHiddenGreen.Views.MonthList = Backbone.View.extend({
 		this.$el.append(new TheHiddenGreen.Views.Month({
 			model: month
 		}).el)
+	},
+
+	sendToCalendar: function(model){
+		this.trigger('upToCalendar', model)
 	}
 
 

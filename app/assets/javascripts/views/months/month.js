@@ -1,5 +1,9 @@
 TheHiddenGreen.Views.Month = Backbone.View.extend({
 
+	events:{
+		'click .month' : "renderModal"
+	},
+
 	initialize: function(){
 		this.render();
 	},
@@ -33,5 +37,9 @@ TheHiddenGreen.Views.Month = Backbone.View.extend({
 			collection: this.investmentCollection
 		})
 		this.$el.find('.investment_list').append(this.investments.el)
+	},
+
+	renderModal: function(){
+		this.trigger('clickedMonth', this.model)
 	}
 })
