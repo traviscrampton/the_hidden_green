@@ -9,11 +9,28 @@
 		display: inline-block;
 		overflow: hidden;
 		float: left;
-		border: 1px solid darkgray;
+		box-shadow: 2px 2px 6px -2px darken(#82CA9C, 10%);
+		border: 1px solid darken(#82CA9C, 10%);
 		height: 300px;
+		.expand{
+			text-align: right;
+	    margin-right: 8px;
+		}
+		&:hover{
+			box-shadow: 2px 2px 6px 0px darken(#82CA9C, 10%);
+			cursor: pointer;
+		}
+		.month__date{
+			font-size: 23px;
+			background: #82CA9C;
+			line-height: 72px;
+			color: white;
+		}
 		.month__stats{
 			padding: 10px;
 			text-align: left;
+			overflow: auto;
+			max-height: 195px;
 			.title{
 				text-decoration: underline;
 			}
