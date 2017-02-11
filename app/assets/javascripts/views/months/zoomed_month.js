@@ -5,7 +5,6 @@ TheHiddenGreen.Views.ZoomedMonth = Backbone.View.extend({
 	},
 
 	render: function(){
-		debugger;
-		this.$el.html(JST['layouts/individual_month'])
+		this.$el.html(JST['layouts/individual_month']({month: this.model}))
 	}
 })
