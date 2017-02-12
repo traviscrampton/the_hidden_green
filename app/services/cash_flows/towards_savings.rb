@@ -10,11 +10,11 @@ class CashFlows::TowardsSavings
 		goal = month.total_debt == 0 ? six_month(month) : three_month(month)
 		savings_account = month.order_savings_by_lowest_interest_rate.last
 		if goal <= month.cash_flow.amount
-			month.advices.create(description: "Cash flow of #{goal} should go towards your #{savings_account.name} account")
+			month.advices.create(to_type:savings_account.class, to_id: savings_account.id, from_type: month.cash_flow.class, from_id: month.cash_flow.id, amount: goal)
 			savings_account.update!(amount: savings_account.amount + goal)
 			month.cash_flow.update!(amount: month.cash_flow.amount - goal)
 		else
-			month.advices.create(description:"Cash flow of #{month.cash_flow.amount} should go towards your #{savings_account.name} account")
+			month.advices.create(to_type: savings_account.class, to_id:savings_account.id, from_type: month.cash_flow.class, from_id: month.cash_flow.id, amount: month.cash_flow.amount)
 			savings_account.update!(amount: savings_account.amount + month.cash_flow.amount)
 			month.cash_flow.update!(amount: 0)
 		end

@@ -32,8 +32,10 @@ RSpec.describe CashFlows::TowardsSavings do
 			end
 
 			it "has the proper advice" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Cash flow of 2000.0 should go towards your Bank Of America account")
+				advice = month.advices.first
+				expect(advice.to).to eq(savings)
+				expect(advice.from).to eq(cash_flow)
+				expect(advice.amount).to eq(2000.0)
 			end
 		end
 
@@ -63,8 +65,10 @@ RSpec.describe CashFlows::TowardsSavings do
 			end
 
 			it "has the proper advices" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Cash flow of 1400.0 should go towards your Bank Of America account")
+				advice = month.advices.first
+				expect(advice.to).to eq(savings)
+				expect(advice.from).to eq(cash_flow)
+				expect(advice.amount).to eq(1400)
 			end
 		end
 	end
@@ -98,8 +102,10 @@ RSpec.describe CashFlows::TowardsSavings do
 			end
 
 			it "has the proper advice" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Cash flow of 2000.0 should go towards your Bank Of America account")
+				advice = month.advices.first
+				expect(advice.to).to eq(savings)
+				expect(advice.from).to eq(cash_flow)
+				expect(advice.amount).to eq(2000.0)
 			end
 		end
 
@@ -130,8 +136,10 @@ RSpec.describe CashFlows::TowardsSavings do
 			end
 
 			it "has the proper advices" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Cash flow of 700.0 should go towards your Bank Of America account")
+				advice = month.advices.first
+				expect(advice.to).to eq(savings)
+				expect(advice.from).to eq(cash_flow)
+				expect(advice.amount).to eq(700.0)
 			end
 		end
 	end

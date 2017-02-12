@@ -28,8 +28,10 @@ RSpec.describe Investments::TransferInvestmentToDebt do
 			end
 
 			it "gives the proper advice" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Transfer 3000.0 from your Big Stock Investment investment to your Student Loan debt")
+				advice = month.advices.first
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(investment)
+				expect(advice.amount).to eq(3000.0)
 			end
 		end
 
@@ -61,13 +63,17 @@ RSpec.describe Investments::TransferInvestmentToDebt do
 			end
 
 			it "gives the correct advice for debt_1" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Transfer 3000.0 from your Big Stock Investment investment to your Student Loan debt")
+				advice = month.advices.second
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(investment)
+				expect(advice.amount).to eq(3000.0)
 			end
 
 			it "gives the correct advice for debt_2" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Transfer 8543.0 from your Big Stock Investment investment to your Credit Card debt")
+				advice = month.advices.first
+				expect(advice.to).to eq(debt_2)
+				expect(advice.from).to eq(investment)
+				expect(advice.amount).to eq(8543.0)
 			end
 		end
 
@@ -100,13 +106,17 @@ RSpec.describe Investments::TransferInvestmentToDebt do
 			end
 
 			it "adds the proper advice part 1" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Transfer 5000.0 from your Big Stock Investment investment to your Credit Card debt")
+				advice = month.advices.first
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(investment)
+				expect(advice.amount).to eq(5000.0)
 			end
 
 			it "adds the proper advice part 2" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Transfer 3543.0 from your S&B 500 investment to your Credit Card debt")
+				advice = month.advices.second
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(investment_2)
+				expect(advice.amount).to eq(3543.0)
 			end
 		end
 
@@ -145,18 +155,24 @@ RSpec.describe Investments::TransferInvestmentToDebt do
 			end
 
 			it "adds the correct advices part 1" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Transfer 1540.0 from your Big Stock Investment investment to your Credit Card debt")
+				advice = month.advices.first
+				expect(advice.to).to eq(debt_2)
+				expect(advice.from).to eq(investment)
+				expect(advice.amount).to eq(1540.0)
 			end
 
 			it "adds the correct advices part 2" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Transfer 3460.0 from your Big Stock Investment investment to your Student Loan debt")
+				advice = month.advices.second
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(investment)
+				expect(advice.amount).to eq(3460.0)
 			end
 
 			it "adds the correct advices part 3" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Transfer 5083.0 from your S&B 500 investment to your Student Loan debt")
+				advice = month.advices.third
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(investment_2)
+				expect(advice.amount).to eq(5083.0)
 			end
 
 			it "has three advices" do
@@ -187,8 +203,10 @@ RSpec.describe Investments::TransferInvestmentToDebt do
 			end
 
 			it "gives the proper advice" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Transfer 3000.0 from your Big Stock Investment investment to your Student Loan debt")
+				advice = month.advices.first
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(investment)
+				expect(advice.amount).to eq(3000.0)
 			end
 		end
 
@@ -220,13 +238,17 @@ RSpec.describe Investments::TransferInvestmentToDebt do
 			end
 
 			it "gives the correct advice for debt_1" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Transfer 3000.0 from your Big Stock Investment investment to your Student Loan debt")
+				advice = month.advices.first
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(investment)
+				expect(advice.amount).to eq(3000.0)
 			end
 
 			it "gives the correct advice for debt_2" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Transfer 8000.0 from your Big Stock Investment investment to your Credit Card debt")
+				advice = month.advices.second
+				expect(advice.to).to eq(debt_2)
+				expect(advice.from).to eq(investment)
+				expect(advice.amount).to eq(8000.0)
 			end
 		end
 
@@ -258,13 +280,17 @@ RSpec.describe Investments::TransferInvestmentToDebt do
 			end
 
 			it "adds the proper advice part 1" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Transfer 5000.0 from your Big Stock Investment investment to your Credit Card debt")
+				advice = month.advices.first
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(investment)
+				expect(advice.amount).to eq(5000.0)
 			end
 
 			it "adds the proper advice part 2" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Transfer 6000.0 from your S&B 500 investment to your Credit Card debt")
+				advice = month.advices.second
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(investment_2)
+				expect(advice.amount).to eq(6000.0)
 			end
 		end
 
@@ -303,18 +329,24 @@ RSpec.describe Investments::TransferInvestmentToDebt do
 			end
 
 			it "adds the correct advices part 1" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Transfer 4540.0 from your Big Stock Investment investment to your Credit Card debt")
+				advice = month.advices.first
+				expect(advice.to).to eq(debt_2)
+				expect(advice.from).to eq(investment)
+				expect(advice.amount).to eq(4540.0)
 			end
 
 			it "adds the correct advices part 2" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Transfer 460.0 from your Big Stock Investment investment to your Student Loan debt")
+				advice = month.advices.second
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(investment)
+				expect(advice.amount).to eq(460.0)
 			end
 
 			it "adds the correct advices part 3" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Transfer 6000.0 from your S&B 500 investment to your Student Loan debt")
+				advice = month.advices.third
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(investment_2)
+				expect(advice.amount).to eq(6000.0)
 			end
 
 			it "has three advices" do

@@ -33,8 +33,10 @@ RSpec.describe Investments::SavingsMoreThanSixMonthsCheckInvestment do
 		end
 
 		it "has the correct advices associated"  do
-			descriptions = month.advices.pluck(:description)
-			expect(descriptions).to include("Tranfer 3600.0 from your Bank Of America account to your S&B 500")
+			advice = month.advices.first
+			expect(advice.to).to eq(investment)
+			expect(advice.from).to eq(savings)
+			expect(advice.amount).to eq(3600.0)
 		end
 	end
 
@@ -67,8 +69,10 @@ RSpec.describe Investments::SavingsMoreThanSixMonthsCheckInvestment do
 		end
 
 		it "has the correct advices associated"  do
-			descriptions = month.advices.pluck(:description)
-			expect(descriptions).to include("Tranfer 3600.0 from your Grandmas Fund account to your S&B 500")
+			advice = month.advices.first
+			expect(advice.to).to eq(investment)
+			expect(advice.from).to eq(savings_2)
+			expect(advice.amount).to eq(3600.0)
 		end
 	end
 end

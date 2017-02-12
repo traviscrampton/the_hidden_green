@@ -12,12 +12,12 @@ class Investments::SavingsLessTransferInvestment
 		month.order_investment_by_lowest_rate.each do |investment|
 			next if goal == 0
 			if goal <= investment.amount
-				month.advices.create(description:"Transfer #{goal} from your #{investment.name} investment to your #{savings_account.name} account")
+				month.advices.create(to_type:savings_account.class, to_id: savings_account.id, from_type: investment.class, from_id: investment.id, amount: goal)
 				savings_account.update!(amount: savings_account.amount + goal)
 				investment.update!(amount: investment.amount - goal)
 				goal = 0
 			else
-				month.advices.create(description:"Transfer #{investment.amount} from your #{investment.name} investment to your #{savings_account.name} account")
+				month.advices.create(to_type: savings_account.class, to_id: savings_account.id, from_type:investment.class, from_id:investment.id, amount:investment.amount)
 				savings_account.update!(amount: savings_account.amount + investment.amount)
 				goal = goal - investment.amount
 				investment.update!(amount: 0)

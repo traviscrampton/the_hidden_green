@@ -24,8 +24,10 @@ RSpec.describe CashFlows::TowardsInvestments do
 		end
 
 		it "adds the proper advice" do
-			descriptions = month.advices.pluck(:description)
-			expect(descriptions).to include("Cash flow of 2000.0 should go towards Big Stock Investment")
+			advice = month.advices.first
+			expect(advice.to).to eq(investment)
+			expect(advice.from).to eq(cash_flow)
+			expect(advice.amount).to eq(2000)
 		end
 	end
 end

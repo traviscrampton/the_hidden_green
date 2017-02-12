@@ -24,8 +24,10 @@ RSpec.describe Debts::PayOffAllDebtFromSavings do
 		end
 
 		it "adds the proper advice for this context" do
-			descriptions = month.advices.pluck(:description)
-			expect(descriptions).to include("Transfer 8000.0 from your Bank Of America account to your Student Loan debt")
+			advice = month.advices.first
+			expect(advice.to).to eq(debt)
+			expect(advice.from).to eq(savings)
+			expect(advice.amount).to eq(8000.0)
 		end
 	end
 
@@ -53,10 +55,18 @@ RSpec.describe Debts::PayOffAllDebtFromSavings do
 			expect(savings.amount).to eq 29716
 		end
 
-		it "adds the proper advice for the context" do
-			descriptions = month.advices.pluck(:description)
-			expect(descriptions).to include "Transfer 4255.0 from your Bank Of America account to your Student Loan debt"
-			expect(descriptions).to include "Transfer 1029.0 from your Bank Of America account to your Credit Card debt"
+		it "has a proper first advice" do
+			advice = month.advices.first
+			expect(advice.to).to eq(debt_1)
+			expect(advice.from).to eq(savings)
+			expect(advice.amount).to eq(4255.0)
+		end
+
+		it "has a proper second advice" do
+			advice = month.advices.second
+			expect(advice.to).to eq(debt_2)
+			expect(advice.from).to eq(savings)
+			expect(advice.amount).to eq(1029.0)
 		end
 	end
 
@@ -87,10 +97,18 @@ RSpec.describe Debts::PayOffAllDebtFromSavings do
 			expect(savings_1.amount).to eq 32000
 		end
 
-		it "adds the proper advice given the context" do
-			descriptions = month.advices.pluck(:description)
-			expect(descriptions).to include "Transfer 5000.0 from your Grandmas Fund towards your Student Loan debt"
-			expect(descriptions).to include "Transfer 3000.0 from your Bank Of America account to your Student Loan debt"
+		it "adds the first proper advice" do
+			advice = month.advices.first
+			expect(advice.to).to eq(debt)
+			expect(advice.from).to eq(savings_2)
+			expect(advice.amount).to eq(5000)
+		end
+
+		it "adds the second proper advice" do
+			advice = month.advices.second
+			expect(advice.to).to eq(debt)
+			expect(advice.from).to eq(savings_1)
+			expect(advice.amount).to eq(3000)
 		end
 	end
 
@@ -132,10 +150,24 @@ RSpec.describe Debts::PayOffAllDebtFromSavings do
 		end
 
 		it "creates the proper advices based on the context" do
-			descriptions = month.advices.pluck(:description)
-			expect(descriptions).to include "Transfer 1029.0 from your Grandmas Fund account to your Credit Card debt"
-			expect(descriptions).to include "Transfer 3971.0 from your Grandmas Fund towards your Student Loan debt"
-			expect(descriptions).to include "Transfer 4029.0 from your Bank Of America account to your Student Loan debt"
+			advice = month.advices.first
+			expect(advice.to).to eq(debt_2)
+			expect(advice.from).to eq(savings_1)
+			expect(advice.amount).to eq(1029.0)
+		end
+
+		it "creates the proper advices based on the context" do
+			advice = month.advices.second
+			expect(advice.to).to eq(debt_1)
+			expect(advice.from).to eq(savings_1)
+			expect(advice.amount).to eq(3971.0)
+		end
+
+		it "creates the proper advices based on the context" do
+			advice = month.advices.third
+			expect(advice.to).to eq(debt_1)
+			expect(advice.from).to eq(savings_2)
+			expect(advice.amount).to eq(4029.0)
 		end
 	end
 end

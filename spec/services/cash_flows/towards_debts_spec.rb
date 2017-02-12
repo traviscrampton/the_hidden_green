@@ -29,9 +29,15 @@ RSpec.describe CashFlows::TowardsDebts do
 				expect(month.advices.length).to eq 1
 			end
 
-			it 'has the proper advice' do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Cash flow of 1500.0 should go towards Credit Card debt")
+			it 'sets up the proper number of advices' do
+				expect(month.advices.length).to eq 1
+			end
+
+			it 'has the advice to and from working proerly' do
+				advice = month.advices.first
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(cash_flow)
+				expect(advice.amount).to eq(1500)
 			end
 		end
 
@@ -60,8 +66,10 @@ RSpec.describe CashFlows::TowardsDebts do
 			end
 
 			it 'has the proper advice' do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Cash flow of 500.0 should go towards Credit Card debt")
+				advice = month.advices.first
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(cash_flow)
+				expect(advice.amount).to eq 500
 			end
 		end
 	end
@@ -100,13 +108,17 @@ RSpec.describe CashFlows::TowardsDebts do
 			end
 
 			it "has the proper advice part 1" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Cash flow of 1500.0 should go towards Student Loan debt")
+				advice = month.advices.first
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(cash_flow)
+				expect(advice.amount).to eq(1000.0)
 			end
 
 			it 'has the proper advice part 2' do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Cash flow of 1000.0 should go towards Credit Card debt")
+				advice = month.advices.second
+				expect(advice.to).to eq(debt_2)
+				expect(advice.from).to eq(cash_flow)
+				expect(advice.amount).to eq(1500.0)
 			end
 		end
 
@@ -140,13 +152,17 @@ RSpec.describe CashFlows::TowardsDebts do
 			end
 
 			it "has the proper advice part 1" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Cash flow of 1000.0 should go towards Credit Card debt")
+				advice = month.advices.first
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(cash_flow)
+				expect(advice.amount).to eq(1000.0)
 			end
 
 			it "has the proper advices part 2" do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Cash flow of 1000.0 should go towards Student Loan debt")
+				advice = month.advices.second
+				expect(advice.to).to eq(debt_2)
+				expect(advice.from).to eq(cash_flow)
+				expect(advice.amount).to eq(1000.0)
 			end
 		end
 
@@ -180,8 +196,10 @@ RSpec.describe CashFlows::TowardsDebts do
 			end
 
 			it 'has the proper advice included' do
-				descriptions = month.advices.pluck(:description)
-				expect(descriptions).to include("Cash flow of 500.0 should go towards Credit Card debt")
+				advice = month.advices.first
+				expect(advice.to).to eq(debt)
+				expect(advice.from).to eq(cash_flow)
+				expect(advice.amount).to eq(500)
 			end
 		end
 	end
