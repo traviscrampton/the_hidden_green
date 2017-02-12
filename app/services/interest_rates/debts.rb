@@ -7,8 +7,8 @@ class InterestRates::Debts
 	end
 
 	def call
-		return if !month.has_debt?
 		month.debts.reload
+		return if !month.has_debt?
 		month.debts.each do |debt|
 			compounding_interest_rate(debt)
 		end
