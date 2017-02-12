@@ -47,6 +47,9 @@ class Month < ActiveRecord::Base
 		total_debt > 0 ? month.three_months_spending : month.six_months_spending
 	end
 
+	def net_worth
+		(total_savings + total_investment) - total_debt
+	end
 
 
 
@@ -97,14 +100,15 @@ class Month < ActiveRecord::Base
 
 	def all_totals
 		options = {}
+		options['month'] = self
 		options['Debt'] = [total_debt, 0.0]
 		options['Account'] = [total_savings, 0.0]
 		options['Investment'] = [total_investment, 0.0]
+		options["net_worth"] = net_worth
 
 		advices.pluck(:to_type, :from_type, :amount).each do |to_type, from_type, amount|
-			next if from_type == "CashFlow"
 			options[to_type][1] += amount
-			options[from_type][1] -= amount
+			options[from_type][1] -= amount unless from_type == "CashFlow"
 		end
 
 		return options
