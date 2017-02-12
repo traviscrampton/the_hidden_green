@@ -12,10 +12,10 @@ class Debts::PayOffAllDebtFromSavings
 				next if debt.amount == 0 || saving.amount == 0
 				if debt.amount <= saving.amount
 					saving.update(amount: (saving.amount - debt.amount).round(2))
-					month.advices.create(description: "Transfer #{debt.amount} from your #{saving.name} account to your #{debt.name} debt")
+					month.advices.create(from_type:saving.class, from_id: saving.id, to_type: debt.class, to_id: debt.id, amount: debt.amount)
 					debt.update!(amount: 0)
 				else
-					month.advices.create(description:"Transfer #{saving.amount} from your #{saving.name} towards your #{debt.name} debt")
+					month.advices.create(from_type: saving.class, from_id:saving.id, to_type:debt.class, to_id:debt.id, amount: saving.amount)
 					debt.update(amount: (debt.amount - saving.amount).round(2) )
 					saving.update!(amount: 0)
 				end
