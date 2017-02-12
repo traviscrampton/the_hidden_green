@@ -9,7 +9,7 @@ class Calendar
 	private
 
 	def options(user)
-		user.hashitize_months
+		user.hash_calendar_months
 	end
 
 end

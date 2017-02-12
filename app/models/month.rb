@@ -94,4 +94,19 @@ class Month < ActiveRecord::Base
 		options['advices'] = advices
 		return options
 	end
+
+	def all_totals
+		options = {}
+		options['Debt'] = [total_debt, 0.0]
+		options['Account'] = [total_savings, 0.0]
+		options['Investment'] = [total_investment, 0.0]
+
+		advices.pluck(:to_type, :from_type, :amount).each do |to_type, from_type, amount|
+			next if from_type == "CashFlow"
+			options[to_type][1] += amount
+			options[from_type][1] -= amount
+		end
+
+		return options
+	end
 end
