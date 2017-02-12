@@ -30,8 +30,10 @@ RSpec.describe Investments::SavingsLessTransferInvestment do
 		end
 
 		it "has the proper advices attached to the month" do
-			descriptions = month.advices.pluck(:description)
-			expect(descriptions).to include("Transfer 4500.0 from your Big Time Stocks investment to your Bank Of America account")
+			advice = month.advices.first
+			expect(advice.to).to eq(savings)
+			expect(advice.from).to eq(investment)
+			expect(advice.amount).to eq(4500.0)
 		end
 	end
 
@@ -57,8 +59,10 @@ RSpec.describe Investments::SavingsLessTransferInvestment do
 		end
 
 		it "adds the proper advices to the month" do
-			descriptions = month.advices.pluck(:description)
-			expect(descriptions).to include("Transfer 3000.0 from your Big Time Stocks investment to your Bank Of America account")
+			advice = month.advices.first
+			expect(advice.to).to eq(savings)
+			expect(advice.from).to eq(investment)
+			expect(advice.amount).to eq(3000.0)
 		end
 	end
 
@@ -106,11 +110,10 @@ RSpec.describe Investments::SavingsLessTransferInvestment do
 		end
 
 		it "creates the proper advices" do
-			service.call
-			investment_2.reload
-			savings.reload
-			descriptions = month.advices.pluck(:description)
-			expect(descriptions).to include("Transfer 2300.0 from your #{investment_2.name} investment to your #{savings.name} account")
+			advice = month.advices.first
+			expect(advice.to).to eq(savings)
+			expect(advice.from).to eq(investment_2)
+			expect(advice.amount).to eq(2300.0)
 		end
 	end
 end
