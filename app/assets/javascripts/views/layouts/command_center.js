@@ -24,6 +24,11 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		this.listenTo(TheHiddenGreen.Views.InvestmentList.prototype, 'editItem', this.renderInvestmentForm)
 		this.listenTo(TheHiddenGreen.Views.AccountList.prototype, 'deleteItem', this.deleteItem)
 		this.listenTo(TheHiddenGreen.Views.IncomeList.prototype, 'deleteItem', this.deleteItem)
+
+		this.listenTo(TheHiddenGreen.Views.MonthlySpendingList.prototype, 'deleteItem', this.deleteItem)
+		this.listenTo(TheHiddenGreen.Views.MonthlySpendingList.prototype, 'editItem', this.renderMonthlySpendingForm)
+		this.listenTo(TheHiddenGreen.Views.MonthlySpendingList.prototype, 'triggerMonthlySpendingForm', this.renderMonthlySpendingForm);
+		this.listenTo(TheHiddenGreen.Views.MonthlySpendingForm.prototype, 'submitMonthlySpendingForm', this.selectFinancial)
 	},
 
 	render: function(){
@@ -48,6 +53,14 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		this.activeView = new TheHiddenGreen.Views.DebtForm({
 			model: model
 		});
+		this.renderFinancial();
+	},
+
+	renderMonthlySpendingForm: function(model){
+		this.removeCurrentWindow()
+		this.activeView = new TheHiddenGreen.Views.MonthlySpendingForm({
+			model: model
+		})
 		this.renderFinancial();
 	},
 
@@ -129,10 +142,10 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 	},
 
 	getSpending: function(){
-		this.monthlySpendingModel = new TheHiddenGreen.Models.MonthlySpending();
+		this.spendingCollection = new TheHiddenGreen.Collections.MonthlySpendings();
 		this.activeView = new TheHiddenGreen.Views.MonthlySpendingList({
-			model: this.monthlySpendingModel
+			collection: this.spendingCollection
 		});
-		this.monthlySpendingModel.fetch({});
+		this.spendingCollection.fetch({})
 	}
 })

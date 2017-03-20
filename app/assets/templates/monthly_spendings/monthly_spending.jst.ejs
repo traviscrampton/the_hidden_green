@@ -1,0 +1,27 @@
+<div class="account__name__type">
+	<div class="account__name">
+		Monthly Spending
+	</div>
+	<div class="account__type">
+		Rent: <%= monthly_spending.get('rent') %>
+	</div>
+	<div class="account__type">
+		Food: <%= monthly_spending.get('food') %>
+	</div>
+	<div class="account__type">
+		Phone Bill: <%= monthly_spending.get('phone') %>
+	</div>
+	<div class="account__type">
+		Utility Bill: <%= monthly_spending.get('utilities') %>
+	</div>
+	<div class="account__type">
+		Everything Else: <%= monthly_spending.get('everything_else') %>
+	</div>
+</div>
+<!-- <div class="account__amount">
+	<%= monthly_spending.get('amount') %>
+</div> -->
+<div class='edit_and_delete'>
+	<img src="edit_pencil.png" alt="" class="editItem">
+	<img src="trash_can.png" alt="" class="deleteItem">
+</div>

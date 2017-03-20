@@ -18,10 +18,11 @@ TheHiddenGreen.Views.MonthlySpendingForm = Backbone.View.extend({
 	},
 
 	populateUpdateForm: function(model){
-		this.$el.find('input#name').val(model.attributes.name)
-		this.$el.find('input#amount').val(model.attributes.amount)
-		this.$el.find('input#interest_rate').val(model.attributes.interest_rate)
-		this.$el.find('input#minimum_monthly_payment').val(model.attributes.minimum_monthly_payment)
+		this.$el.find('input#rent').val(model.get('rent')),
+		this.$el.find('input#food').val(model.get('food')),
+		this.$el.find('input#phone').val(model.get('phone')),
+		this.$el.find('input#utilities').val(model.get('utilities')),
+		this.$el.find('input#everything_else').val(model.get('everything_else'))
 	},
 
 	changeUpdateButton(){
@@ -30,15 +31,16 @@ TheHiddenGreen.Views.MonthlySpendingForm = Backbone.View.extend({
 
 	submitMonthlySpendingForm: function(){
 		var self = this;
-		var newModel = new TheHiddenGreen.Models.Debt({
-			name: $('input#name').val(),
-			amount: $('input#amount').val(),
-			interest_rate: $('input#interest_rate').val(),
-			minimum_monthly_payment: $('input#minimum_monthly_payment').val()
+		var newModel = new TheHiddenGreen.Models.MonthlySpending({
+			rent: this.$el.find('input#rent').val(),
+			food: this.$el.find('input#food').val(),
+			phone: this.$el.find('input#phone').val(),
+			utilities: this.$el.find('input#utilites').val(),
+			everything_else: this.$el.find('input#everything_else').val()
 		});
 		newModel.save({}, {
 		    success: function (model, response) {
-		      self.trigger('submitDebtForm', "debts")
+		      self.trigger('submitMonthlySpendingForm', "spending")
 		    },
 		    error: function (model, response) {
 		        console.log(response);
@@ -46,14 +48,15 @@ TheHiddenGreen.Views.MonthlySpendingForm = Backbone.View.extend({
 		});
 	},
 
-	updateDebtForm: function(){
+	updateMonthlySpendingForm: function(){
 		var attributes = {
-			name: $('#name').val(),
-			amount: $('#amount').val(),
-			interest_rate: $('#interest_rate').val(),
-			minimum_monthly_payment: $('#minimum_monthly_payment').val()
+			rent: this.$el.find('input#rent').val(),
+			food: this.$el.find('input#food').val(),
+			phone: $('input#phone').val(),
+			utilities: this.$el.find('input#utilities').val(),
+			everything_else: this.$el.find('input#everything_else').val()
 		}
 		this.model.save(attributes, {patch: true})
-		this.trigger('submitDebtForm', "debts")
+		this.trigger('submitMonthlySpendingForm', "spending")
 	}
 })

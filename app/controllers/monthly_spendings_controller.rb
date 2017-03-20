@@ -8,7 +8,7 @@ class MonthlySpendingsController < ApplicationController
 	end
 
 	def create
-		monthly_spending = current_user.monthly_spendings.build(monthly_spending_params)
+		monthly_spending = current_user.build_monthly_spending(monthly_spending_params)
 		monthly_spending.save!
 		respond_with monthly_spending
 	end
