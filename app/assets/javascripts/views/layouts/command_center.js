@@ -24,7 +24,6 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		this.listenTo(TheHiddenGreen.Views.InvestmentList.prototype, 'editItem', this.renderInvestmentForm)
 		this.listenTo(TheHiddenGreen.Views.AccountList.prototype, 'deleteItem', this.deleteItem)
 		this.listenTo(TheHiddenGreen.Views.IncomeList.prototype, 'deleteItem', this.deleteItem)
-
 		this.listenTo(TheHiddenGreen.Views.MonthlySpendingList.prototype, 'deleteItem', this.deleteItem)
 		this.listenTo(TheHiddenGreen.Views.MonthlySpendingList.prototype, 'editItem', this.renderMonthlySpendingForm)
 		this.listenTo(TheHiddenGreen.Views.MonthlySpendingList.prototype, 'triggerMonthlySpendingForm', this.renderMonthlySpendingForm);
