@@ -26,6 +26,6 @@ TheHiddenGreen.Views.Calendar = Backbone.View.extend({
 		this.modalMonth = new TheHiddenGreen.Views.ZoomedMonth({
 			model: model
 		})
-		this.$el.append(this.modalMonth.el)
+		this.$el.append(this.modalMonth.el);
 	}
 })

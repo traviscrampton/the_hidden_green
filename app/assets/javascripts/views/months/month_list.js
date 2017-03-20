@@ -22,6 +22,4 @@ TheHiddenGreen.Views.MonthList = Backbone.View.extend({
 	sendToCalendar: function(model){
 		this.trigger('upToCalendar', model)
 	}
-
-
 })
