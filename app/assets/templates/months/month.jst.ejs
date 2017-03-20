@@ -1,30 +1,39 @@
 <div class="month">
 	<div class="month__date">
-		<span class="month__date--month"><%= calendar.get('month').name %></span>
-		<span class="month__date--year"><%= calendar.get('month').year %></span>
+		<span class="month__date--month"><%= calendar.month.name %></span>
+		<span class="month__date--year"><%= calendar.month.year %></span>
+		<span class="month__date--net_worth">NET WORTH: $<%= calendar.net_worth %></span>
 	</div>
 	<div class="month__stats">
-		<div class="month__stats--debts">
-			<div class="title">Debts</div>
-			<ul class="debt_list">
-			</ul>
+		<div class="month__bucket">
+			Debt: $<%= calendar.Debt[0] %>
+			<% if(calendar.Debt[1] > 0){ %>
+				<span class="positive_arrow">&#9660</span>
+			<% } else if(calendar.Debt[1] < 0) { %>
+				<span class="negative_arrow">&#9650</span>
+			<% } %>
+			 <%= calendar.Debt[1] > 0 ? calendar.Debt[1] : "" %>
 		</div>
-		<div class="month__stats--savings">
-			<div class="title">Savings</div>
-			<ul class="saving_list">
-			</ul>
-		</div>
-		<div class="month__stats--investments">
-			<div class="title">Investments</div>
-			<ul class="investment_list">
-			</ul>
-		</div>
-	</div>
-	<div class="expand">
-		<?xml version="1.0" encoding="iso-8859-1"?>
-		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 44 44" enable-background="new 0 0 44 44" width="25px" height="25px">
-		  <path d="m22,0c-12.2,0-22,9.8-22,22s9.8,22 22,22 22-9.8 22-22-9.8-22-22-22zm-1.3,19.3l-1.4,1.4c-0.4,0.4-1,0.4-1.4,0l-4-4c-0.3-0.3-0.9-0.1-0.9,0.4v1c0,0.6-0.4,1-1,1h-2c-0.6,0-1-0.4-1-1v-8c0-0.6 0.4-1 1-1h8c0.6,0 1,0.4 1,1v2c0,0.6-0.4,1-1,1h-1c-0.4,0-0.7,0.5-0.4,0.9l4,4c0.5,0.3 0.5,0.9 0.1,1.3zm14.3,14.7c0,0.6-0.4,1-1,1h-8c-0.6,0-1-0.4-1-1v-2c0-0.6 0.4-1 1-1h1c0.4,0 0.7-0.5 0.4-0.9l-4-4c-0.4-0.4-0.4-1 0-1.4l1.4-1.4c0.4-0.4 1-0.4 1.4,0l4,4c0.3,0.3 0.9,0.1 0.9-0.4v-1c0-0.6 0.4-1 1-1h2c0.6,0 1,0.4 1,1v8.1h-0.1z" fill="#82ca9c"/>
-		</svg>
+		<div class="month__bucket">
+			Savings: $<%= calendar.Account[0] %>
+			<% if(calendar.Account[1] > 0){ %>
+				<span class="positive_arrow">&#9650</span>
+			<% } else if(calendar.Account[1] < 0) { %>
+				<span class="negative_arrow">&#9660</span>
+			<% } %>
 
+			 <%= calendar.Account[1] !== 0 ? Math.abs(calendar.Account[1]) : "" %>
+		</div>
+		<div class="month__bucket">
+			Investment: $<%= calendar.Investment[0] %>
+
+			<% if(calendar.Investment[1] > 0){ %>
+				<span class="positive_arrow">&#9650</span>
+			<% } else if(calendar.Investment[1] < 0) { %>
+				<span class="negative_arrow">&#9660</span>
+			<% } %>
+
+			<%= calendar.Investment[1] !== 0 ? calendar.Investment[1] : "" %>
+		</div>
 	</div>
 </div>

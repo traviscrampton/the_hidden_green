@@ -4,12 +4,6 @@ class UsersController < ApplicationController
 
 	def show
 		FinancialForcast::CalculationMatrix.new(current_user.months.first).call
-		# @matrix_results = CalculationMatrix.new(@user).financial_shuffle(@user.total_debt, @user.savings, @user.total_investment, @user.cash_flow, [])
-		# @debt = @matrix_results[:debt]
-		# @savings = @matrix_results[:savings]
-		# @total_investment_amount = @user.total_investment[:amount]
-		# @advice = @matrix_results[:advice]
-		# @months_from_now = Calendar.new(user: @user).re_order_year
 	end
 
 	def update

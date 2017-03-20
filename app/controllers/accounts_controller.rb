@@ -3,8 +3,7 @@ class AccountsController < ApplicationController
 	respond_to :json, only: [:index, :create, :update, :destroy]
 
 	def index
-		user = User.find(params[:user_id])
-		accounts = user.accounts.order('created_at ASC')
+		accounts = current_user.accounts.order('created_at ASC')
 		respond_with accounts
 	end
 

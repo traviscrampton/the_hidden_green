@@ -1,29 +1,36 @@
 class MonthlySpendingsController < ApplicationController
 
-	before_action :set_user
-	before_action :next_pls, only:[:new]
+	respond_to :json, only:[:index, :create, :update, :destroy]
 
-	def new
-		@monthly_spending = @user.build_monthly_spending
+	def index
+		monthly_spending = current_user.monthly_spending
+		respond_with monthly_spending
 	end
 
 	def create
-		@monthly_spending = @user.build_monthly_spending(monthly_spending_params)
-		@monthly_spending.save!
-		redirect_to debts_path
+		monthly_spending = current_user.build_monthly_spending(monthly_spending_params)
+		monthly_spending.save!
+		respond_with monthly_spending
 	end
+
+	def update
+		monthly_spending = MonthlySpending.find params[:id]
+		monthly_spending.update!(monthly_spending_params)
+		respond_with monthly_spending
+
+	end
+
+	def destroy
+		monthly_spending = MonthlySpending.find(params[:id])
+		monthly_spending.destroy
+		respond_with monthly_spending
+	end
+
 
 	private
-
-	def set_user
-		@user = current_user
-	end
-
-	def next_pls
-		redirect_to user_path(@user) if @user.monthly_spending
-	end
 
 	def monthly_spending_params
 		params.require(:monthly_spending).permit(:rent, :food, :phone, :utilities, :everything_else)
 	end
+
 end

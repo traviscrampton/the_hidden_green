@@ -3,8 +3,7 @@ class IncomesController < ApplicationController
 	respond_to :json, only: [:index, :create, :update, :destroy]
 
 	def index
-		user = User.find(params[:user_id])
-		incomes = user.incomes.order('created_at ASC')
+		incomes = current_user.incomes.order('created_at ASC')
 		respond_with incomes
 	end
 

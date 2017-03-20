@@ -4,7 +4,11 @@
 	</div>
 	<div class="navbar__rightside">
 		<div class="navbar__calendar">
-			CC Calendar
+			<% if(current_user.initial_setup){  %>
+				<span><a href="/calendars">View Calendar</a></span>
+			<% } else { %>
+				<span class="getSetup">Calculate Year View ||</span>
+			<% } %>
 		</div>
 		<div class="navbar__user">
 			Travis Crampton

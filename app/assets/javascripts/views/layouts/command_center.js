@@ -1,16 +1,17 @@
 TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 
 	initialize: function(){
-		this.setupEvents();
 		this.render();
 		this.renderSubViews();
+		this.setupEvents();
 	},
 
 	setupEvents: function(){
-		this.listenTo(TheHiddenGreen.Views.NavigationButtons.prototype, 'selectFinancial', this.selectFinancial);
+		this.listenTo(this.navigationButtons, 'selectFinancial', this.selectFinancial);
 		this.listenTo(TheHiddenGreen.Views.DebtList.prototype, 'triggerDebtForm', this.renderDebtForm);
 		this.listenTo(TheHiddenGreen.Views.DebtForm.prototype, 'submitDebtForm', this.selectFinancial)
 		this.listenTo(TheHiddenGreen.Views.InvestmentList.prototype, 'triggerInvestmentForm', this.renderInvestmentForm)
+		this.listenTo(TheHiddenGreen.Views.InvestmentList.prototype, 'deleteItem', this.deleteItem)
 		this.listenTo(TheHiddenGreen.Views.InvestmentForm.prototype, 'submitInvestmentForm', this.selectFinancial)
 		this.listenTo(TheHiddenGreen.Views.IncomeList.prototype, 'triggerIncomeForm', this.renderIncomeForm)
 		this.listenTo(TheHiddenGreen.Views.IncomeForm.prototype, 'submitIncomeForm', this.selectFinancial)
@@ -23,6 +24,10 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 		this.listenTo(TheHiddenGreen.Views.InvestmentList.prototype, 'editItem', this.renderInvestmentForm)
 		this.listenTo(TheHiddenGreen.Views.AccountList.prototype, 'deleteItem', this.deleteItem)
 		this.listenTo(TheHiddenGreen.Views.IncomeList.prototype, 'deleteItem', this.deleteItem)
+		this.listenTo(TheHiddenGreen.Views.MonthlySpendingList.prototype, 'deleteItem', this.deleteItem)
+		this.listenTo(TheHiddenGreen.Views.MonthlySpendingList.prototype, 'editItem', this.renderMonthlySpendingForm)
+		this.listenTo(TheHiddenGreen.Views.MonthlySpendingList.prototype, 'triggerMonthlySpendingForm', this.renderMonthlySpendingForm);
+		this.listenTo(TheHiddenGreen.Views.MonthlySpendingForm.prototype, 'submitMonthlySpendingForm', this.selectFinancial)
 	},
 
 	render: function(){
@@ -34,9 +39,8 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 			el: '#navigationButtons'
 		});
 
-		activeView = new TheHiddenGreen.Views.ContentView({
-			el: '#contentView'
-		})
+		this.activeView = new TheHiddenGreen.Views.ContentView({});
+		this.$el.find('#contentView').append(this.activeView.$el);
 	},
 
 	deleteItem: function(debtItem){
@@ -45,34 +49,42 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 
 	renderDebtForm: function(model){
 		this.removeCurrentWindow();
-		activeView = new TheHiddenGreen.Views.DebtForm({
-			el: '#contentView',
+		this.activeView = new TheHiddenGreen.Views.DebtForm({
 			model: model
 		});
+		this.renderFinancial();
+	},
+
+	renderMonthlySpendingForm: function(model){
+		this.removeCurrentWindow()
+		this.activeView = new TheHiddenGreen.Views.MonthlySpendingForm({
+			model: model
+		})
+		this.renderFinancial();
 	},
 
 	renderInvestmentForm: function(model){
 		this.removeCurrentWindow();
-		activeView = new TheHiddenGreen.Views.InvestmentForm({
-			el: '#contentView',
+		this.activeView = new TheHiddenGreen.Views.InvestmentForm({
 			model: model
 		});
+		this.renderFinancial();
 	},
 
 	renderIncomeForm: function(model){
 		this.removeCurrentWindow();
-		activeView = new TheHiddenGreen.Views.IncomeForm({
-			el: '#contentView',
+		this.activeView = new TheHiddenGreen.Views.IncomeForm({
 			model: model
 		});
+		this.renderFinancial();
 	},
 
 	renderAccountForm: function(model){
 		this.removeCurrentWindow();
-		activeView = new TheHiddenGreen.Views.AccountForm({
-			el: '#contentView',
+		this.activeView = new TheHiddenGreen.Views.AccountForm({
 			model: model
 		});
+		this.renderFinancial();
 	},
 
 	selectFinancial: function(data){
@@ -84,51 +96,55 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 			'income': this.getIncome,
 			'spending': this.getSpending
 		}
-		viewHash[data].call();
+		viewHash[data].call(this);
+		this.renderFinancial();
+	},
+
+	renderFinancial: function(){
+		this.$el.find('#contentView').append(this.activeView.$el);
 	},
 
 	removeCurrentWindow: function(){
-		activeView.unbind();
-		activeView.$el.empty().off();
+		this.activeView.remove();
 	},
 
 	getDebts: function(){
 		this.debtsCollection = new TheHiddenGreen.Collections.Debts();
-		activeView = new TheHiddenGreen.Views.DebtList({
-			el: '#contentView',
+		this.activeView = new TheHiddenGreen.Views.DebtList({
 			collection: this.debtsCollection,
 		});
-		this.debtsCollection.fetch({data: { user_id: current_user.id} });
+		this.debtsCollection.fetch({});
 	},
 
 	getSavings: function(){
 		this.accountsCollection = new TheHiddenGreen.Collections.Accounts();
-		activeView = new TheHiddenGreen.Views.AccountList({
-			el: '#contentView',
-			collection: this.accountsCollection,
+		this.activeView = new TheHiddenGreen.Views.AccountList({
+			collection: this.accountsCollection
 		});
-		this.accountsCollection.fetch({data: { user_id: current_user.id} });
+		this.accountsCollection.fetch({});
 	},
 
 	getInvestments: function(){
 		this.investmentCollection = new TheHiddenGreen.Collections.Investments();
-		activeView = new TheHiddenGreen.Views.InvestmentList({
-			el: '#contentView',
-			collection: this.investmentCollection,
+		this.activeView = new TheHiddenGreen.Views.InvestmentList({
+			collection: this.investmentCollection
 		});
-		this.investmentCollection.fetch({data: { user_id: current_user.id} });
+		this.investmentCollection.fetch({});
 	},
 
 	getIncome: function(){
 		this.incomeCollection = new TheHiddenGreen.Collections.Incomes();
-		activeView = new TheHiddenGreen.Views.IncomeList({
-			el: '#contentView',
-			collection: this.incomeCollection,
+		this.activeView = new TheHiddenGreen.Views.IncomeList({
+			collection: this.incomeCollection
 		});
-		this.incomeCollection.fetch({data: { user_id: current_user.id} });
+		this.incomeCollection.fetch({});
 	},
 
 	getSpending: function(){
-		alert('you hit spending')
+		this.spendingCollection = new TheHiddenGreen.Collections.MonthlySpendings();
+		this.activeView = new TheHiddenGreen.Views.MonthlySpendingList({
+			collection: this.spendingCollection
+		});
+		this.spendingCollection.fetch({})
 	}
 })

@@ -6,9 +6,10 @@ TheHiddenGreen.Views.DebtForm = Backbone.View.extend({
 	},
 
 	initialize: function(options){
+		this.model = options.model
 		this.render();
-		if(options.model){
-			this.populateUpdateForm(options.model)
+		if(this.model){
+			this.populateUpdateForm()
 			this.changeUpdateButton();
 		}
 	},
@@ -17,11 +18,11 @@ TheHiddenGreen.Views.DebtForm = Backbone.View.extend({
 		this.$el.html(JST['debts/debt_form']);
 	},
 
-	populateUpdateForm: function(model){
-		this.$el.find('input#name').val(model.attributes.name)
-		this.$el.find('input#amount').val(model.attributes.amount)
-		this.$el.find('input#interest_rate').val(model.attributes.interest_rate)
-		this.$el.find('input#minimum_monthly_payment').val(model.attributes.minimum_monthly_payment) 
+	populateUpdateForm: function(){
+		this.$el.find('input#name').val(this.model.get('name'))
+		this.$el.find('input#amount').val(this.model.get('amount'))
+		this.$el.find('input#interest_rate').val(this.model.get('interest_rate'))
+		this.$el.find('input#minimum_monthly_payment').val(this.model.get('minimum_monthly_payment'))
 	},
 
 	changeUpdateButton(){
@@ -31,10 +32,10 @@ TheHiddenGreen.Views.DebtForm = Backbone.View.extend({
 	submitDebtForm: function(){
 		var self = this;
 		var newModel = new TheHiddenGreen.Models.Debt({
-			name: $('input#name').val(),
-			amount: $('input#amount').val(),
-			interest_rate: $('input#interest_rate').val(),
-			minimum_monthly_payment: $('input#minimum_monthly_payment').val()
+			name: self.$el.find('input#name').val(),
+			amount: self.$el.find('input#amount').val(),
+			interest_rate: self.$el.find('input#interest_rate').val(),
+			minimum_monthly_payment: self.$el.find('input#minimum_monthly_payment').val()
 		});
 		newModel.save({}, {
 		    success: function (model, response) {
@@ -48,10 +49,10 @@ TheHiddenGreen.Views.DebtForm = Backbone.View.extend({
 
 	updateDebtForm: function(){
 		var attributes = {
-			name: $('#name').val(),
-			amount: $('#amount').val(),
-			interest_rate: $('#interest_rate').val(),
-			minimum_monthly_payment: $('#minimum_monthly_payment').val()
+			name: this.$el.find('#name').val(),
+			amount: this.$el.find('#amount').val(),
+			interest_rate: this.$el.find('#interest_rate').val(),
+			minimum_monthly_payment: this.$el.find('#minimum_monthly_payment').val()
 		}
 		this.model.save(attributes, {patch: true})
 		this.trigger('submitDebtForm', "debts")

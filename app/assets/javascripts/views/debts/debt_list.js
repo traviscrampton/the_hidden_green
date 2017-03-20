@@ -23,7 +23,7 @@ TheHiddenGreen.Views.DebtList = Backbone.View.extend({
 	},
 
 	triggerDebtForm: function(){
-		this.trigger('triggerDebtForm')
+		this.trigger('debtForm')
 	},
 
 	clickedTrashCan: function(model){

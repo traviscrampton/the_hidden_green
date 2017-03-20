@@ -11,5 +11,6 @@ class InitialSetup::CreateInitialYearView
 		created_months = InitialSetup::CreateMonths.new(user).call
 		created_financials = InitialSetup::CreateIndividualMonthFinancials.new(user).call
 		FinancialForcast::FutureMonths.new(created_financials).call
+		user.update(initial_setup: true) if !user.initial_setup
 	end
 end

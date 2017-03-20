@@ -72,4 +72,12 @@ class User < ActiveRecord::Base
 		return monthz
 	end
 
+	def hash_calendar_months
+		options = {}
+		monthz = months.map do |month|
+			CalendarMonth.new(month.all_totals)
+		end
+		return monthz
+	end
+
  end
