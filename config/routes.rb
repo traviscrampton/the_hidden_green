@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :users
   resources :incomes
   resources :monthly_spendings
+	resources :months
 
 	resources :calendars, only:[:index]
 

@@ -8,6 +8,7 @@ TheHiddenGreen.Views.Navbar = Backbone.View.extend({
 		this.render();
 	},
 
+
 	render: function(){
 		this.$el.html(JST['layouts/navbar']);
 	},
