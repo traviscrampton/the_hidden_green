@@ -23,22 +23,21 @@ TheHiddenGreen.Views.Calendar = Backbone.View.extend({
 	},
 
 	renderModal: function(model){
-		var furl = model.urlRoot + "/" + model.id.toString();
 		var self = this;
-		$.ajax({
-			url: furl,
-			method:'GET',
-			success: function(data){
-				self.monthModel = new TheHiddenGreen.Models.Month(data)
+		model.fetch({
+			data:{
+				id: model.id
+			},
+			success: function(model, response, options){
+				// self.monthModel = new TheHiddenGreen.Models.Month(model)
 				self.activeModal = new TheHiddenGreen.Views.ZoomedMonth({
-					model: self.monthModel,
-					data: data
+					model: model
 				})
 				self.$el.append(self.activeModal.el);
-			},
-			error: function(data){
-				console.log(data)
+			}, error: function(model, response, options){
+				console.log(response)
 			}
+
 		})
 	}
 })

@@ -13,7 +13,7 @@ TheHiddenGreen.Views.Month = Backbone.View.extend({
 	},
 
 	renderModal: function(){
-		var modelify = this.model.get('options').month
+		var modelify = this.model.get('options')
 		this.monthModel = new TheHiddenGreen.Models.Month(modelify)
 		this.trigger('clickedMonth', this.monthModel)
 	}

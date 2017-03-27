@@ -1,6 +1,5 @@
 class MonthsController < ApplicationController
-
-		respond_to :json, only:[:show]
+	respond_to :json, only:[:show]
 
 	def show
 		month = Month.find(params[:id])

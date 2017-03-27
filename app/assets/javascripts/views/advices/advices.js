@@ -1,12 +1,12 @@
 TheHiddenGreen.Views.Advices = Backbone.View.extend({
 
-	initialize: function(){
+	initialize: function(options){
+		this.adviceArray = options.adviceArray
 		this.render();
 	},
 
 	render: function(){
-		debugger;
-		this.collection.each(this.renderAdvice, this)
+		_.each(this.adviceArray, this.renderAdvice, this);
 	},
 
 	renderAdvice: function(advice){

@@ -27,7 +27,7 @@ class SingleMonth
 	def compile_advice(single_month)
 		single_month['advices'] = month.advices.map do |advice|
 			from = "Transfer " + advice.amount.to_s + " from your " + advice.from_what
-			to = "to your " + advice.to.name + " " + advice.to.class.to_s
+			to = " to your " + advice.to.name + " " + advice.to.class.to_s
 			from + to
 		end
 		single_month

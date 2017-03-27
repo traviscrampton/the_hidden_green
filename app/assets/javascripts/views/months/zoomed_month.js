@@ -1,7 +1,6 @@
 TheHiddenGreen.Views.ZoomedMonth = Backbone.View.extend({
 
-	initialize: function(options){
-		this.options = options.data
+	initialize: function(){
 		this.render();
 		this.renderAdvices();
 		this.renderSideNav();
@@ -12,10 +11,9 @@ TheHiddenGreen.Views.ZoomedMonth = Backbone.View.extend({
 	},
 
 	renderAdvices: function(){
-		this.adviceCollection = new TheHiddenGreen.Collections.Advices(this.options['advices'])
-		debugger;
+		this.adviceCollection = new TheHiddenGreen.Collections.Advices(this.model.get('advices'))
 		this.advices = new TheHiddenGreen.Views.Advices({
-			collection: this.adviceCollection
+			adviceArray: this.model.get('advices')
 		})
 		this.$el.find('.advices').append(this.advices.el);
 	},
