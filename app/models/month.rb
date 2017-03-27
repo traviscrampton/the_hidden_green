@@ -100,21 +100,17 @@ class Month < ActiveRecord::Base
 
 	def all_totals
 		options = self.attributes
-
 		options["Debt"] = FinanceObj.new(type: "Debt", total_amount: total_debt, transfer: 0)
 		options['Account'] = FinanceObj.new(type: "Account", total_amount: total_savings, transfer: 0)
 		options["Investment"] = FinanceObj.new(type: "Investment", total_amount: total_investment, transfer: 0)
-		# networth = FinanceObj.new(type: "net_worth", total_amount: net_worth, transfer: 0)
-		# options['Debt'] = [total_debt, 0.0]
-		# options['Account'] = [total_savings, 0.0]
-		# options['Investment'] = [total_investment, 0.0]
-		# options["net_worth"] = net_worth
-
+		options['net_worth'] = FinanceObj.new(total_amount: net_worth, transfer: 0 )
 		advices.pluck(:to_type, :from_type, :amount).each do |to_type, from_type, amount|
-			options[to_type].total_amount += amount
-			options[from_type].transfer -= amount unless from_type == "CashFlow"
-			# options[to_type][1] += amount
-			# options[from_type][1] -= amount unless from_type == "CashFlow"
+			options[to_type].transfer += amount
+			options[to_type].transfer = options[to_type].transfer.round(2)
+			unless from_type == "CashFlow"
+				options[from_type].transfer -= amount
+				options[from_type].transfer.round(2)
+			end
 		end
 		return options
 	end
