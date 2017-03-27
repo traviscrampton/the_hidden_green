@@ -35,7 +35,7 @@ TheHiddenGreen.Views.MonthlySpendingForm = Backbone.View.extend({
 			rent: this.$el.find('input#rent').val(),
 			food: this.$el.find('input#food').val(),
 			phone: this.$el.find('input#phone').val(),
-			utilities: this.$el.find('input#utilites').val(),
+			utilities: this.$el.find('input#utilities').val(),
 			everything_else: this.$el.find('input#everything_else').val()
 		});
 		newModel.save({}, {

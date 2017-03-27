@@ -1,39 +1,39 @@
 <div class="month">
 	<div class="month__date">
-		<span class="month__date--month"><%= calendar.month.name %></span>
-		<span class="month__date--year"><%= calendar.month.year %></span>
-		<span class="month__date--net_worth">NET WORTH: $<%= calendar.net_worth %></span>
+		<span class="month__date--month"><%= month.name %></span>
+		<span class="month__date--year"><%= month.year %></span>
+		<span class="month__date--net_worth">NET WORTH: $ NETWORTH </span>
 	</div>
 	<div class="month__stats">
 		<div class="month__bucket">
-			Debt: $<%= calendar.Debt[0] %>
-			<% if(calendar.Debt[1] > 0){ %>
+			Debt: $<%= month.Debt.total_amount %>
+			<% if(month.Debt.transfer > 0){ %>
 				<span class="positive_arrow">&#9660</span>
-			<% } else if(calendar.Debt[1] < 0) { %>
+			<% } else if(month.Debt.transfer < 0) { %>
 				<span class="negative_arrow">&#9650</span>
 			<% } %>
-			 <%= calendar.Debt[1] > 0 ? calendar.Debt[1] : "" %>
+			 <%= month.Debt.transfer > 0 ? month.Debt.transfer : "" %>
 		</div>
 		<div class="month__bucket">
-			Savings: $<%= calendar.Account[0] %>
-			<% if(calendar.Account[1] > 0){ %>
+			Savings: $<%= month.Account.total_amount %>
+			<% if(month.Account.transfer > 0){ %>
 				<span class="positive_arrow">&#9650</span>
-			<% } else if(calendar.Account[1] < 0) { %>
+			<% } else if(month.Account.transfer < 0) { %>
 				<span class="negative_arrow">&#9660</span>
 			<% } %>
 
-			 <%= calendar.Account[1] !== 0 ? Math.abs(calendar.Account[1]) : "" %>
+			 <%= month.Account.transfer !== 0 ? Math.abs(month.Account.transfer) : "" %>
 		</div>
 		<div class="month__bucket">
-			Investment: $<%= calendar.Investment[0] %>
+			Investment: $<%= month.Investment.total_amount %>
 
-			<% if(calendar.Investment[1] > 0){ %>
+			<% if(month.Investment.transfer > 0){ %>
 				<span class="positive_arrow">&#9650</span>
-			<% } else if(calendar.Investment[1] < 0) { %>
+			<% } else if(month.Investment.transfer < 0) { %>
 				<span class="negative_arrow">&#9660</span>
 			<% } %>
 
-			<%= calendar.Investment[1] !== 0 ? calendar.Investment[1] : "" %>
+			<%= month.Investment.transfer !== 0 ? month.Investment.transfer : "" %>
 		</div>
 	</div>
 </div>

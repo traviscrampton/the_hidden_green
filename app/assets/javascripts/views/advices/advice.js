@@ -1,6 +1,6 @@
 TheHiddenGreen.Views.Advice = Backbone.View.extend({
 
-	initialize: function(){
+	initialize: function(options){
 		this.render()
 	},
 

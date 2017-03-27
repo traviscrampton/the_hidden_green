@@ -9,7 +9,7 @@ TheHiddenGreen.Views.Month = Backbone.View.extend({
 	},
 
 	render: function(){
-		this.$el.html(JST['months/month']({calendar: this.model.get("options") }))
+		this.$el.html(JST['months/month']({month: this.model.get("options") }))
 	},
 
 	renderModal: function(){

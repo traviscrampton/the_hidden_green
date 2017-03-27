@@ -22,6 +22,6 @@ class InterestRates::Debts
 	def compounding_interest_rate(debt)
 		percentage = (debt.interest_rate/12)
 		interest = (debt.amount*percentage)
-		debt.update!(amount: (debt.amount + interest).round(2))
+		debt.update!(amount: debt.amount + interest)
 	end
 end

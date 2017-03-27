@@ -1,7 +1,7 @@
 class SingleMonth
 
 	attr_accessor :month
-	
+
 	def initialize(month)
 		@month = month
 	end
@@ -23,8 +23,6 @@ class SingleMonth
 		single_month['monthly_spending'] = month.monthly_spending.attributes
 		compile_advice(single_month)
 	end
-
-	private
 
 	def compile_advice(single_month)
 		single_month['advices'] = month.advices.map do |advice|

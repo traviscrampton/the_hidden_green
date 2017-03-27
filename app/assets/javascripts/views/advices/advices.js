@@ -11,7 +11,7 @@ TheHiddenGreen.Views.Advices = Backbone.View.extend({
 
 	renderAdvice: function(advice){
 		this.advice = new TheHiddenGreen.Views.Advice({
-			model: advice
+			advice: advice
 		})
 		this.$el.append(this.advice.el)
 	}
