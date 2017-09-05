@@ -15,6 +15,9 @@
 //= require underscore
 //= require backbone
 //= require the_hidden_green
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./views
