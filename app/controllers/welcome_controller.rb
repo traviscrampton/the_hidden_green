@@ -4,7 +4,9 @@ class WelcomeController < ApplicationController
 
 
 	def dashboard
-
+		@finance_options = ["Debts", "Income", "Savings", "Investments", "Monthly Spending"].map do |opt|
+			FinanceOption.new(opt)
+		end
 	end
 
 	def yearview

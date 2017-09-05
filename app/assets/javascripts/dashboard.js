@@ -1,7 +1,7 @@
 $(function() {
-  if ($("#dashboard").length) {
+  if ($("#dashboardz").length) {
     return new TheHiddenGreen.Views.DashboardLayout({
-      el:'#dashboard'
+      el:'#dashboardz'
     });
   } else if($('#calendars').length) {
 		return new TheHiddenGreen.Views.Calendar({

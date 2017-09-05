@@ -1,4 +1,17 @@
 <script>
 	var current_user = <%= raw json_escape(current_user.to_json) %>
 </script>
-<div id="dashboard"></div>
+<div class="navbar">
+	<div class="navbar__title" style="display: inline-block">
+		The Hidden Green
+	</div>
+	<div class="navbar__rightside" style="float: right;">
+		<div class="navbar__calendar" style="display: inline-block;">
+			DEAL LATER ||
+		</div>
+		<div class="navbar__user" style="display: inline-block;">
+			Travis Crampton
+		</div>
+	</div>
+</div>
+<%= react_component("DashBoard", {financeOptions: @finance_options}) %>

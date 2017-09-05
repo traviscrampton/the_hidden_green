@@ -48,7 +48,6 @@ TheHiddenGreen.Views.CommandCenter = Backbone.View.extend({
 	},
 
 	renderDebtForm: function(model){
-		debugger;
 		this.removeCurrentWindow();
 		this.activeView = new TheHiddenGreen.Views.DebtForm({
 			model: model
