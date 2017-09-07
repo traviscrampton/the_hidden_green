@@ -1,5 +1,22 @@
 function Finance(props){
-	debugger
+	return(
+		<div className="itemContainer">
+			<div className="account__name__type">
+				<div className="account__name">
+					{props.name}
+				</div>
+					<div className="account__type">
+						Minimum Monthly Payment: {props.minumumMonthlyPayment}
+					</div>
+				<div className="account__type">
+					Interest Rate: {props.interestRate}
+				</div>
+			</div>
+			<div className="account__amount">
+				{props.amount}
+			</div>
+		</div>
+	)
 }
 
 Finance.propTypes = {

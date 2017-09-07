@@ -8,6 +8,7 @@ function Finances(props){
 			</center>
 		)
 	} else {
+		return(
 		<div>
 			<div className="itemContainer">
 				<button>Add Here</button>
@@ -22,6 +23,7 @@ function Finances(props){
 				})}
 			</div>
 		</div>
+	)
 	}
 }
 
