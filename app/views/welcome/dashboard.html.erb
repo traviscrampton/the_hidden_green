@@ -15,5 +15,6 @@
 	</div>
 </div>
 <div id="dashboard">
-		<%= react_component("DashBoard", {financeOptions: @finance_options, baseSetting: true, activeFinances:[]}) %>
+		<%= react_component("DashBoard", {
+			financeOptions: @finance_options, activeFinance:'None', activeFinances:[]}) %>
 </div>

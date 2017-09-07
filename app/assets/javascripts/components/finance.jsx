@@ -5,9 +5,14 @@ function Finance(props){
 				<div className="account__name">
 					{props.name}
 				</div>
+				// comeback and fix this hack
+				{!!props.minimumMonthlyPayment ? (
 					<div className="account__type">
-						Minimum Monthly Payment: {props.minumumMonthlyPayment}
+						Minimum Monthly Payment: {props.minimumMonthlyPayment}
 					</div>
+				) : (
+					""
+				)}
 				<div className="account__type">
 					Interest Rate: {props.interestRate}
 				</div>

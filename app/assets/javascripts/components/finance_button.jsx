@@ -9,6 +9,5 @@ function FinanceButton(props){
 FinanceButton.propTypes = {
 	name: React.PropTypes.string.isRequired,
 	url: React.PropTypes.string.isRequired,
-	isActive: React.PropTypes.bool.isRequired,
 	fetchFinances: React.PropTypes.func.isRequired
 }

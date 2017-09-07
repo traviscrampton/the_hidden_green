@@ -1,6 +1,6 @@
 function Finances(props){
 
-	if(props.isBaseSetting){
+	if(props.activeFinance == "None"){
 		return(
 			<center className='hidden__home'>
 				<img src="hidden_green_icon.png" alt=""></img>
@@ -28,7 +28,7 @@ function Finances(props){
 }
 
 Finances.propTypes = {
-	isBaseSetting: React.PropTypes.bool.isRequired,
+	activeFinance: React.PropTypes.string,
 	activeFinances: React.PropTypes.arrayOf(React.PropTypes.shape({
 		name: React.PropTypes.string,
 		amount: React.PropTypes.number,

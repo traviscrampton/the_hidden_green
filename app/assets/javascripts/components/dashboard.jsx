@@ -4,21 +4,20 @@ var DashBoard = React.createClass({
 		financeOptions: React.PropTypes.arrayOf(React.PropTypes.shape({
 			name: React.PropTypes.string.isRequired,
 			url: React.PropTypes.string.isRequired,
-			isActive: React.PropTypes.bool.isRequired
 		})),
-		baseSetting: React.PropTypes.bool.isRequired,
 		activeFinances: React.PropTypes.arrayOf(React.PropTypes.shape({
 			name: React.PropTypes.string,
 			amount: React.PropTypes.number,
 			minimum_monthly_payment: React.PropTypes.number,
 			interest_rate: React.PropTypes.number
-		}))
+		})),
+		activeFinance: React.PropTypes.string.isRequired
 	},
 
 	getInitialState: function(){
 		return {
 			financeOptions: this.props.financeOptions,
-			baseSetting: this.props.baseSetting,
+			activeFinance: this.props.activeFinance,
 			activeFinances: this.props.activeFinances
 		}
 	},
@@ -31,7 +30,7 @@ var DashBoard = React.createClass({
 	setActiveFinance: function(index){
 		var activeFinance = this.state.financeOptions[index]
 		this.fetchFinance(activeFinance)
-		activeFinance.isActive = true
+		this.state.activeFinance = activeFinance.name
 		this.setState(this.state)
 	},
 
@@ -50,7 +49,6 @@ var DashBoard = React.createClass({
 	},
 
 	setFinances: function(finances){
-		this.state.baseSetting = false
 		this.state.activeFinances = finances
 		this.setState(this.state)
 	},
