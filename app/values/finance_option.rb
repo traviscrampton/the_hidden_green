@@ -8,10 +8,11 @@ class FinanceOption
 		'Monthly Spending': '/monthly_spendings'
 	}.with_indifferent_access
 
-	attr_accessor :name, :url
+	attr_accessor :name, :url, :isActive
 
 	def initialize(name)
 		self.name = name
 		self.url = ROUTES[name]
+		self.isActive = true
 	end
 end

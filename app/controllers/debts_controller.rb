@@ -3,6 +3,7 @@ class DebtsController < ApplicationController
 	respond_to :json, only:[:index, :create, :update, :destroy]
 
 	def index
+
 		debts = current_user.debts.order('created_at ASC')
 		respond_with debts
 	end
@@ -17,7 +18,6 @@ class DebtsController < ApplicationController
 		debt = Debt.find params[:id]
 		debt.update!(debt_params)
 		respond_with debt
-
 	end
 
 	def destroy
