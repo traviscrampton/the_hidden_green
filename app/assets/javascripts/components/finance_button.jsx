@@ -1,6 +1,6 @@
 function FinanceButton(props){
 	return(
-		<div>
+		<div className={'navigation__button'}>
 			{props.name}
 		</div>
 	)
@@ -8,5 +8,6 @@ function FinanceButton(props){
 
 FinanceButton.propTypes = {
 	name: React.PropTypes.string.isRequired,
-	url: React.PropTypes.string.isRequired
+	url: React.PropTypes.string.isRequired,
+	isActive: React.PropTypes.bool.isRequired
 }

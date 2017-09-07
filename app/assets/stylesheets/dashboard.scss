@@ -1,7 +1,5 @@
 #dashboard{
-
-	#commandCenter{
-		    padding: 100px 100px 0px;
+    padding: 100px 100px 0px;
 		#contentView, #navigationButtons{
 			display:inline-block;
 			overflow: hidden;
@@ -118,7 +116,7 @@
 
 
 
-		#navigationButtons{
+		.navigation__buttons{
 			width: 30%;
 			padding:10px;
 			.navigation__button{
@@ -143,5 +141,4 @@
 				}
 			}
 		}
-	}
 }
