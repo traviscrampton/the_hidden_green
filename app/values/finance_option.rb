@@ -1,10 +1,10 @@
 class FinanceOption
 
 	ROUTES = {
-		'Debts': '/debts',
+		'Debt': '/debts',
 		'Income': '/incomes',
-		'Savings': '/accounts',
-		'Investments': '/investments',
+		'Account': '/accounts',
+		'Investment': '/investments',
 		'Monthly Spending': '/monthly_spendings'
 	}.with_indifferent_access
 

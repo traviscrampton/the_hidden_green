@@ -5,10 +5,13 @@ function ActiveFinanceView(props){
 }
 
 function chooseActiveFinance(props){
+	debugger
 	var optionsHash = {
 		"None": <DefaultDash />,
-		"Debts":<Debts debtsCollection={props.activeFinances}/>,
-		"Investments": <Investments investmentsCollection={props.activeFinances} />
+		"Debt":<Debts debtsCollection={props.activeFinances}/>,
+		"Investment": <Investments investmentsCollection={props.activeFinances} />,
+		"Account": <Accounts accountsCollection={props.activeFinances}/>,
+		"Income": <Incomes incomesCollection={props.activeFinances} />
 	}
 	return optionsHash[props.activeFinance]
 }
@@ -16,6 +19,8 @@ function chooseActiveFinance(props){
 ActiveFinanceView.propTypes = {
 	activeFinance: React.PropTypes.string,
 	activeFinances: React.PropTypes.arrayOf(React.PropTypes.shape({
+		source_name: React.PropTypes.string,
+		source_amount: React.PropTypes.number,
 		name: React.PropTypes.string,
 		amount: React.PropTypes.number,
 		minimum_monthly_payment: React.PropTypes.number,
