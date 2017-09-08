@@ -5,7 +5,6 @@ function ActiveFinanceView(props){
 }
 
 function chooseActiveFinance(props){
-	debugger
 	var optionsHash = {
 		"None": <DefaultDash />,
 		"Debt":<Debts debtsCollection={props.activeFinances}/>,

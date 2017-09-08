@@ -1,9 +1,15 @@
 function FinanceButton(props){
 	return(
-		<div onClick={props.fetchFinances} className={'navigation__button'}>
+		<div onClick={props.fetchFinances} className={this.isActiveButton(props)}>
 			{props.name}
 		</div>
 	)
+}
+
+function isActiveButton(props){
+	var classNames = "navigation__button "
+	if(props.isActive) {classNames += "selected__navigation__button"}
+	return classNames
 }
 
 FinanceButton.propTypes = {

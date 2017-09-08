@@ -29,6 +29,7 @@ var DashBoard = React.createClass({
 
 	setActiveFinance: function(index){
 		var activeFinance = this.state.financeOptions[index]
+		activeFinance.isActive = true
 		this.fetchFinance(activeFinance)
 	},
 
@@ -57,7 +58,6 @@ var DashBoard = React.createClass({
 		for (i = 0; i < financeOptions.length; ++i){
 			financeOptions[i].isActive = false
 		}
-		this.setState(this.state)
 	},
 
 	render: function(){
