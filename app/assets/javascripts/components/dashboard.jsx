@@ -30,8 +30,6 @@ var DashBoard = React.createClass({
 	setActiveFinance: function(index){
 		var activeFinance = this.state.financeOptions[index]
 		this.fetchFinance(activeFinance)
-		this.state.activeFinance = activeFinance.name
-		this.setState(this.state)
 	},
 
 	fetchFinance: function(activeFinance) {
@@ -39,8 +37,8 @@ var DashBoard = React.createClass({
 			url:activeFinance.url,
 			type:'GET',
 			context: this,
-			success: function(response) {
-				this.setFinances(response)
+			success: function(activeFinances) {
+				this.setFinances(activeFinance, activeFinances)
 			},
 			error: function(){
 				console.log("There was an error processing whatever you were trying to do")
@@ -48,8 +46,9 @@ var DashBoard = React.createClass({
 		})
 	},
 
-	setFinances: function(finances){
-		this.state.activeFinances = finances
+	setFinances: function(activeFinance, activeFinances){
+		this.state.activeFinance = activeFinance.name
+		this.state.activeFinances = activeFinances
 		this.setState(this.state)
 	},
 
@@ -74,7 +73,7 @@ var DashBoard = React.createClass({
 					}.bind(this))}
 				</div>
 				<div className="contentView">
-					<Finances isBaseSetting={this.state.baseSetting} activeFinances={this.state.activeFinances}/>
+					<ActiveFinanceView activeFinance={this.state.activeFinance} activeFinances={this.state.activeFinances}/>
 				</div>
 			</div>
 		)

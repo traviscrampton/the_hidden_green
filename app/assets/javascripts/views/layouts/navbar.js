@@ -28,7 +28,6 @@ TheHiddenGreen.Views.Navbar = Backbone.View.extend({
 	},
 
 	replaceText: function(){
-		debugger;
 		this.$el.find('.getSetup').replaceWith("<span><a href='/calendars'>View Calendar</a></span>")
 	}
 })
